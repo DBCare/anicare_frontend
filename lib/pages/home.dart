@@ -139,11 +139,12 @@ class _HomeState extends State<Home> {
               width: 250,
               height: 130,
               child: ElevatedButton.icon(
-                onPressed: (){
+                /*onPressed: (){
                   setState(() {
                     analyzeText = 'Coming soon';
                   });
-                },
+                },*/
+                onPressed: () => seeProductDetails(),
                 icon: const Icon(Icons.camera_enhance, size:60),
                 label: Text(analyzeText,
                   textAlign: TextAlign.center,
@@ -157,6 +158,11 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  seeProductDetails() {
+    Navigator.pushNamed(context, '/product');
+//    Navigator.pushNamed(context, '/barcode',arguments: barcodeScanRes);
   }
 }
 
