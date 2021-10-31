@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "154384049554",
+    "firebase_url": "https://anicare-2e66c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "anicare-2e66c",
+    "storage_bucket": "anicare-2e66c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154384049554:android:1d19f99232bfbb404a0d4b",
+        "android_client_info": {
+          "package_name": "com.dbcare.anicare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154384049554-6vmf170vhppf8glcnb670l8l85ac5393.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5xn0lwgxU31SbftKiwIkUHTBtbBC1-eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154384049554-6vmf170vhppf8glcnb670l8l85ac5393.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
