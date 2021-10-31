@@ -108,9 +108,7 @@ class _HomeState extends State<Home> {
               height: 130,
               child: ElevatedButton.icon(
                 onPressed: (){
-                  setState(() {
-                    searchText = 'Coming soon';
-                  });
+                  Navigator.pushNamed(context, '/search_product');
                 },
                 icon: const Icon(Icons.search, size: 60),
                 label: Text(searchText,

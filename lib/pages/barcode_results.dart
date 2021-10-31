@@ -13,6 +13,17 @@ class _BarcodeResultsState extends State<BarcodeResults> {
   Widget build(BuildContext context) {
     barcodeRes = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+            'Scan Result',
+            style: TextStyle(
+              fontSize: 20.0,
+
+            )
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.yellow[500],
+      ),
       body: Row(
         children: <Widget>[
           Center(
