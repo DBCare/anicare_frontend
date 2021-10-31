@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-void main() =>runApp(const MaterialApp(
-    home: Home()
-));
+void main() => runApp(const MaterialApp(home: Home()));
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +15,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final database = FirebaseDatabase.instance.reference();
+
   String _scanBarcode = 'Unknown';
 
   @override
@@ -24,7 +27,7 @@ class _HomeState extends State<Home> {
 
   Future<void> startBarcodeScanStream() async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
-        '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+            '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
         .listen((barcode) => print(barcode));
   }
 
@@ -69,36 +72,38 @@ class _HomeState extends State<Home> {
     setState(() {
       _scanBarcode = barcodeScanRes;
     });
-    Navigator.pushNamed(context, '/barcode',arguments: barcodeScanRes);
+    Navigator.pushNamed(context, '/barcode', arguments: barcodeScanRes);
   }
-
 
   String searchText = "Search a product";
   String scanText = "Scan a barcode";
   String analyzeText = "Analyze Ingredients";
   @override
   Widget build(BuildContext context) {
+    final companyRef = database.child('companies');
+
     return Scaffold(
       backgroundColor: Colors.yellow[300],
       appBar: AppBar(
-        title: const Text(
-            'AniCare',
+        title: const Text('AniCare',
             style: TextStyle(
               fontSize: 20.0,
-
-            )
-        ),
+            )),
         centerTitle: true,
         backgroundColor: Colors.yellow[500],
         leading: const Icon(Icons.pets),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await companyRef
+                  .push()
+                  .set({'country_code': 'UK', 'name': 'test'});
+            },
             icon: const Icon(Icons.settings),
           )
         ],
       ),
-      body:  Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,11 +112,19 @@ class _HomeState extends State<Home> {
               width: 250,
               height: 130,
               child: ElevatedButton.icon(
+<<<<<<< Updated upstream
                 onPressed: (){
                   Navigator.pushNamed(context, '/search_product');
+=======
+                onPressed: () {
+                  setState(() {
+                    searchText = 'Coming soon';
+                  });
+>>>>>>> Stashed changes
                 },
                 icon: const Icon(Icons.search, size: 60),
-                label: Text(searchText,
+                label: Text(
+                  searchText,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30.0,
@@ -125,7 +138,8 @@ class _HomeState extends State<Home> {
               child: ElevatedButton.icon(
                 onPressed: () => scanBarcodeNormal(),
                 icon: const Icon(Icons.qr_code, size: 60),
-                label: Text(scanText,
+                label: Text(
+                  scanText,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30.0,
@@ -143,8 +157,9 @@ class _HomeState extends State<Home> {
                   });
                 },*/
                 onPressed: () => seeProductDetails(),
-                icon: const Icon(Icons.camera_enhance, size:60),
-                label: Text(analyzeText,
+                icon: const Icon(Icons.camera_enhance, size: 60),
+                label: Text(
+                  analyzeText,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30.0,
@@ -163,4 +178,3 @@ class _HomeState extends State<Home> {
 //    Navigator.pushNamed(context, '/barcode',arguments: barcodeScanRes);
   }
 }
-
