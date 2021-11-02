@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:untitled/database_transactions/db_communication.dart';
 
 void main() => runApp(const MaterialApp(home: Home()));
 
@@ -80,7 +82,7 @@ class _HomeState extends State<Home> {
   String analyzeText = "Analyze Ingredients";
   @override
   Widget build(BuildContext context) {
-    final companyRef = database.child('companies');
+    final companyRef = database.child('products');
 
     return Scaffold(
       backgroundColor: Colors.yellow[300],
@@ -95,9 +97,7 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             onPressed: () async {
-              await companyRef
-                  .push()
-                  .set({'country_code': 'UK', 'name': 'test'});
+              createProduct('-MnRpUpm5T8HuguZplDF', database);
             },
             icon: const Icon(Icons.settings),
           )
@@ -112,15 +112,8 @@ class _HomeState extends State<Home> {
               width: 250,
               height: 130,
               child: ElevatedButton.icon(
-<<<<<<< Updated upstream
-                onPressed: (){
-                  Navigator.pushNamed(context, '/search_product');
-=======
                 onPressed: () {
-                  setState(() {
-                    searchText = 'Coming soon';
-                  });
->>>>>>> Stashed changes
+                  Navigator.pushNamed(context, '/search_product');
                 },
                 icon: const Icon(Icons.search, size: 60),
                 label: Text(
