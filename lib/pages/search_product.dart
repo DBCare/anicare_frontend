@@ -31,25 +31,6 @@ class _SearchProductState extends State<SearchProduct> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final products = [
-    "Ekmek",
-    "Süt",
-    "Yumurta",
-    "Patlıcan Kebabı",
-    "Domates",
-    "Beyti",
-    "Reçel",
-    "Tahin",
-    "Adana",
-    "Urfa",
-  ];
-
-  final suggestedProducts = [
-    "Patlıcan Kebabı",
-    "Beyti",
-    "Adana",
-    "Urfa",
-  ];
   String searchResult = "";
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -113,8 +94,6 @@ class DataSearch extends SearchDelegate<String> {
                             product_id: searchResult,
                           ),
                         ));
-
-                    showResults(context);
                   },
                   leading: Icon(Icons.location_city),
                   title: RichText(

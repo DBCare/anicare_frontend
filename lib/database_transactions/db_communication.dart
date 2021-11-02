@@ -63,7 +63,7 @@ Future<Brand> createBrand(String brandId, DatabaseReference db) async {
   });
 
   Company comp = Company('', '', '');
-  createComp(compId, db).then((value) => comp = value);
+  await createComp(compId, db).then((value) => comp = value);
 
   return Brand.fromMap(map, comp);
 }
@@ -82,7 +82,7 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
 
   Brand brand = Brand(Company('', '', ''), '', '', '', '', false, false, false,
       false, false, false, false, false, false, false);
-  createBrand(brandId, db).then((value) => brand = value);
+  await createBrand(brandId, db).then((value) => brand = value);
 
   debugPrint(brandId);
 

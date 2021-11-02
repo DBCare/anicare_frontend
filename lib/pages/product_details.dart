@@ -43,7 +43,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     leading: const Icon(Icons.arrow_back),
                     actions: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                         icon: const Icon(Icons.menu),
                       )
                     ],
