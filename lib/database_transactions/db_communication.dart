@@ -14,7 +14,6 @@ Future<List<Pair<String, String>>> searchSuggestion(
   final productRef = db.child('products');
   List<Pair<String, String>> items = [];
   begin.toLowerCase();
-  debugPrint(begin);
 
   await productRef
       .orderByChild('name')
@@ -84,7 +83,26 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
       false, false, false, false, false, false, false);
   await createBrand(brandId, db).then((value) => brand = value);
 
-  debugPrint(brandId);
-
   return Product.fromMap(map, brand);
+}
+
+Future<String> findBarcode(String barcode, DatabaseReference db) async {
+  String productID = '';
+
+  final DatabaseReference productRef = db.child('products');
+
+  await productRef
+      .orderByChild('barcode')
+      .equalTo(barcode)
+      .once()
+      .then((value) {
+    if (value.value != null) {
+      LinkedHashMap arr = value.value;
+      arr.forEach((key, value) {
+        productID = value['id'];
+      });
+    }
+  });
+
+  return productID;
 }
