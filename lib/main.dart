@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/pages/home.dart';
 import 'package:untitled/pages/barcode_results.dart';
+import 'package:untitled/pages/login.dart';
 import 'package:untitled/pages/search_product.dart';
 import 'package:untitled/pages/product_details.dart';
 
