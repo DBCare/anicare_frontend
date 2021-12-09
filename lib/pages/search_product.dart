@@ -17,7 +17,7 @@ class _SearchProductState extends State<SearchProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search Product"),
+        title: const Text("Search Product"),
         actions: <Widget>[
           IconButton(
               onPressed: () {
@@ -39,7 +39,7 @@ class DataSearch extends SearchDelegate<String> {
           onPressed: () {
             query = "";
           },
-          icon: Icon(Icons.clear))
+          icon: const Icon(Icons.clear))
     ];
   }
 
@@ -91,20 +91,20 @@ class DataSearch extends SearchDelegate<String> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProductDetails(
-                            product_id: searchResult,
+                            productID: searchResult,
                           ),
                         ));
                   },
-                  leading: Icon(Icons.location_city),
+                  leading: const Icon(Icons.location_city),
                   title: RichText(
                       text: TextSpan(
                           text: items[index].first.substring(0, query.length),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold),
                           children: [
                         TextSpan(
                           text: items[index].first.substring(query.length),
-                          style: TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: Colors.grey),
                         )
                       ])),
                 ),
@@ -112,7 +112,7 @@ class DataSearch extends SearchDelegate<String> {
               );
             }
           }
-          return Center(child: Text('error'));
+          return const Center(child: Text('error'));
         });
   }
 }

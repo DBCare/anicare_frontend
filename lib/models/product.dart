@@ -1,9 +1,6 @@
 import 'dart:collection';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/models/brand.dart';
-import 'dart:convert';
 
 class Product {
   late Brand brand;

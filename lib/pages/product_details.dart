@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/product.dart';
-import 'package:untitled/models/brand.dart';
-import 'package:untitled/models/company.dart';
-import 'package:untitled/models/product.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class ProductDetails extends StatefulWidget {
-  final product_id;
-  const ProductDetails({Key? key, @required this.product_id}) : super(key: key);
+  final productID;
+  const ProductDetails({Key? key, @required this.productID}) : super(key: key);
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState(product_id);
+  _ProductDetailsState createState() => _ProductDetailsState(productID);
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
@@ -32,14 +29,14 @@ class _ProductDetailsState extends State<ProductDetails> {
               Product mainProduct = snapshot.data!;
               return SafeArea(
                 child: Scaffold(
-                  backgroundColor: Color(0xFFF7F48B),
+                  backgroundColor: const Color(0xFFF7F48B),
                   appBar: AppBar(
                     title: Text(mainProduct.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         )),
                     centerTitle: true,
-                    backgroundColor: Color(0xFFF47C7C),
+                    backgroundColor: const Color(0xFFF47C7C),
                     leading: const Icon(Icons.arrow_back),
                     actions: [
                       IconButton(
@@ -55,9 +52,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Container(
                         height: 200.0,
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 0.0, horizontal: 0.0),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0x33F6748B),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
@@ -73,62 +70,50 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   width: 200.0, height: 200.0)),
                         ),*/
                             Container(
-                              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+                              padding: const EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
                               child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     mainProduct.brand.cerPeta == true
-                                        ? Container(
-                                            child: Opacity(
-                                                opacity: 1.0,
-                                                child: Image.asset(
-                                                    'assets/certificate_1.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          )
-                                        : Container(
-                                            child: Opacity(
-                                                opacity: 0.3,
-                                                child: Image.asset(
-                                                    'assets/certificate_1.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          ),
+                                        ? Opacity(
+                                            opacity: 1.0,
+                                            child: Image.asset(
+                                                'assets/certificate_1.png',
+                                                width: 45.0,
+                                                height: 45.0))
+                                        : Opacity(
+                                            opacity: 0.3,
+                                            child: Image.asset(
+                                                'assets/certificate_1.png',
+                                                width: 45.0,
+                                                height: 45.0)),
                                     mainProduct.brand.cerLB == true
-                                        ? Container(
-                                            child: Opacity(
-                                                opacity: 1.0,
-                                                child: Image.asset(
-                                                    'assets/certificate_2.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          )
-                                        : Container(
-                                            child: Opacity(
-                                                opacity: 0.3,
-                                                child: Image.asset(
-                                                    'assets/certificate_2.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          ),
+                                        ? Opacity(
+                                            opacity: 1.0,
+                                            child: Image.asset(
+                                                'assets/certificate_2.png',
+                                                width: 45.0,
+                                                height: 45.0))
+                                        : Opacity(
+                                            opacity: 0.3,
+                                            child: Image.asset(
+                                                'assets/certificate_2.png',
+                                                width: 45.0,
+                                                height: 45.0)),
                                     mainProduct.brand.cerCCF == true
-                                        ? Container(
-                                            child: Opacity(
-                                                opacity: 1.0,
-                                                child: Image.asset(
-                                                    'assets/certificate_3.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          )
-                                        : Container(
-                                            child: Opacity(
-                                                opacity: 0.3,
-                                                child: Image.asset(
-                                                    'assets/certificate_3.png',
-                                                    width: 45.0,
-                                                    height: 45.0)),
-                                          )
+                                        ? Opacity(
+                                            opacity: 1.0,
+                                            child: Image.asset(
+                                                'assets/certificate_3.png',
+                                                width: 45.0,
+                                                height: 45.0))
+                                        : Opacity(
+                                            opacity: 0.3,
+                                            child: Image.asset(
+                                                'assets/certificate_3.png',
+                                                width: 45.0,
+                                                height: 45.0))
                                   ]),
                             ),
                           ],
@@ -136,7 +121,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       Container(
                         width: double.infinity,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFF7F48B),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30.0),
@@ -146,22 +131,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                           children: [
                             Container(
                               height: 65.0,
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 30.0),
                               decoration: BoxDecoration(
                                 /*color: mainProduct.allergy == true
                                 ? Color(0xFFD92027)
                                 : Color(0xFFA1DE93),*/
-                                color: Color(0xFFD92027),
+                                color: const Color(0xFFD92027),
                                 borderRadius: BorderRadius.circular(30.0),
                                 border:
                                     Border.all(color: Colors.white60, width: 3),
                               ),
                               child: Row(
                                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
+                                children: const [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 15.0),
                                     child: Icon(Icons.health_and_safety,
                                         size: 20.0),
@@ -190,12 +175,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             Container(
                               height: 65.0,
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 30.0),
                               decoration: BoxDecoration(
                                 color: mainProduct.brand.crueltyFree == true
-                                    ? Color(0xFFA1DE93)
-                                    : Color(0xFFD92027),
+                                    ? const Color(0xFFA1DE93)
+                                    : const Color(0xFFD92027),
                                 borderRadius: BorderRadius.circular(30.0),
                                 border:
                                     Border.all(color: Colors.white60, width: 3),
@@ -203,19 +188,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 15.0),
                                     child: Icon(Icons.pets, size: 20.0),
                                   ),
                                   mainProduct.brand.crueltyFree == true
-                                      ? Text(
+                                      ? const Text(
                                           "This product has not been tested on animals.",
                                           style: TextStyle(
                                               fontSize: 13.0,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white))
-                                      : Text(
+                                      : const Text(
                                           "This product has been tested on animals.",
                                           style: TextStyle(
                                               fontSize: 13.0,
@@ -226,12 +211,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             Container(
                               height: 65.0,
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 30.0),
                               decoration: BoxDecoration(
                                 color: mainProduct.vegan == true
-                                    ? Color(0xFFA1DE93)
-                                    : Color(0xFFD92027),
+                                    ? const Color(0xFFA1DE93)
+                                    : const Color(0xFFD92027),
                                 borderRadius: BorderRadius.circular(30.0),
                                 border:
                                     Border.all(color: Colors.white60, width: 3),
@@ -239,18 +224,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 15.0),
                                     child: Icon(Icons.no_food, size: 20.0),
                                   ),
                                   mainProduct.vegan == true
-                                      ? Text("Vegans can use this product.",
+                                      ? const Text("Vegans can use this product.",
                                           style: TextStyle(
                                               fontSize: 13.0,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white))
-                                      : Text(
+                                      : const Text(
                                           "Vegans should not use this product.",
                                           style: TextStyle(
                                               fontSize: 13.0,
@@ -268,7 +253,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           //padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0),
                           //color: Colors.black,
                           width: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xFF70A1D7),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30.0),
@@ -277,7 +262,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
+                              const Padding(
                                 padding:
                                     EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
                                 child: Center(
@@ -290,9 +275,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsets.fromLTRB(20.0, 15.0, 5.0, 5.0),
+                                    const EdgeInsets.fromLTRB(20.0, 15.0, 5.0, 5.0),
                                 child: Text(mainProduct.ingredients,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
                                         letterSpacing: 1.1)),
@@ -307,7 +292,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               );
             }
           }
-          return Text('error');
+          return const Text('error');
         });
   }
 }

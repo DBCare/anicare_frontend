@@ -42,15 +42,15 @@ class _BarcodeResultsState extends State<BarcodeResults> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ProductDetails(
-                                product_id: snapshot.data!,
+                                productID: snapshot.data!,
                               ),
                             ));
                       },
                       icon: const Icon(Icons.qr_code, size: 60),
-                      label: Text(
+                      label: const Text(
                         "scanText",
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 30.0,
                         ),
                       ),
