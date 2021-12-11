@@ -16,23 +16,24 @@ class _UserProfileState extends State<UserProfile> {
           backgroundColor: Colors.blueAccent,
           body: SafeArea(child: Column(
             children: <Widget>[
-              Text('Profile',
-                style: TextStyle(color:Colors.white,fontSize: 20),
+              const Text('Profile',
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              Center(
+              const Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 75.0),
-                  child: CircleAvatar(radius:40.0 ,
+                  padding: EdgeInsets.only(top: 75.0),
+                  child: CircleAvatar(radius: 40.0,
                     backgroundColor: Colors.white,
-                    backgroundImage: AssetImage('assets/images/s-6087dc34879d8bfbaf0e50cb808a2dfd88d42fdb.jpg'),
+                    backgroundImage: AssetImage(
+                        'assets/images/s-6087dc34879d8bfbaf0e50cb808a2dfd88d42fdb.jpg'),
                   ),
                 ),
               ),
               Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 45.0,
                   ),
-                  padding:EdgeInsets.all(30.0),
+                  padding: EdgeInsets.all(30.0),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,42 +43,45 @@ class _UserProfileState extends State<UserProfile> {
                           Row(
                             children: <Widget>[
                               Icon(Icons.local_hospital,
-                                  size:30,
+                                  size: 30,
                                   color: Colors.yellowAccent.shade400),
-                              SizedBox(
+                              const SizedBox(
                                   width: 10.0
                               ),
-                              Text('2 Allergies',style: TextStyle(color: Colors.black87),)
+                              const Text('2 Allergies',
+                                style: TextStyle(color: Colors.black87),)
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20.0,
                           ),
                           Row(
-                            children: <Widget>[
+                            children: const <Widget>[
                               Icon(Icons.favorite,
-                                  size:30,
+                                  size: 30,
                                   color: Colors.blueAccent),
                               SizedBox(
                                   width: 10.0
                               ),
-                              Text('30 Favorites',style: TextStyle(color: Colors.black87),)
+                              Text('30 Favorites',
+                                style: TextStyle(color: Colors.black87),)
                             ],
                           )
                         ],
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.only(left:70.0),
+                        padding: const EdgeInsets.only(left: 70.0),
                         child: Row(
                           children: <Widget>[
                             Icon(Icons.star,
-                                size:30,
+                                size: 30,
                                 color: Colors.yellowAccent.shade400),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10.0
                             ),
-                            Text('5 Badges',style: TextStyle(color: Colors.black87),)
+                            const Text('5 Badges', style: TextStyle(
+                                color: Colors.black87),)
                           ],
                         ),
                       ),
@@ -85,7 +89,8 @@ class _UserProfileState extends State<UserProfile> {
                   )
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 35),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 35),
                 child: Container(
                     color: Colors.white,
                     child: Column(
@@ -94,17 +99,18 @@ class _UserProfileState extends State<UserProfile> {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              Icon(Icons.settings,size:30,
+                              const Icon(Icons.settings, size: 30,
                                   color: Colors.blueAccent),
-                              SizedBox(
+                              const SizedBox(
                                   width: 10.0
                               ),
-                              Text('Account Settings',
-                                style: TextStyle(color:Colors.black,),),
+                              const Text('Account Settings',
+                                style: TextStyle(color: Colors.black,),),
                               Row(
-                                children: [
+                                children: const [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(138,2,2,2),
+                                    padding: EdgeInsets.fromLTRB(
+                                        138, 2, 2, 2),
                                     child: Icon(Icons.keyboard_arrow_right,
                                         size: 30,
                                         color: Colors.black45),
@@ -118,18 +124,19 @@ class _UserProfileState extends State<UserProfile> {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              Icon(Icons.lock,size:30,
+                              const Icon(Icons.lock, size: 30,
                                   color: Colors.blueAccent),
 
-                              SizedBox(
+                              const SizedBox(
                                   width: 10.0
                               ),
-                              Text('Privacy & Security',
-                                style: TextStyle(color:Colors.black,),),
+                              const Text('Privacy & Security',
+                                style: TextStyle(color: Colors.black,),),
                               Row(
-                                children: [
+                                children: const [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(132,2,2,2),
+                                    padding: EdgeInsets.fromLTRB(
+                                        132, 2, 2, 2),
                                     child: Icon(Icons.keyboard_arrow_right,
                                         size: 30,
                                         color: Colors.black45),
@@ -143,18 +150,19 @@ class _UserProfileState extends State<UserProfile> {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              Icon(Icons.notifications,size:30,
+                              const Icon(Icons.notifications, size: 30,
                                   color: Colors.blueAccent),
 
-                              SizedBox(
+                              const SizedBox(
                                   width: 10.0
                               ),
-                              Text('Notifications',
-                                style: TextStyle(color:Colors.black,),),
+                              const Text('Notifications',
+                                style: TextStyle(color: Colors.black,),),
                               Row(
-                                children: [
+                                children: const [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(165,2,2,2),
+                                    padding: EdgeInsets.fromLTRB(
+                                        165, 2, 2, 2),
                                     child: Icon(Icons.keyboard_arrow_right,
                                         size: 30,
                                         color: Colors.black45),
@@ -168,18 +176,19 @@ class _UserProfileState extends State<UserProfile> {
                           padding: const EdgeInsets.all(12.0),
                           child: Row(
                             children: [
-                              Icon(Icons.logout_outlined,size:30,
+                              const Icon(Icons.logout_outlined, size: 30,
                                   color: Colors.blueAccent),
 
-                              SizedBox(
+                              const SizedBox(
                                   width: 10.0
                               ),
-                              Text('Log Out',
-                                style: TextStyle(color:Colors.black,),),
+                              const Text('Log Out',
+                                style: TextStyle(color: Colors.black,),),
                               Row(
-                                children: [
+                                children: const [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(192,2,2,2),
+                                    padding: EdgeInsets.fromLTRB(
+                                        192, 2, 2, 2),
                                     child: Icon(Icons.keyboard_arrow_right,
                                         size: 30,
                                         color: Colors.black45),
@@ -191,19 +200,21 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                         Container(
                             color: Colors.grey,
-                            child:Row(
+                            child: Row(
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Row(
-                                      children: [
+                                      children: const [
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Icon(Icons.wallet_giftcard,size:30,
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(
+                                              Icons.wallet_giftcard, size: 30,
                                               color: Colors.blueAccent),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(20,2,2,2),
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 2, 2, 2),
                                           child: Text('Invite your friends'),
                                         ),
                                       ],
@@ -220,5 +231,5 @@ class _UserProfileState extends State<UserProfile> {
           )),
         )
     );
+  }
 }
-

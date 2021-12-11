@@ -7,10 +7,11 @@ import 'package:untitled/pages/register.dart';
 import 'package:untitled/pages/search_product.dart';
 import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/terms_conditions.dart';
+import 'package:untitled/pages/user_profile.dart';
 
 void main() => runApp(MaterialApp(initialRoute: '/main', routes: {
       //'/': (context) => Loading(),
-      '/main' : (context) => const MainScreen(),
+      '/main' : (context) => const UserProfile(),
       '/register' : (context) => const Register(),
       '/login' : (context) => const Login(),
       '/home': (context) => const Home(),

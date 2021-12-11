@@ -12,7 +12,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   bool doesAgree=false;
-  TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController(); //nameController.text şeklinde kullanıcının girdiği değeri alabilirsin
   TextEditingController emailController = TextEditingController();
   TextEditingController pw1Controller = TextEditingController();
   TextEditingController pw2Controller = TextEditingController();
