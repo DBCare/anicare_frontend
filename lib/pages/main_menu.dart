@@ -92,19 +92,24 @@ class _MainMenuState extends State<MainMenu> {
                             ),
                             Padding(  //SEARCH BAR YUNUS SENDE
                               padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 8),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    hintText: "Vegan eyeshadow palette",
-                                    hintStyle: TextStyle(fontSize: 14,color: Color(0xffBAB9D0)),
-                                    prefixIcon: Icon(Icons.search,color: Color(0xff4754F0)),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: BorderSide.none
-                                    ),
-                                    contentPadding: EdgeInsets.zero,
-                                    filled: true,
-                                    fillColor: Color(0xffFCFCFF)
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xffFCFCFF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8), // <-- Radius
+                                  ),
                                 ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 0.0,right: 10.0),
+                                      child: Icon(Icons.search,color: Color(0xff4754F0)),
+                                    ),
+                                    Text("Vegan eyeshadow palette",style: TextStyle(fontSize: 14,color: Color(0xffBAB9D0)))
+                                  ],
+                                ),
+                                onPressed: () {  }, 
                               ),
                             ),
                           ],
