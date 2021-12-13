@@ -33,7 +33,7 @@ class _UserProfileState extends State<UserProfile> {
                   margin: const EdgeInsets.symmetric(
                     horizontal: 45.0,
                   ),
-                  padding: EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(30.0),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
