@@ -21,6 +21,7 @@ class _BarcodeResultsState extends State<BarcodeResults> {
     String id = "";
     debugPrint("BARCODE RES:");
     debugPrint(barcodeRes);
+
     await findBarcode(barcode, db).then((String result) {
       id = result;
     });
