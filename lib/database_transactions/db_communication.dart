@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
@@ -71,6 +72,9 @@ Future<Brand> createBrand(String brandId, DatabaseReference db) async {
 
 Future<Product> createProduct(String productId, DatabaseReference db) async {
   DatabaseReference prodRef = db.child('products/' + productId);
+  if (prodRef == null) {
+    throw ItemNotFound("No such product found in database! (EXCEPTION)");
+  }
   debugPrint(productId);
   String prodInfo = '';
   String brandId = '';
@@ -80,7 +84,8 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
     map = value.value;
     brandId = map['brand_id'];
   });
-
+  debugPrint("PRODUCT INFO:");
+  debugPrint(prodInfo);
   Brand brand = Brand(Company('', '', ''), '', '', '', '', false, false, false,
       false, false, false, false, false, false, false);
   await createBrand(brandId, db).then((value) => brand = value);
@@ -92,6 +97,8 @@ Future<String> findBarcode(String barcode, DatabaseReference db) async {
   String productID = '';
 
   final DatabaseReference productRef = db.child('products');
+  debugPrint("BARCODE:");
+  debugPrint(barcode);
 
   await productRef
       .orderByChild('barcode')

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/product.dart';
 import 'package:untitled/models/brand.dart';
@@ -25,6 +26,17 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   _ProductDetailsState(this.productId);
   Future<Product> _createProduct(id, db) async {
+    Product mainProduct;
+    try {} on ItemNotFound {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return ProductDetails(productID: id);
+          },
+        ),
+      );
+    }
     return createProduct(id, db);
   }
 
@@ -318,7 +330,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                     onPressed: () {
                                                       Navigator.pushNamed(
                                                           context,
-                                                          '/brand_details');
+                                                          '/brand_details',
+                                                          arguments:
+                                                              foundProduct
+                                                                  .brand);
                                                     },
                                                     child: Text(
                                                       "See Brand Details",

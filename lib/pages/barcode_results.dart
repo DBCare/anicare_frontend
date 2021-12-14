@@ -19,6 +19,8 @@ class _BarcodeResultsState extends State<BarcodeResults> {
 
   Future<String> _findBarcode(barcode, db) async {
     String id = "";
+    debugPrint("BARCODE RES:");
+    debugPrint(barcodeRes);
     await findBarcode(barcode, db).then((String result) {
       id = result;
     });
@@ -36,6 +38,8 @@ class _BarcodeResultsState extends State<BarcodeResults> {
 
   @override
   Widget build(BuildContext context) {
+    final barc = ModalRoute.of(context)!.settings.arguments as String;
+    barcodeRes = barc;
     return Scaffold(
       body: buildBody(context),
     );

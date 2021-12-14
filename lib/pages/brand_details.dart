@@ -25,6 +25,7 @@ class _BrandDetailsState extends State<BrandDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final brand = ModalRoute.of(context)!.settings.arguments as Brand;
     Size size = MediaQuery.of(context).size;
     final height = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.top -
@@ -42,7 +43,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                 ),
                 backgroundColor: Color(0xFFFFFFFF),
                 title: Center(
-                    child: Text("Faith in Nature",
+                    child: Text(brand.name,
                         style: TextStyle(color: Color(0xFF29303E)))),
                 elevation: 0,
               ),
@@ -110,13 +111,13 @@ class _BrandDetailsState extends State<BrandDetails> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 4.0),
-                                    child: Text("Faith in Nature",
+                                    child: Text(brand.name,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 26,
                                             fontWeight: FontWeight.bold)),
                                   ),
-                                  true == true
+                                  brand.crueltyFree
                                       ? Text(
                                           "Faith in Nature has confirmed that it is truly cruelty-free.",
                                           style: TextStyle(
@@ -170,7 +171,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                                         ),
                                       ],
                                     ),
-                                    true == true
+                                    brand.crueltyFree
                                         ? Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
@@ -205,7 +206,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                                         ),
                                       ],
                                     ),
-                                    true == true
+                                    brand.crueltyFree
                                         ? Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
@@ -239,7 +240,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                                         ),
                                       ],
                                     ),
-                                    true == true
+                                    !brand.statusChina
                                         ? Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
