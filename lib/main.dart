@@ -12,14 +12,14 @@ import 'package:untitled/pages/terms_conditions.dart';
 
 void main() => runApp(MaterialApp(initialRoute: '/main', routes: {
       //'/': (context) => Loading(),
-      '/main' : (context) => const MainScreen(),
-      '/register' : (context) => const Register(),
-      '/login' : (context) => const Login(),
+      '/main': (context) => const MainScreen(),
+      '/register': (context) => const Register(),
+      '/login': (context) => const Login(),
       '/home': (context) => const MainMenu(),
       '/barcode': (context) => const BarcodeResults(),
       '/search_product': (context) => const SearchProduct(),
       '/product': (context) => const ProductDetails(),
       '/terms': (context) => const TermsConditions(),
       '/product_details': (context) => ProductDetails(),
-      '/brand_details' : (context) => BrandDetails()
+      '/brand_details': (context) => BrandDetails()
     }));
