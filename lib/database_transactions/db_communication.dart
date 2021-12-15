@@ -8,9 +8,6 @@ import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/database_transactions/db_communication.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 Future<List<Pair<String, String>>> searchSuggestion(
     String begin, DatabaseReference db) async {
@@ -75,22 +72,37 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
   if (prodRef == null) {
     throw ItemNotFound("No such product found in database! (EXCEPTION)");
   }
+
   debugPrint(productId);
   String prodInfo = '';
   String brandId = '';
+  String ingr = '';
+  List<String> ingrList = [];
+  List analyze = [];
   LinkedHashMap map = LinkedHashMap();
+
   await prodRef.once().then((value) {
     prodInfo = value.value.toString();
     map = value.value;
     brandId = map['brand_id'];
+    ingr = map['ingredients'];
   });
+
+  ingrList = editIngredientList(ingr);
+  ingr = ingrList.join(",");
+  debugPrint("Ingr: " + ingr);
+
+  await analyzeIngredients(ingr, db).then((value) {
+    analyze = value;
+  });
+
   debugPrint("PRODUCT INFO:");
   debugPrint(prodInfo);
   Brand brand = Brand(Company('', '', ''), '', '', '', '', false, false, false,
       false, false, false, false, false, false, false);
   await createBrand(brandId, db).then((value) => brand = value);
 
-  return Product.fromMap(map, brand);
+  return Product.fromMap(map, brand, ingrList, analyze, ingr);
 }
 
 Future<String> findBarcode(String barcode, DatabaseReference db) async {
@@ -114,4 +126,65 @@ Future<String> findBarcode(String barcode, DatabaseReference db) async {
   });
 
   return productID;
+}
+
+Future<Map> getIngredients(DatabaseReference db) async {
+  DatabaseReference prodRef = db.child('ingredients');
+
+  LinkedHashMap map = LinkedHashMap();
+
+  await prodRef.once().then((value) {
+    map = value.value;
+  });
+
+  return map;
+}
+
+Future<List> analyzeIngredients(String ingr, DatabaseReference db) async {
+  List ingredients = [];
+  List categories = [];
+  List<String> ingredientStatus = [];
+
+  await getIngredients(db).then((value) {
+    ingredients = value.values.toList();
+    categories = value.keys.toList();
+  });
+
+  for (var i = 0; i < categories.length; i++) {
+    for (var j = 0; j < ingredients[i].length; j++) {
+      if (ingr
+          .toLowerCase()
+          .contains(ingredients[i][j].toString().toLowerCase())) {
+        ingredientStatus.add(categories[i]);
+      }
+    }
+  }
+
+  Set temp = ingredientStatus.toSet();
+  debugPrint("Product contains " + temp.toString());
+
+  return temp.toList();
+}
+
+List<String> editIngredientList(String ingredients) {
+  List punc = [",", "|"];
+  List<String> ingredientList = [];
+
+  for (var i = 0; i < punc.length; i++) {
+    if (ingredients.contains(punc[i])) {
+      ingredientList.addAll(ingredients.split(punc[i]));
+      break;
+    }
+  }
+
+  return ingredientList;
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
 }

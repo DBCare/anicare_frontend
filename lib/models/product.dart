@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/brand.dart';
 
 class Product {
@@ -10,8 +11,9 @@ class Product {
   late String subCategory;
   late String description;
   late String barcode;
-  late String ingredientStatus;
   late String ingredients;
+  late List ingredientList;
+  late List ingredientAnalyze;
 
   Product(
       this.brand,
@@ -21,10 +23,11 @@ class Product {
       this.subCategory,
       this.description,
       this.barcode,
-      this.ingredientStatus,
-      this.ingredients) {/*INTENTIONALLY EMPTY*/}
+      this.ingredients,
+      this.ingredientList) {/*INTENTIONALLY EMPTY*/}
 
-  Product.fromMap(LinkedHashMap infoMap, Brand br) {
+  Product.fromMap(LinkedHashMap infoMap, Brand br, List ingrList, List analyze,
+      String ingr) {
     debugPrint(infoMap.toString());
     brand = br;
     vegan = (infoMap['status_vegan'] == '1');
@@ -33,24 +36,8 @@ class Product {
     subCategory = infoMap['sub_category'];
     description = infoMap['description'];
     barcode = infoMap['barcode'];
-    ingredientStatus = infoMap['status_ingredient'];
-    ingredients = infoMap['ingredients'];
+    ingredientList = ingrList;
+    ingredientAnalyze = analyze;
+    ingredients = ingr;
   }
 }
-
-/*
-
-Class Product{
-  int id;
-  Brand brand;
-  String name;
-  String category;
-  String subCategory;
-  String ingredients;
-  String description;
-  String ingredientStatus; //gluten_free, sulfate_free etc.
-  String barcode;
-  bool vegan;
-}
-
-*/
