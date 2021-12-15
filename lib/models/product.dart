@@ -14,6 +14,7 @@ class Product {
   late String ingredients;
   late List ingredientList;
   late List ingredientAnalyze;
+  late String picURL;
 
   Product(
       this.brand,
@@ -24,7 +25,8 @@ class Product {
       this.description,
       this.barcode,
       this.ingredients,
-      this.ingredientList) {/*INTENTIONALLY EMPTY*/}
+      this.ingredientList,
+      this.picURL) {/*INTENTIONALLY EMPTY*/}
 
   Product.fromMap(LinkedHashMap infoMap, Brand br, List ingrList, List analyze,
       String ingr) {
@@ -36,6 +38,7 @@ class Product {
     subCategory = infoMap['sub_category'];
     description = infoMap['description'];
     barcode = infoMap['barcode'];
+    picURL = infoMap['pic-url'];
     ingredientList = ingrList;
     ingredientAnalyze = analyze;
     ingredients = ingr;

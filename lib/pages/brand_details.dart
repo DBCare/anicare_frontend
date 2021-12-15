@@ -32,42 +32,39 @@ class _BrandDetailsState extends State<BrandDetails> {
         MediaQuery.of(context).padding.bottom;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Color(0xFFE5E5E5),
+          backgroundColor: const Color(0xFFE5E5E5),
           appBar: PreferredSize(
             preferredSize: Size(size.width, height * 0.1),
             child: Center(
               child: AppBar(
-                leading: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                leading: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Icon(Icons.arrow_back_ios, color: Color(0xFF29303E)),
                 ),
-                backgroundColor: Color(0xFFFFFFFF),
+                backgroundColor: const Color(0xFFFFFFFF),
                 title: Center(
                     child: Text(brand.name,
-                        style: TextStyle(color: Color(0xFF29303E)))),
+                        style: const TextStyle(color: Color(0xFF29303E)))),
                 elevation: 0,
               ),
             ),
           ),
-          body: Container(
+          body: SizedBox(
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   height: height * 0.25,
-                  decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                      image: new AssetImage(
-                        'assets/Faith-In-Nature-Category.png',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: NetworkImage(brand.picURL)),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Container(
+                  child: SizedBox(
                     height: height * 0.54,
                     child: Column(
                       children: [
@@ -77,7 +74,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                child: Center(
+                                child: const Center(
                                   child: Text("Cruelty-Free",
                                       style: TextStyle(
                                         color: Color(0xFF4754F0),
@@ -86,14 +83,16 @@ class _BrandDetailsState extends State<BrandDetails> {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(21),
-                                  color: Color(0xFF4754F0).withOpacity(0.2),
+                                  color:
+                                      const Color(0xFF4754F0).withOpacity(0.2),
                                 ),
                                 width: 99,
                                 height: 36,
                               ),
-                              Container(
+                              SizedBox(
                                 child: Icon(Icons.favorite,
-                                    color: Color(0xFFC2C2FE).withOpacity(1)),
+                                    color:
+                                        const Color(0xFFC2C2FE).withOpacity(1)),
                                 height: 24,
                                 width: 26,
                               ),
@@ -112,35 +111,36 @@ class _BrandDetailsState extends State<BrandDetails> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 4.0),
                                     child: Text(brand.name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 26,
                                             fontWeight: FontWeight.bold)),
                                   ),
                                   brand.crueltyFree
                                       ? Text(
-                                          "Faith in Nature has confirmed that it is truly cruelty-free.",
-                                          style: TextStyle(
+                                          brand.name +
+                                              " has confirmed that it is truly cruelty-free.",
+                                          style: const TextStyle(
                                               color: Color(0xff4754F0),
                                               fontSize: 14))
                                       : Text(
-                                          "Faith in Nature has NOT confirmed that it is truly cruelty-free.",
-                                          style: TextStyle(
+                                          brand.name +
+                                              " has NOT confirmed that it is truly cruelty-free.",
+                                          style: const TextStyle(
                                               color: Color(0xff4754F0),
                                               fontSize:
                                                   14)), //NAME kısmına firma adı yazılacak. (true == true yerine cruelty_free == true olacak)
                                 ],
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 15.0),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 15.0),
                                 child: Text(
                                     "They don't test finished products or ingredients on animals, and neither do their suppliers or any third-parties. They also don't sell their products where animal testing is required by law.",
                                     style: TextStyle(
                                         color: Color(0xffBAB9D0),
                                         fontSize: 13.5)),
                               ),
-                              Divider(color: Color(0xffBAB9D0))
+                              const Divider(color: Color(0xffBAB9D0))
                             ],
                           ),
                         ),
@@ -155,7 +155,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
-                                      children: [
+                                      children: const [
                                         true == true
                                             ? Icon(
                                                 Icons.check,
@@ -164,19 +164,18 @@ class _BrandDetailsState extends State<BrandDetails> {
                                             : Icon(Icons.close,
                                                 color: Color(0xff4754F0)),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
+                                          padding: EdgeInsets.only(left: 8.0),
                                           child: Text(
                                               "Finished products tested on animals"),
                                         ),
                                       ],
                                     ),
                                     brand.crueltyFree
-                                        ? Text("No",
+                                        ? const Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
-                                        : Text("Yes",
+                                        : const Text("Yes",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
@@ -184,13 +183,13 @@ class _BrandDetailsState extends State<BrandDetails> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.only(top: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
-                                      children: [
+                                      children: const [
                                         true == true
                                             ? Icon(
                                                 Icons.check,
@@ -199,19 +198,18 @@ class _BrandDetailsState extends State<BrandDetails> {
                                             : Icon(Icons.close,
                                                 color: Color(0xff4754F0)),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
+                                          padding: EdgeInsets.only(left: 8.0),
                                           child: Text(
                                               "Ingredients tested on animals"),
                                         ),
                                       ],
                                     ),
                                     brand.crueltyFree
-                                        ? Text("No",
+                                        ? const Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
-                                        : Text("Yes",
+                                        : const Text("Yes",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
@@ -219,13 +217,13 @@ class _BrandDetailsState extends State<BrandDetails> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.only(top: 10),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
-                                      children: [
+                                      children: const [
                                         true == true
                                             ? Icon(
                                                 Icons.check,
@@ -234,18 +232,17 @@ class _BrandDetailsState extends State<BrandDetails> {
                                             : Icon(Icons.close,
                                                 color: Color(0xff4754F0)),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text("Sell on Mainland China"),
+                                          padding: EdgeInsets.only(left: 8.0),
+                                          child: Text("Sold in Mainland China"),
                                         ),
                                       ],
                                     ),
                                     !brand.statusChina
-                                        ? Text("No",
+                                        ? const Text("No",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
-                                        : Text("Yes",
+                                        : const Text("Yes",
                                             style: TextStyle(
                                                 color: Color(0xff4754F0),
                                                 fontSize: 13.5))
@@ -262,7 +259,7 @@ class _BrandDetailsState extends State<BrandDetails> {
               ],
             ),
           ),
-          bottomNavigationBar: CustomBottomNavigationBar()),
+          bottomNavigationBar: const CustomBottomNavigationBar()),
     );
   }
 }

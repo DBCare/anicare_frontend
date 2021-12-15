@@ -17,6 +17,7 @@ class Brand {
   late bool statusChina;
   late bool crueltyFree;
   late bool vegan;
+  late String picURL;
 
   Brand(
       this.company,
@@ -33,7 +34,8 @@ class Brand {
       this.statusEE,
       this.statusChina,
       this.crueltyFree,
-      this.vegan);
+      this.vegan,
+      this.picURL);
 
   Brand.fromMap(LinkedHashMap infoMap, Company comp) {
     company = comp;
@@ -51,5 +53,6 @@ class Brand {
     statusChina = (infoMap['status_china'] == '1');
     crueltyFree = (infoMap['cruelty_free'] == '1');
     vegan = (infoMap['vegan'] == '1');
+    picURL = infoMap['pic-url'];
   }
 }

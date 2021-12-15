@@ -91,80 +91,77 @@ class _ProductDetailsState extends State<ProductDetails> {
                           children: [
                             Container(
                               height: height * 0.5,
-                              width: size.width * 3 / 4,
-                              decoration: const BoxDecoration(
+                              width: size.width * 4 / 5,
+                              decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                    'assets/product2.png',
-                                  ),
-                                  fit: BoxFit.contain,
-                                ),
+                                    fit: BoxFit.fitWidth,
+                                    image: NetworkImage(foundProduct.picURL)),
                               ),
                             ),
                             SizedBox(
-                              width: size.width * 1 / 4,
-                              height: height * 0.25,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: height * 0.0625,
-                                    width: height * 0.0625,
-                                    child: Opacity(
-                                      opacity:
-                                          foundProduct.brand.cerPeta ? 1 : 0.0,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              'assets/certificate_1.png',
+                                width: size.width * 1 / 5,
+                                height: height * 0.25,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      height: height * 0.0625,
+                                      width: height * 0.0625,
+                                      child: Opacity(
+                                        opacity: foundProduct.brand.cerPeta
+                                            ? 1
+                                            : 0.0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                'assets/certificate_1.png',
+                                              ),
+                                              fit: BoxFit.fill,
                                             ),
-                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: height * 0.0625,
-                                    width: height * 0.0625,
-                                    child: Opacity(
-                                      opacity:
-                                          foundProduct.brand.cerLB ? 1 : 0.0,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              'assets/certificate_2.png',
+                                    SizedBox(
+                                      height: height * 0.0625,
+                                      width: height * 0.0625,
+                                      child: Opacity(
+                                        opacity:
+                                            foundProduct.brand.cerLB ? 1 : 0.0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                'assets/certificate_2.png',
+                                              ),
+                                              fit: BoxFit.fill,
                                             ),
-                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: height * 0.0625,
-                                    width: height * 0.0625,
-                                    child: Opacity(
-                                      opacity:
-                                          foundProduct.brand.cerCCF ? 1 : 0.0,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              'assets/certificate_3.png',
+                                    SizedBox(
+                                      height: height * 0.0625,
+                                      width: height * 0.0625,
+                                      child: Opacity(
+                                        opacity:
+                                            foundProduct.brand.cerCCF ? 1 : 0.0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                'assets/certificate_3.png',
+                                              ),
+                                              fit: BoxFit.fill,
                                             ),
-                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
+                                  ],
+                                ))
                           ],
                         ),
                         Padding(
@@ -324,10 +321,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: SizedBox(
-                            child: ElevatedButton(
+                        SizedBox(
+                          child: ElevatedButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, '/brand_details',
                                     arguments: foundProduct.brand);
@@ -336,14 +331,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 "View Brand Details",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 16.0, color: Colors.black),
+                                    fontSize: 14.0, color: Color(0xFF4754F0)),
                               ),
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xffBAB9D0))),
-                            ),
-                          ),
-                        ),
+                                  shadowColor: MaterialStateProperty.all<Color>(
+                                      Colors.black.withOpacity(0)),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          const Color(0xFFF9F9F9)),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(21.0),
+                                          side: const BorderSide(
+                                              color: Color(0xFF4754F0)))))),
+                        )
                       ],
                     ),
                   ),

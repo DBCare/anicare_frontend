@@ -99,7 +99,7 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
   debugPrint("PRODUCT INFO:");
   debugPrint(prodInfo);
   Brand brand = Brand(Company('', '', ''), '', '', '', '', false, false, false,
-      false, false, false, false, false, false, false);
+      false, false, false, false, false, false, false, '');
   await createBrand(brandId, db).then((value) => brand = value);
 
   return Product.fromMap(map, brand, ingrList, analyze, ingr);
