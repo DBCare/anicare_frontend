@@ -286,68 +286,61 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   ),
                                 ),
                                 Expanded(
-                                  child: SingleChildScrollView(
-                                    child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 25.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
-                                              children: [
-                                                const Text("Ingredients:",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 25.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              const Text("Ingredients:",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color(0xFF4754F0),
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10.0),
+                                                child: Text(
+                                                    foundProduct.ingredients,
+                                                    style: const TextStyle(
                                                         color:
-                                                            Color(0xFF4754F0),
-                                                        fontSize: 14)),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10.0),
-                                                  child: Text(
-                                                      foundProduct.ingredients,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              Color(0xffBAB9D0),
-                                                          fontSize: 13)),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: SizedBox(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/brand_details',
-                                            arguments: foundProduct.brand);
-                                      },
-                                      child: const Text(
-                                        "View Brand Details",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.black),
-                                      ),
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  const Color(0xffBAB9D0))),
-                                    ),
-                                  ),
+                                                            Color(0xffBAB9D0),
+                                                        fontSize: 13)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )),
                                 ),
                               ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: SizedBox(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/brand_details',
+                                    arguments: foundProduct.brand);
+                              },
+                              child: const Text(
+                                "View Brand Details",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.black),
+                              ),
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color(0xffBAB9D0))),
                             ),
                           ),
                         ),
