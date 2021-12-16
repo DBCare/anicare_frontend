@@ -297,7 +297,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                         fontSize: 12,
                                                       )),
                                                 ),
-<<<<<<< Updated upstream
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(21),
@@ -307,130 +306,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                 width: 105,
                                                 height: 38,
                                               ))
-=======
-                                              ),
-                                            /*if (!foundProduct.vegan)
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 4.0),
-                                                child: Container(
-                                                  child: const Center(
-                                                    child: Text("Not Vegan",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xFFE64A45),
-                                                          fontSize: 12,
-                                                        )),
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            21),
-                                                    color:
-                                                        const Color(0xFFE64A45)
-                                                            .withOpacity(0.2),
-                                                  ),
-                                                  width: 105,
-                                                  height: 38,
-                                                ),
-                                              )*/
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          child: Icon(Icons.favorite,
-                                              color: const Color(0xFFC2C2FE)
-                                                  .withOpacity(1)),
-                                          height: 24,
-                                          width: 26,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(0.0),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 25.0, vertical: 7),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                for (int i = 0;
-                                                    i <
-                                                        foundProduct
-                                                            .ingredientAnalyze
-                                                            .length;
-                                                    i++)
-                                                  Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 4.0),
-                                                      child: Container(
-                                                        child: Center(
-                                                          child: Text(
-                                                              foundProduct
-                                                                  .ingredientAnalyze[
-                                                                      i]
-                                                                  .toString()
-                                                                  .toCapitalized(),
-                                                              style:
-                                                                  const TextStyle(
-                                                                color: Color(
-                                                                    0xFFE64A45),
-                                                                fontSize: 12,
-                                                              )),
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(21),
-                                                          color: const Color(
-                                                                  0xFFE64A45)
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                        width: 105,
-                                                        height: 38,
-                                                      ))
-                                              ],
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5.0, left: 25.0, right: 25.0),
-                                    child: Column(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
-                                              child: Text(foundProduct.name,
-                                                  style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 26,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12.0),
-                                          child: Text(foundProduct.description,
-                                              style: const TextStyle(
-                                                  color: Color(0xffBAB9D0),
-                                                  fontSize: 13.5)),
-                                        ),
->>>>>>> Stashed changes
                                       ],
                                     )),
                               ],
