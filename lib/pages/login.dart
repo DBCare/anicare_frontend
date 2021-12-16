@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
   TextEditingController emailController =
-      TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
+  TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
 
   Widget buildEmail() {
@@ -79,7 +79,6 @@ class _LoginState extends State<Login> {
 
   Widget buildRememberMeAndForgotPW() {
     return SizedBox(
-<<<<<<< Updated upstream
         height: 35,
         child: Row(children: <Widget>[
           TextButton(
@@ -87,7 +86,7 @@ class _LoginState extends State<Login> {
             child: const Text(
               'Forgot Password?',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(width: 60),
@@ -110,117 +109,74 @@ class _LoginState extends State<Login> {
             ),
           ),
         ]));
-=======
-        height:35,
-        child: Row(
-            children: <Widget>[
-              TextButton(
-                onPressed: () => {/*ELİNİZDEN ÖPER*/},
-                child: const Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-              const SizedBox(width:60),
-              const Text(
-                  'Remember me?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  )
-              ),
-              Theme(
-
-                data: ThemeData(unselectedWidgetColor: Colors.white),
-                child: Checkbox(
-                  value: isRememberMe,
-                  checkColor: Colors.black,
-                  activeColor: Colors.white,
-                  onChanged: (value) {
-                    setState((){
-                      isRememberMe = value!;
-                    });
-                  },
-                ),
-              ),
-
-            ]
-        )
-
-
-    );
->>>>>>> Stashed changes
   }
 
   Widget buildSocialLogins() {
     return SizedBox(
         child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 40,
-          height: 40,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              padding: const EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: Image.asset(
+                  'assets/facebook.png',
+                  width: 20,
+                  height: 20,
+                ), // <-- Use 'Image.asset(...)' here
               ),
             ),
-            child: Image.asset(
-              'assets/facebook.png',
-              width: 20,
-              height: 20,
-            ), // <-- Use 'Image.asset(...)' here
-          ),
-        ),
-        const SizedBox(width: 20),
-        SizedBox(
-          width: 40,
-          height: 40,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              padding: const EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+            const SizedBox(width: 20),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  padding: const EdgeInsets.all(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: Image.asset(
+                  'assets/google.png',
+                  width: 20,
+                  height: 20,
+                ), // <-- Use 'Image.asset(...)' here
               ),
             ),
-            child: Image.asset(
-              'assets/google.png',
-              width: 20,
-              height: 20,
-            ), // <-- Use 'Image.asset(...)' here
-          ),
-        ),
-        const SizedBox(width: 20),
-        SizedBox(
-          width: 40,
-          height: 40,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              padding: const EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+            const SizedBox(width: 20),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: Image.asset(
+                  'assets/apple.png',
+                  width: 20,
+                  height: 20,
+                ), // <-- Use 'Image.asset(...)' here
               ),
-            ),
-            child: Image.asset(
-              'assets/apple.png',
-              width: 20,
-              height: 20,
-            ), // <-- Use 'Image.asset(...)' here
-          ),
-        )
-      ],
-    ));
+            )
+          ],
+        ));
   }
 
   Widget buildSignUpButton() {
@@ -228,19 +184,19 @@ class _LoginState extends State<Login> {
         onTap: () => {Navigator.pushNamed(context, '/register')},
         child: RichText(
             text: const TextSpan(children: [
-          TextSpan(
-              text: 'Don\'t have an Account? ',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400)),
-          TextSpan(
-              text: 'Sign Up',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold)),
-        ])));
+              TextSpan(
+                  text: 'Don\'t have an Account? ',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400)),
+              TextSpan(
+                  text: 'Sign Up',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
+            ])));
   }
 
   Widget buildLoginButton() {
