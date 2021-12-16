@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:untitled/pages/main_menu.dart';
+import 'package:untitled/pages/scan_result.dart';
 
 import '../main.dart';
 
@@ -100,7 +101,9 @@ class RecognizeTextScreenState extends State<RecognizeTextScreen> {
             // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => MainMenu(),
+                builder: (context) => scanResult(
+                  ingredientL: text,
+                ),
               ),
             );
           } catch (e) {
