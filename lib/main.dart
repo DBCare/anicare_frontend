@@ -10,6 +10,7 @@ import 'package:untitled/pages/register.dart';
 import 'package:untitled/pages/search_product.dart';
 import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/terms_conditions.dart';
+import 'package:untitled/pages/user_profile.dart';
 
 List<CameraDescription> cameras = [];
 Future<void> main() async {
@@ -27,6 +28,7 @@ Future<void> main() async {
     '/product': (context) => const ProductDetails(),
     '/terms': (context) => const TermsConditions(),
     '/product_details': (context) => ProductDetails(),
-    '/brand_details': (context) => BrandDetails()
+    '/brand_details': (context) => BrandDetails(),
+    'profile': (context) => UserProfile()
   }));
 }

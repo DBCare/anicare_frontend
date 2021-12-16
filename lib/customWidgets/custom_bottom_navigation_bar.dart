@@ -35,7 +35,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         });
         _onTap();
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(
             icon: Icon(
               Icons.home,

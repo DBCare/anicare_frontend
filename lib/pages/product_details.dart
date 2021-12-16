@@ -83,271 +83,315 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   body: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: height * 0.5,
-                              width: size.width * 4 / 5,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.fitWidth,
-                                    image: NetworkImage(foundProduct.picURL)),
+                    child: Container(
+                      width: size.width,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: height * 0.5,
+                                width: size.width * 4 / 5,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fitWidth,
+                                      image: NetworkImage(foundProduct.picURL)),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                                width: size.width * 1 / 5,
-                                height: height * 0.25,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      height: height * 0.0625,
-                                      width: height * 0.0625,
-                                      child: Opacity(
-                                        opacity: foundProduct.brand.cerPeta
-                                            ? 1
-                                            : 0.0,
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/certificate_1.png',
-                                              ),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: height * 0.0625,
-                                      width: height * 0.0625,
-                                      child: Opacity(
-                                        opacity:
-                                            foundProduct.brand.cerLB ? 1 : 0.0,
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/certificate_2.png',
-                                              ),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: height * 0.0625,
-                                      width: height * 0.0625,
-                                      child: Opacity(
-                                        opacity:
-                                            foundProduct.brand.cerCCF ? 1 : 0.0,
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/certificate_3.png',
-                                              ),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ))
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: SizedBox(
-                            height: height * 0.54,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25.0),
-                                  child: Row(
+                              SizedBox(
+                                  width: size.width * 1 / 5,
+                                  height: height * 0.25,
+                                  child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            child: const Center(
-                                              child: Text("Cruelty-Free",
-                                                  style: TextStyle(
-                                                    color: Color(0xFF4754F0),
-                                                    fontSize: 12,
-                                                  )),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(21),
-                                              color: const Color(0xFF4754F0)
-                                                  .withOpacity(0.2),
-                                            ),
-                                            width: 99,
-                                            height: 36,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Container(
-                                              child: const Center(
-                                                child: Text("Vegan",
-                                                    style: TextStyle(
-                                                      color: Color(0xFF4754F0),
-                                                      fontSize: 12,
-                                                    )),
+                                      SizedBox(
+                                        height: height * 0.0625,
+                                        width: height * 0.0625,
+                                        child: Opacity(
+                                          opacity: foundProduct.brand.cerPeta
+                                              ? 1
+                                              : 0.0,
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  'assets/certificate_1.png',
+                                                ),
+                                                fit: BoxFit.fill,
                                               ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(21),
-                                                color: const Color(0xFF4754F0)
-                                                    .withOpacity(0.2),
-                                              ),
-                                              width: 99,
-                                              height: 36,
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Container(
-                                              child: const Center(
-                                                child: Text("Silicone",
-                                                    style: TextStyle(
-                                                      color: Color(0xFFE64A45),
-                                                      fontSize: 12,
-                                                    )),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(21),
-                                                color: const Color(0xFFE64A45)
-                                                    .withOpacity(0.2),
-                                              ),
-                                              width: 99,
-                                              height: 36,
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                       SizedBox(
-                                        child: Icon(Icons.favorite,
-                                            color: const Color(0xFFC2C2FE)
-                                                .withOpacity(1)),
-                                        height: 24,
-                                        width: 26,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 25.0, left: 25.0, right: 25.0),
-                                  child: Column(
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4.0),
-                                            child: Text(foundProduct.name,
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 26,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
+                                        height: height * 0.0625,
+                                        width: height * 0.0625,
+                                        child: Opacity(
+                                          opacity: foundProduct.brand.cerLB
+                                              ? 1
+                                              : 0.0,
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  'assets/certificate_2.png',
+                                                ),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12.0),
-                                        child: Text(foundProduct.description,
-                                            style: const TextStyle(
-                                                color: Color(0xffBAB9D0),
-                                                fontSize: 13.5)),
+                                      SizedBox(
+                                        height: height * 0.0625,
+                                        width: height * 0.0625,
+                                        child: Opacity(
+                                          opacity: foundProduct.brand.cerCCF
+                                              ? 1
+                                              : 0.0,
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  'assets/certificate_3.png',
+                                                ),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 25.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: [
-                                              const Text("Ingredients:",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color(0xFF4754F0),
-                                                      fontSize: 14)),
+                                  ))
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SizedBox(
+                              height: height * 0.54,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            if (foundProduct.brand.crueltyFree)
+                                              Container(
+                                                child: const Center(
+                                                  child: Text("Cruelty-Free",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF4754F0),
+                                                        fontSize: 12,
+                                                      )),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(21),
+                                                  color: const Color(0xFF4754F0)
+                                                      .withOpacity(0.2),
+                                                ),
+                                                width: 99,
+                                                height: 36,
+                                              ),
+                                            if (foundProduct.vegan)
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    top: 10.0),
-                                                child: Text(
-                                                    foundProduct.ingredients,
-                                                    style: const TextStyle(
-                                                        color:
-                                                            Color(0xffBAB9D0),
-                                                        fontSize: 13)),
+                                                    left: 5.0),
+                                                child: Container(
+                                                  child: const Center(
+                                                    child: Text("Vegan",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFF4754F0),
+                                                          fontSize: 12,
+                                                        )),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            21),
+                                                    color:
+                                                        const Color(0xFF4754F0)
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  width: 99,
+                                                  height: 36,
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ],
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          child: Icon(Icons.favorite,
+                                              color: const Color(0xFFC2C2FE)
+                                                  .withOpacity(1)),
+                                          height: 24,
+                                          width: 26,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 25.0, vertical: 7),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: <Widget>[
+                                                for (int i = 0;
+                                                    i <
+                                                        foundProduct
+                                                            .ingredientAnalyze
+                                                            .length;
+                                                    i++)
+                                                  Container(
+                                                    child: Center(
+                                                      child: Text(
+                                                          foundProduct
+                                                              .ingredientAnalyze[
+                                                                  i]
+                                                              .toString()
+                                                              .toCapitalized(),
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Color(
+                                                                0xFFE64A45),
+                                                            fontSize: 12,
+                                                          )),
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              21),
+                                                      color: const Color(
+                                                              0xFFE64A45)
+                                                          .withOpacity(0.2),
+                                                    ),
+                                                    width: 99,
+                                                    height: 36,
+                                                  )
+                                              ],
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, left: 25.0, right: 25.0),
+                                    child: Column(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4.0),
+                                              child: Text(foundProduct.name,
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 26,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 12.0),
+                                          child: Text(foundProduct.description,
+                                              style: const TextStyle(
+                                                  color: Color(0xffBAB9D0),
+                                                  fontSize: 13.5)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 25.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                const Text("Ingredients:",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Color(0xFF4754F0),
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10.0),
+                                                  child: Text(
+                                                      foundProduct.ingredients,
+                                                      style: const TextStyle(
+                                                          color:
+                                                              Color(0xffBAB9D0),
+                                                          fontSize: 13)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/brand_details',
-                                    arguments: foundProduct.brand);
-                              },
-                              child: const Text(
-                                "View Brand Details",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Color(0xFF4754F0)),
-                              ),
-                              style: ButtonStyle(
-                                  shadowColor: MaterialStateProperty.all<Color>(
-                                      Colors.black.withOpacity(0)),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          const Color(0xFFF9F9F9)),
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(21.0),
-                                          side: const BorderSide(
-                                              color: Color(0xFF4754F0)))))),
-                        )
-                      ],
+                          SizedBox(
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/brand_details',
+                                      arguments: foundProduct.brand);
+                                },
+                                child: const Text(
+                                  "View Brand Details",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: Color(0xFF4754F0)),
+                                ),
+                                style: ButtonStyle(
+                                    shadowColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.black.withOpacity(0)),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            const Color(0xFFF9F9F9)),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(21.0),
+                                            side: const BorderSide(
+                                                color: Color(0xFF4754F0)))))),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   bottomNavigationBar: const CustomBottomNavigationBar()),

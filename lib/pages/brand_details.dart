@@ -32,7 +32,7 @@ class _BrandDetailsState extends State<BrandDetails> {
         MediaQuery.of(context).padding.bottom;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color(0xFFE5E5E5),
+          backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: Size(size.width, height * 0.1),
             child: Center(
