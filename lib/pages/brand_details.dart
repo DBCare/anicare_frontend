@@ -93,26 +93,6 @@ class _BrandDetailsState extends State<BrandDetails> {
                                     height: 38,
                                   ),
                                 ),
-                              if (!brand.crueltyFree)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 4.0),
-                                  child: Container(
-                                    child: const Center(
-                                      child: Text("Not Cruelty-Free",
-                                          style: TextStyle(
-                                            color: Color(0xFFE64A45),
-                                            fontSize: 12,
-                                          )),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(21),
-                                      color: const Color(0xFFE64A45)
-                                          .withOpacity(0.2),
-                                    ),
-                                    width: 105,
-                                    height: 38,
-                                  ),
-                                ),
                               if (brand.vegan)
                                 Padding(
                                   padding: const EdgeInsets.only(right: 4.0),
@@ -127,6 +107,26 @@ class _BrandDetailsState extends State<BrandDetails> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(21),
                                       color: const Color(0xFF4754F0)
+                                          .withOpacity(0.2),
+                                    ),
+                                    width: 105,
+                                    height: 38,
+                                  ),
+                                ),
+                              if (!brand.crueltyFree)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: Container(
+                                    child: const Center(
+                                      child: Text("Not Cruelty-Free",
+                                          style: TextStyle(
+                                            color: Color(0xFFE64A45),
+                                            fontSize: 12,
+                                          )),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(21),
+                                      color: const Color(0xFFE64A45)
                                           .withOpacity(0.2),
                                     ),
                                     width: 105,
