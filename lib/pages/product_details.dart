@@ -185,48 +185,60 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         Row(
                                           children: [
                                             if (foundProduct.brand.crueltyFree)
-                                              Container(
-                                                child: const Center(
-                                                  child: Text("Cruelty-Free",
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xFF4754F0),
-                                                        fontSize: 12,
-                                                      )),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 4.0),
+                                                child: Container(
+                                                  child: const Center(
+                                                    child: Text("Cruelty-Free",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFF4754F0),
+                                                          fontSize: 12,
+                                                        )),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            21),
+                                                    color:
+                                                        const Color(0xFF4754F0)
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  width: 105,
+                                                  height: 38,
                                                 ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(21),
-                                                  color: const Color(0xFF4754F0)
-                                                      .withOpacity(0.2),
-                                                ),
-                                                width: 105,
-                                                height: 38,
                                               ),
                                             if (!foundProduct.brand.crueltyFree)
-                                              Container(
-                                                child: const Center(
-                                                  child: Text(
-                                                      "Not Cruelty-Free",
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xFFE64A45),
-                                                        fontSize: 12,
-                                                      )),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 4.0),
+                                                child: Container(
+                                                  child: const Center(
+                                                    child: Text(
+                                                        "Not Cruelty-Free",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFFE64A45),
+                                                          fontSize: 12,
+                                                        )),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            21),
+                                                    color:
+                                                        const Color(0xFFE64A45)
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  width: 105,
+                                                  height: 38,
                                                 ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(21),
-                                                  color: const Color(0xFFE64A45)
-                                                      .withOpacity(0.2),
-                                                ),
-                                                width: 105,
-                                                height: 38,
                                               ),
                                             if (foundProduct.vegan)
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 5.0),
+                                                    right: 4.0),
                                                 child: Container(
                                                   child: const Center(
                                                     child: Text("Vegan",
@@ -242,6 +254,31 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             21),
                                                     color:
                                                         const Color(0xFF4754F0)
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  width: 105,
+                                                  height: 38,
+                                                ),
+                                              ),
+                                            if (!foundProduct.vegan)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 4.0),
+                                                child: Container(
+                                                  child: const Center(
+                                                    child: Text("Not Vegan",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFFE64A45),
+                                                          fontSize: 12,
+                                                        )),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            21),
+                                                    color:
+                                                        const Color(0xFFE64A45)
                                                             .withOpacity(0.2),
                                                   ),
                                                   width: 105,

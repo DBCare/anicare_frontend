@@ -73,22 +73,66 @@ class _BrandDetailsState extends State<BrandDetails> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                child: const Center(
-                                  child: Text("Cruelty-Free",
-                                      style: TextStyle(
-                                        color: Color(0xFF4754F0),
-                                        fontSize: 12,
-                                      )),
+                              if (brand.crueltyFree)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: Container(
+                                    child: const Center(
+                                      child: Text("Cruelty-Free",
+                                          style: TextStyle(
+                                            color: Color(0xFF4754F0),
+                                            fontSize: 12,
+                                          )),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(21),
+                                      color: const Color(0xFF4754F0)
+                                          .withOpacity(0.2),
+                                    ),
+                                    width: 105,
+                                    height: 38,
+                                  ),
                                 ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(21),
-                                  color:
-                                      const Color(0xFF4754F0).withOpacity(0.2),
+                              if (!brand.crueltyFree)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: Container(
+                                    child: const Center(
+                                      child: Text("Not Cruelty-Free",
+                                          style: TextStyle(
+                                            color: Color(0xFFE64A45),
+                                            fontSize: 12,
+                                          )),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(21),
+                                      color: const Color(0xFFE64A45)
+                                          .withOpacity(0.2),
+                                    ),
+                                    width: 105,
+                                    height: 38,
+                                  ),
                                 ),
-                                width: 99,
-                                height: 36,
-                              ),
+                              if (brand.vegan)
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: Container(
+                                    child: const Center(
+                                      child: Text("Vegan",
+                                          style: TextStyle(
+                                            color: Color(0xFF4754F0),
+                                            fontSize: 12,
+                                          )),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(21),
+                                      color: const Color(0xFF4754F0)
+                                          .withOpacity(0.2),
+                                    ),
+                                    width: 105,
+                                    height: 38,
+                                  ),
+                                ),
                               SizedBox(
                                 child: Icon(Icons.favorite,
                                     color:
