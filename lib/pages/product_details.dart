@@ -172,7 +172,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              height: height * 0.54,
+                              height: height * 0.4,
                               child: Column(
                                 children: [
                                   Padding(
@@ -247,6 +247,26 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                   width: 105,
                                                   height: 38,
                                                 ),
+                                              ),
+                                            if (!foundProduct.brand.crueltyFree)
+                                              Container(
+                                                child: const Center(
+                                                  child: Text(
+                                                      "Not Cruelty-Free",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFFE64A45),
+                                                        fontSize: 12,
+                                                      )),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(21),
+                                                  color: const Color(0xFFE64A45)
+                                                      .withOpacity(0.2),
+                                                ),
+                                                width: 105,
+                                                height: 38,
                                               ),
                                           ],
                                         ),
@@ -368,17 +388,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                         color:
                                                             Color(0xFF4754F0),
                                                         fontSize: 14)),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10.0),
-                                                  child: Text(
-                                                      foundProduct.ingredients,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              Color(0xffBAB9D0),
-                                                          fontSize: 13)),
-                                                ),
                                               ],
                                             ),
                                           ],
@@ -387,6 +396,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ],
                               ),
                             ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            child: Text(foundProduct.ingredients,
+                                style: const TextStyle(
+                                    color: Color(0xffBAB9D0), fontSize: 13)),
                           ),
                           SizedBox(
                             child: ElevatedButton(
