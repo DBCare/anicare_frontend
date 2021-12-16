@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/recognize_text.dart';
+import 'package:untitled/pages/user_profile.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  final screens = [MainMenu(), RecognizeTextScreen(), MainMenu()];
+  final screens = [MainMenu(), RecognizeTextScreen(), UserProfile()];
   int _selectedIndex = 0;
   _onTap() {
     // this has changed
