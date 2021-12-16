@@ -200,8 +200,28 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                   color: const Color(0xFF4754F0)
                                                       .withOpacity(0.2),
                                                 ),
-                                                width: 99,
-                                                height: 36,
+                                                width: 105,
+                                                height: 38,
+                                              ),
+                                            if (!foundProduct.brand.crueltyFree)
+                                              Container(
+                                                child: const Center(
+                                                  child: Text(
+                                                      "Not Cruelty-Free",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFFE64A45),
+                                                        fontSize: 12,
+                                                      )),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(21),
+                                                  color: const Color(0xFFE64A45)
+                                                      .withOpacity(0.2),
+                                                ),
+                                                width: 105,
+                                                height: 38,
                                               ),
                                             if (foundProduct.vegan)
                                               Padding(
@@ -224,8 +244,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                         const Color(0xFF4754F0)
                                                             .withOpacity(0.2),
                                                   ),
-                                                  width: 99,
-                                                  height: 36,
+                                                  width: 105,
+                                                  height: 38,
                                                 ),
                                               ),
                                           ],
@@ -258,32 +278,37 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             .ingredientAnalyze
                                                             .length;
                                                     i++)
-                                                  Container(
-                                                    child: Center(
-                                                      child: Text(
-                                                          foundProduct
-                                                              .ingredientAnalyze[
-                                                                  i]
-                                                              .toString()
-                                                              .toCapitalized(),
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Color(
-                                                                0xFFE64A45),
-                                                            fontSize: 12,
-                                                          )),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              21),
-                                                      color: const Color(
-                                                              0xFFE64A45)
-                                                          .withOpacity(0.2),
-                                                    ),
-                                                    width: 99,
-                                                    height: 36,
-                                                  )
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 4.0),
+                                                      child: Container(
+                                                        child: Center(
+                                                          child: Text(
+                                                              foundProduct
+                                                                  .ingredientAnalyze[
+                                                                      i]
+                                                                  .toString()
+                                                                  .toCapitalized(),
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Color(
+                                                                    0xFFE64A45),
+                                                                fontSize: 12,
+                                                              )),
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(21),
+                                                          color: const Color(
+                                                                  0xFFE64A45)
+                                                              .withOpacity(0.2),
+                                                        ),
+                                                        width: 105,
+                                                        height: 38,
+                                                      ))
                                               ],
                                             )),
                                       ],
