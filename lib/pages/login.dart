@@ -79,6 +79,7 @@ class _LoginState extends State<Login> {
 
   Widget buildRememberMeAndForgotPW() {
     return SizedBox(
+<<<<<<< Updated upstream
         height: 35,
         child: Row(children: <Widget>[
           TextButton(
@@ -109,6 +110,49 @@ class _LoginState extends State<Login> {
             ),
           ),
         ]));
+=======
+        height:35,
+        child: Row(
+            children: <Widget>[
+              TextButton(
+                onPressed: () => {/*ELİNİZDEN ÖPER*/},
+                child: const Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              const SizedBox(width:60),
+              const Text(
+                  'Remember me?',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  )
+              ),
+              Theme(
+
+                data: ThemeData(unselectedWidgetColor: Colors.white),
+                child: Checkbox(
+                  value: isRememberMe,
+                  checkColor: Colors.black,
+                  activeColor: Colors.white,
+                  onChanged: (value) {
+                    setState((){
+                      isRememberMe = value!;
+                    });
+                  },
+                ),
+              ),
+
+            ]
+        )
+
+
+    );
+>>>>>>> Stashed changes
   }
 
   Widget buildSocialLogins() {
