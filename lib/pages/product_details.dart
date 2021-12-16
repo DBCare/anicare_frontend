@@ -170,8 +170,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ],
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 25.0, vertical: 10.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -234,24 +234,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           width: 105,
                                           height: 38,
                                         ),
-                                      ),
-                                    if (!foundProduct.brand.crueltyFree)
-                                      Container(
-                                        child: const Center(
-                                          child: Text("Not Cruelty-Free",
-                                              style: TextStyle(
-                                                color: Color(0xFFE64A45),
-                                                fontSize: 12,
-                                              )),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(21),
-                                          color: const Color(0xFFE64A45)
-                                              .withOpacity(0.2),
-                                        ),
-                                        width: 105,
-                                        height: 38,
                                       ),
                                   ],
                                 ),
@@ -359,8 +341,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
-                                    children: [
-                                      const Text("Ingredients:",
+                                    children: const [
+                                      Text("Ingredients:",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xFF4754F0),
@@ -370,8 +352,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ],
                               )),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 25.0, vertical: 15),
                             child: Text(foundProduct.ingredients,
                                 style: const TextStyle(
                                     color: Color(0xffBAB9D0), fontSize: 13)),
