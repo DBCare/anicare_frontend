@@ -247,58 +247,109 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 25.0, vertical: 7),
-                                        child: Row(
-                                          children: <Widget>[
-                                            for (int i = 0;
-                                                i <
-                                                    foundProduct
-                                                        .ingredientAnalyze
-                                                        .length;
-                                                i++)
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 4.0),
-                                                  child: Container(
-                                                    child: Center(
-                                                      child: Text(
-                                                          foundProduct
-                                                              .ingredientAnalyze[
-                                                                  i]
-                                                              .toString()
-                                                              .toCapitalized(),
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Color(
-                                                                0xFFE64A45),
-                                                            fontSize: 12,
-                                                          )),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              21),
-                                                      color: const Color(
-                                                              0xFFE64A45)
-                                                          .withOpacity(0.2),
-                                                    ),
-                                                    width: 105,
-                                                    height: 38,
-                                                  ))
-                                          ],
-                                        )),
-                                  ],
-                                )),
-                          ),
+                          if (foundProduct.ingredientAnalyze.length > 3)
+                            Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 25.0, vertical: 7),
+                                          child: Row(
+                                            children: <Widget>[
+                                              for (int i = 0;
+                                                  i <
+                                                      foundProduct
+                                                          .ingredientAnalyze
+                                                          .length;
+                                                  i++)
+                                                Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 4.0),
+                                                    child: Container(
+                                                      child: Center(
+                                                        child: Text(
+                                                            foundProduct
+                                                                .ingredientAnalyze[
+                                                                    i]
+                                                                .toString()
+                                                                .toCapitalized(),
+                                                            style:
+                                                                const TextStyle(
+                                                              color: Color(
+                                                                  0xFFE64A45),
+                                                              fontSize: 12,
+                                                            )),
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(21),
+                                                        color: const Color(
+                                                                0xFFE64A45)
+                                                            .withOpacity(0.2),
+                                                      ),
+                                                      width: 105,
+                                                      height: 38,
+                                                    ))
+                                            ],
+                                          )),
+                                    ],
+                                  )),
+                            ),
+                          if (foundProduct.ingredientAnalyze.length <= 3)
+                            Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 25.0, vertical: 7),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          for (int i = 0;
+                                              i <
+                                                  foundProduct
+                                                      .ingredientAnalyze.length;
+                                              i++)
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 4.0),
+                                                child: Container(
+                                                  child: Center(
+                                                    child: Text(
+                                                        foundProduct
+                                                            .ingredientAnalyze[
+                                                                i]
+                                                            .toString()
+                                                            .toCapitalized(),
+                                                        style: const TextStyle(
+                                                          color:
+                                                              Color(0xFFE64A45),
+                                                          fontSize: 12,
+                                                        )),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            21),
+                                                    color:
+                                                        const Color(0xFFE64A45)
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  width: 105,
+                                                  height: 38,
+                                                ))
+                                        ],
+                                      )),
+                                ],
+                              ),
+                            ),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 5.0, left: 25.0, right: 25.0),
