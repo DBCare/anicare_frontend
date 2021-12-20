@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:untitled/pages/crop_image.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/scan_result.dart';
 
@@ -79,30 +80,10 @@ class RecognizeTextScreenState extends State<RecognizeTextScreen> {
             // Attempt to take a picture and get the file `image`
             // where it was saved.
             final image = await _controller.takePicture();
-            final textDetector = GoogleMlKit.vision.textDetector();
-            final inputImage = InputImage.fromFile(File(image.path));
-            final RecognisedText recognisedText =
-                await textDetector.processImage(inputImage);
-
-            String text = recognisedText.text;
-            for (TextBlock block in recognisedText.blocks) {
-              final Rect rect = block.rect;
-              final List<Offset> cornerPoints = block.cornerPoints;
-              final String text = block.text;
-              final List<String> languages = block.recognizedLanguages;
-
-              for (TextLine line in block.lines) {
-                // Same getters as TextBlock
-                for (TextElement element in line.elements) {}
-              }
-            }
-            debugPrint(text);
-
-            // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => scanResult(
-                  ingredientL: text,
+                builder: (context) => CropScreen(
+                  imgPath: image.path,
                 ),
               ),
             );
