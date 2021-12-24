@@ -5,6 +5,7 @@ class SearchBar extends StatefulWidget {
   final String text;
   final ValueChanged<String> onChanged;
 
+
   const SearchBar({Key? key, required this.text, required this.onChanged}) : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class _SearchBarState extends State<SearchBar> {
               FocusScope.of(context).requestFocus(FocusNode());
             },
           )
-              : null,
+              : IconButton(onPressed: () {Scaffold.of(context).openEndDrawer(); }, icon: Icon(Icons.filter_list),color: Color(0xff29303E)),
           filled: true,
           fillColor: Colors.white,
           focusColor: Colors.white,

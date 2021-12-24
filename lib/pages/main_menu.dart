@@ -142,7 +142,7 @@ class _MainMenuState extends State<MainMenu> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const SearchProduct(),
+                                         SearchProduct(),
                                   ));
                             },
                           ),

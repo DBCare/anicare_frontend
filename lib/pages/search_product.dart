@@ -1,6 +1,7 @@
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
+import 'package:untitled/customWidgets/custom_drawer.dart';
 import 'package:untitled/customWidgets/search_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +17,8 @@ Map<String, bool> filter = {
 };
 
 class SearchProduct extends StatefulWidget {
-  const SearchProduct({Key? key}) : super(key: key);
+
+  SearchProduct({Key? key}) : super(key: key);
 
   @override
   State<SearchProduct> createState() => _SearchProductState();
@@ -85,187 +87,6 @@ class _SearchProductState extends State<SearchProduct> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 8),
                     child: SearchBar(text: query, onChanged: search),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: height * 0.06,
-                      child: ListView(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: filter['vegan']!
-                                        ? MaterialStateProperty.all(
-                                            (const Color(0xff4754F0)
-                                                .withOpacity(1)))
-                                        : MaterialStateProperty.all(
-                                            const Color(0xff4754F0)
-                                                .withOpacity(0.2))),
-                                onPressed: () {
-                                  filter['vegan'] = !filter['vegan']!;
-                                  setState(() {
-                                    filteredItems = applyFilter(items);
-                                  });
-                                },
-                                child: Text("Vegan",
-                                    style: TextStyle(
-                                        color: filter['vegan']!
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: filter['cruelty_free']!
-                                        ? MaterialStateProperty.all(
-                                            (const Color(0xff4754F0)
-                                                .withOpacity(1)))
-                                        : MaterialStateProperty.all(
-                                            const Color(0xff4754F0)
-                                                .withOpacity(0.2))),
-                                onPressed: () {
-                                  filter['cruelty_free'] =
-                                      !filter['cruelty_free']!;
-                                  setState(() {
-                                    filteredItems = applyFilter(items);
-                                  });
-                                },
-                                child: Text("Cruelty-Free",
-                                    style: TextStyle(
-                                        color: filter['cruelty_free']!
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: filter['cer_peta']!
-                                        ? MaterialStateProperty.all(
-                                            (const Color(0xff4754F0)
-                                                .withOpacity(1)))
-                                        : MaterialStateProperty.all(
-                                            const Color(0xff4754F0)
-                                                .withOpacity(0.2))),
-                                onPressed: () {
-                                  filter['cer_peta'] = !filter['cer_peta']!;
-                                  setState(() {
-                                    filteredItems = applyFilter(items);
-                                  });
-                                },
-                                child: Text("PETA",
-                                    style: TextStyle(
-                                        color: filter['cer_peta']!
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: filter['cer_ccf']!
-                                        ? MaterialStateProperty.all(
-                                            (const Color(0xff4754F0)
-                                                .withOpacity(1)))
-                                        : MaterialStateProperty.all(
-                                            const Color(0xff4754F0)
-                                                .withOpacity(0.2))),
-                                onPressed: () {
-                                  filter['cer_ccf'] = !filter['cer_ccf']!;
-                                  setState(() {
-                                    filteredItems = applyFilter(items);
-                                  });
-                                },
-                                child: Text("CCF",
-                                    style: TextStyle(
-                                        color: filter['cer_ccf']!
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: filter['cer_lb']!
-                                        ? MaterialStateProperty.all(
-                                            (const Color(0xff4754F0)
-                                                .withOpacity(1)))
-                                        : MaterialStateProperty.all(
-                                            const Color(0xff4754F0)
-                                                .withOpacity(0.2))),
-                                onPressed: () {
-                                  filter['cer_lb'] = !filter['cer_lb']!;
-
-                                  setState(() {
-                                    filteredItems = applyFilter(items);
-                                  });
-                                },
-                                child: Text("Leaping Bunny",
-                                    style: TextStyle(
-                                        color: filter['cer_lb']!
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(21.0),
-                                    )),
-                                    backgroundColor: MaterialStateProperty.all(
-                                        const Color(0xff4754F0)
-                                            .withOpacity(0.2))),
-                                onPressed: () {},
-                                child: const Text("Filter2",
-                                    style: TextStyle(
-                                        color: Color(0xff4754F0),
-                                        fontSize: 12))),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
                   ),
                   Expanded(
                     child: Scrollbar(
@@ -358,6 +179,7 @@ class _SearchProductState extends State<SearchProduct> {
           },
         ),
         bottomNavigationBar: const CustomBottomNavigationBar(),
+        endDrawer: CustomDrawer(),
       ),
     );
   }

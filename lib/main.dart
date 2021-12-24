@@ -24,7 +24,7 @@ Future<void> main() async {
     '/login': (context) => const Login(),
     '/home': (context) => const MainMenu(),
     '/barcode': (context) => const BarcodeResults(),
-    '/search_product': (context) => const SearchProduct(),
+    '/search_product': (context) =>  SearchProduct(),
     '/product': (context) => const ProductDetails(),
     '/terms': (context) => const TermsConditions(),
     '/product_details': (context) => ProductDetails(),
