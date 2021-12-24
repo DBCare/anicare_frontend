@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -11,211 +12,173 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: SafeArea(
-          child: Column(
-        children: <Widget>[
-          const Text(
-            'Profile',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: 75.0),
-              child: CircleAvatar(
-                radius: 40.0,
-                backgroundColor: Colors.white,
-                backgroundImage: AssetImage('assets/koyun.jpg'),
+    Size size = MediaQuery.of(context).size;
+    final height = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xffF9F9F9),
+        appBar: AppBar(
+          backgroundColor: const Color(0xff4754F0),
+          elevation: 0,
+          leading: const Icon(Icons.menu_rounded, size: 24),
+          title: Center(child: const Text("Profile" , style: TextStyle(color: Color(0xffF9F9F9) , fontSize: 14))),
+          actions: const [Icon(Icons.notifications_rounded)],
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 60.0),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                      height: height * 0.30,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.elliptical(150, 100),
+                              bottomLeft: Radius.elliptical(600, 250)),
+                          color: Color(0xff4754F0)),
+                      ),
+                  Positioned(
+                    bottom: -20,
+                    left: 0,
+                    right: 0,
+                    top: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 15, bottom: 5),
+                      child: Container(
+                        height: height * 0.30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: const Color(0xffFFFFFF)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const CircleAvatar(
+                              radius: 50,
+                              backgroundImage: AssetImage('assets/mehmet.jpg'),
+                            ),
+                            const Text("Mehmet Göktürk", style: TextStyle(color: Color(0xff29303E) , fontSize: 22, fontWeight: FontWeight.bold)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                    children: const [
+                                      CircleAvatar(
+                                        radius: 10,
+                                        backgroundImage: AssetImage("assets/allergy_icon.png"),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 4.0),
+                                        child: Text("2 Allergies", style: TextStyle(color: Color(0xff29303E), fontWeight: FontWeight.bold, fontSize: 14)),
+                                      ) //Variable eklenecek
+                                    ],
+                                ),
+                                Row(
+                                  children: const [
+                                    Icon(Icons.favorite,color: Color(0xff4754F0)),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 4.0),
+                                      child: Text("30 Favorites" , style: TextStyle(color: Color(0xff4754F0), fontWeight: FontWeight.bold, fontSize: 14)),
+                                    ) //Variable eklenecek
+                                  ],
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 10,
+                                  backgroundImage: ExactAssetImage("assets/badge_icon.png"),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 4.0),
+                                  child: Text("5 Badges", style: TextStyle(color: Color(0xff29303E), fontWeight: FontWeight.bold, fontSize: 14)),
+                                ) //Variable eklenecek
+
+                              ],
+                            )
+                          ],
+                        )
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 45.0,
-              ),
-              padding: const EdgeInsets.all(30.0),
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
+            Expanded(
+              child: Container(
+                color: Colors.white,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: <Widget>[
-                          Icon(Icons.local_hospital,
-                              size: 30, color: Colors.yellowAccent.shade400),
-                          const SizedBox(width: 10.0),
-                          const Text(
-                            '2 Allergies',
-                            style: TextStyle(color: Colors.black87),
-                          )
-                        ],
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton.icon(
+                            onPressed: () {  },
+                            label: Align(alignment: Alignment.centerLeft, child: const Text("Account Settings", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold))),
+                            icon: const Icon(Icons.settings, color: Color(0xff4754F0)),
+                          ),
+                        ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          onPressed: () {  },
+                          label: const Align(alignment: Alignment.centerLeft, child: Text("Privacy & Security", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold))),
+                          icon: const Icon(Icons.lock,color: Color(0xff4754F0)),
+                        ),
                       ),
-                      const SizedBox(
-                        width: 20.0,
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          onPressed: () {  },
+                          label: const Align(alignment: Alignment.centerLeft, child:Text("Notifications", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold))),
+                          icon: const Icon(Icons.notifications, color: Color(0xff4754F0)),
+                        ),
                       ),
-                      Row(
-                        children: const <Widget>[
-                          Icon(Icons.favorite,
-                              size: 30, color: Colors.blueAccent),
-                          SizedBox(width: 10.0),
-                          Text(
-                            '30 Favorites',
-                            style: TextStyle(color: Colors.black87),
-                          )
-                        ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          onPressed: () {  },
+                          label: const Align(alignment: Alignment.centerLeft, child:Text("Log out", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold))),
+                          icon: const Icon(Icons.logout, color: Color(0xff4754F0)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                        child: Container(
+                          color: Color(0xffE0DFE9),
+                          width: double.infinity,
+                          child: TextButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.card_giftcard, color: Color(0xff4754F0)),
+                              label: const Padding(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: Text("Invite your friends", style: TextStyle(color: Color(0xff29303E), fontWeight: FontWeight.bold, fontSize: 16)),
+                              )
+                          ),
+                        ),
                       )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 70.0),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.star,
-                            size: 30, color: Colors.yellowAccent.shade400),
-                        const SizedBox(width: 10.0),
-                        const Text(
-                          '5 Badges',
-                          style: TextStyle(color: Colors.black87),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 35),
-            child: Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.settings,
-                              size: 30, color: Colors.blueAccent),
-                          const SizedBox(width: 10.0),
-                          const Text(
-                            'Account Settings',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(138, 2, 2, 2),
-                                child: Icon(Icons.keyboard_arrow_right,
-                                    size: 30, color: Colors.black45),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.lock,
-                              size: 30, color: Colors.blueAccent),
-                          const SizedBox(width: 10.0),
-                          const Text(
-                            'Privacy & Security',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(132, 2, 2, 2),
-                                child: Icon(Icons.keyboard_arrow_right,
-                                    size: 30, color: Colors.black45),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.notifications,
-                              size: 30, color: Colors.blueAccent),
-                          const SizedBox(width: 10.0),
-                          const Text(
-                            'Notifications',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(165, 2, 2, 2),
-                                child: Icon(Icons.keyboard_arrow_right,
-                                    size: 30, color: Colors.black45),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.logout_outlined,
-                              size: 30, color: Colors.blueAccent),
-                          const SizedBox(width: 10.0),
-                          const Text(
-                            'Log Out',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(192, 2, 2, 2),
-                                child: Icon(Icons.keyboard_arrow_right,
-                                    size: 30, color: Colors.black45),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                        color: Colors.grey,
-                        child: Row(children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(Icons.wallet_giftcard,
-                                      size: 30, color: Colors.blueAccent),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(20, 2, 2, 2),
-                                  child: Text('Invite your friends'),
-                                ),
-                              ],
-                            ),
-                          )
-                        ]))
-                  ],
-                )),
-          )
-        ],
-      )),
-    ));
+                )
+                ,
+              ),
+            ),
+
+          ],
+        ),
+          bottomNavigationBar: const CustomBottomNavigationBar(),
+      ),
+    );
   }
 }
