@@ -15,6 +15,7 @@ class Product {
   late List ingredientList;
   late List ingredientAnalyze;
   late String picURL;
+  late String id;
 
   Product(
       this.brand,
@@ -26,7 +27,8 @@ class Product {
       this.barcode,
       this.ingredients,
       this.ingredientList,
-      this.picURL) {/*INTENTIONALLY EMPTY*/}
+      this.picURL,
+      this.id) {/*INTENTIONALLY EMPTY*/}
 
   Product.fromMap(LinkedHashMap infoMap, Brand br, List ingrList, List analyze,
       String ingr) {
@@ -43,4 +45,19 @@ class Product {
     ingredientAnalyze = analyze;
     ingredients = ingr;
   }
+
+  Map<String, dynamic> toJson() => {
+        'product': {
+          'barcode': barcode,
+          'name': name,
+          'brand_id': brand.id,
+          'category': category,
+          'description': description,
+          'id': id,
+          'ingredients': ingredients,
+          'status_vegan': vegan,
+          'sub_category': subCategory,
+          'pic-url': picURL,
+        }
+      };
 }

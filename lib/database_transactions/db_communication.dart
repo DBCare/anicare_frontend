@@ -9,10 +9,11 @@ import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
 import 'package:flutter/material.dart';
 
-Future<List<Pair<String, String>>> searchSuggestion(
+Future<List<Map<String, dynamic>>> searchSuggestion(
     String begin, DatabaseReference db) async {
   final productRef = db.child('products');
-  List<Pair<String, String>> items = [];
+  final brandRef = db.child('brands');
+  List<Map<String, dynamic>> itemMapList = [];
   begin.toLowerCase();
 
   await productRef
@@ -23,13 +24,31 @@ Future<List<Pair<String, String>>> searchSuggestion(
       .then((value) {
     if (value.value != null) {
       LinkedHashMap arr = value.value;
-      arr.forEach((key, value) {
-        items.add(Pair(value['name'].toString(), value['id'].toString()));
+      arr.forEach((key, value) async {
+        Map<String, dynamic> item = {};
+        item['name'] = value['name'].toString();
+        item['id'] = value['id'].toString();
+        item['brand_id'] = value['brand_id'].toString();
+        item['description'] = value['description'].substring(0, 20);
+        item['pic-url'] = value['pic-url'].toString();
+
+        itemMapList.add(item);
       });
     }
   });
-
-  return items;
+  for (int i = 0; i < itemMapList.length; ++i) {
+    await db.child('brands/' + itemMapList[i]['brand_id']).once().then((value) {
+      LinkedHashMap arr = value.value;
+      itemMapList[i]['vegan'] = arr['vegan'] == '1';
+      itemMapList[i]['category'] = arr['category'].toString();
+      itemMapList[i]['cer_peta'] = arr['cer_peta'] == '1';
+      itemMapList[i]['cer_lb'] = arr['cer_lb'] == '1';
+      itemMapList[i]['cer_ccf'] = arr['cer_ccf'] == '1';
+      itemMapList[i]['cruelty_free'] = arr['cruelty_free'] == '1';
+    });
+  }
+  ;
+  return itemMapList;
 }
 
 Future<String> getElementMap(String path, DatabaseReference db) async {
@@ -178,6 +197,26 @@ List<String> editIngredientList(String ingredients) {
   }
 
   return ingredientList;
+}
+
+String pushCompany(Company comp, String path) {
+  final db = FirebaseDatabase.instance.reference();
+  DatabaseReference ref = db.child(path);
+  DatabaseReference push = ref.push();
+  String pushId = push.key;
+
+  push.set(comp.toJson());
+  return pushId;
+}
+
+String pushBrand(Brand brand, String path) {
+  String pushId = pushCompany(brand.company, path);
+  return pushId;
+}
+
+String pushProduct(Product prod, String path) {
+  String pushId = pushBrand(prod.brand, path);
+  return pushId;
 }
 
 extension StringCasingExtension on String {

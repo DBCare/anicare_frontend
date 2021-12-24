@@ -12,4 +12,8 @@ class Company {
     name = infoMap['name'];
     countryCode = infoMap['country_code'];
   }
+
+  Map<String, dynamic> toJson() => {
+        'company': {'id': id, 'name': name, 'country_code': countryCode}
+      };
 }

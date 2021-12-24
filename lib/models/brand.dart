@@ -55,4 +55,25 @@ class Brand {
     vegan = (infoMap['vegan'] == '1');
     picURL = infoMap['pic-url'];
   }
+
+  Map<String, dynamic> toJson() => {
+        'brand': {
+          'company_id': company.id,
+          'id': id,
+          'name': name,
+          'cer_ccf': cerCCF,
+          'cer_lb': cerLB,
+          'cer_peta': cerPeta,
+          'category': category,
+          'cruelty_free': crueltyFree,
+          'pic-url': picURL,
+          'status_cfk': statusCFK,
+          'status_china': statusChina,
+          'status_ee': statusEE,
+          'status_es': statusES,
+          'status_lh': statusLH,
+          'vegan': vegan,
+          'barcode_prefix': barcodePrefix,
+        }
+      };
 }
