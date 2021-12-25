@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/brand_details.dart';
 import 'package:untitled/pages/home.dart';
@@ -17,6 +18,7 @@ import 'package:untitled/pages/user_profile.dart';
 List<CameraDescription> cameras = [];
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   cameras = await availableCameras();
   runApp(MaterialApp(initialRoute: '/main', routes: {
@@ -26,7 +28,7 @@ Future<void> main() async {
     '/login': (context) => const Login(),
     '/home': (context) => const MainMenu(),
     '/barcode': (context) => const BarcodeResults(),
-    '/search_product': (context) =>  SearchProduct(),
+    '/search_product': (context) => SearchProduct(),
     '/product': (context) => const ProductDetails(),
     '/terms': (context) => const TermsConditions(),
     '/product_details': (context) => ProductDetails(),

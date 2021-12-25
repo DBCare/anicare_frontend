@@ -5,8 +5,8 @@ class SearchBar extends StatefulWidget {
   final String text;
   final ValueChanged<String> onChanged;
 
-
-  const SearchBar({Key? key, required this.text, required this.onChanged}) : super(key: key);
+  const SearchBar({Key? key, required this.text, required this.onChanged})
+      : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -23,14 +23,19 @@ class _SearchBarState extends State<SearchBar> {
       decoration: InputDecoration(
           suffixIcon: widget.text.isNotEmpty
               ? GestureDetector(
-            child: const Icon(Icons.close, color: Color(0xff4754F0)),
-            onTap: () {
-              controller.clear();
-              widget.onChanged('');
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-          )
-              : IconButton(onPressed: () {Scaffold.of(context).openEndDrawer(); }, icon: Icon(Icons.filter_list),color: Color(0xff29303E)),
+                  child: const Icon(Icons.close, color: Color(0xff4754F0)),
+                  onTap: () {
+                    controller.clear();
+                    widget.onChanged('');
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                )
+              : IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  icon: Icon(Icons.filter_list),
+                  color: Color(0xff29303E)),
           filled: true,
           fillColor: Colors.white,
           focusColor: Colors.white,

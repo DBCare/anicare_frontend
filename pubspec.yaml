@@ -41,6 +41,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   analyzer_plugin: ^0.8.0
   image_cropper: ^1.4.1
+  url_launcher: ^6.0.17
+  google_sign_in: ^5.2.1
+  firebase_auth: ^3.3.4
 
 dev_dependencies:
   flutter_test:

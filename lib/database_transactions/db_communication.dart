@@ -26,11 +26,11 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
       LinkedHashMap arr = value.value;
       arr.forEach((key, value) async {
         Map<String, dynamic> item = {};
-        item['name'] = value['name'].toString();
-        item['id'] = value['id'].toString();
-        item['brand_id'] = value['brand_id'].toString();
+        item['name'] = value['name'];
+        item['id'] = value['id'];
+        item['brand_id'] = value['brand_id'];
         item['description'] = value['description'].substring(0, 20);
-        item['pic-url'] = value['pic-url'].toString();
+        item['pic-url'] = value['pic-url'];
 
         itemMapList.add(item);
       });
@@ -40,7 +40,7 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
     await db.child('brands/' + itemMapList[i]['brand_id']).once().then((value) {
       LinkedHashMap arr = value.value;
       itemMapList[i]['vegan'] = arr['vegan'] == '1';
-      itemMapList[i]['category'] = arr['category'].toString();
+      itemMapList[i]['category'] = arr['category'];
       itemMapList[i]['cer_peta'] = arr['cer_peta'] == '1';
       itemMapList[i]['cer_lb'] = arr['cer_lb'] == '1';
       itemMapList[i]['cer_ccf'] = arr['cer_ccf'] == '1';
