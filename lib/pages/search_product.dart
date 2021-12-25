@@ -147,7 +147,7 @@ class _SearchProductState extends State<SearchProduct> {
                           style: TextButton.styleFrom(
                             backgroundColor: Color(0xff4754F0),
                           ),
-                          onPressed: () {},
+                          onPressed: () {Navigator.pushNamed(context, '/request');},
                           child: const Text("Couldn't find it? Suggest us.",
                               style: TextStyle(
                                   fontSize: 16, color: Colors.white))),

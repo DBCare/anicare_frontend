@@ -86,8 +86,13 @@ class _IngredientAnalysisState extends State<IngredientAnalysis> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: (){
-                    scanResult(
-                      ingredientL: ingredientsController.text,
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return scanResult(ingredientL: ingredientsController.text);
+                        },
+                      ),
                     );
                   },
                   child: const Text("Analyze")),

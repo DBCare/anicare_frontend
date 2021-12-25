@@ -234,7 +234,7 @@ class _scanResultState extends State<scanResult> {
             );
           }
         }
-        return const Text('error');
+        return const Text('Loading');
       },
     );
   }
