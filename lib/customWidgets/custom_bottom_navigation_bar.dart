@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/ingredien_analysis.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/recognize_text.dart';
 import 'package:untitled/pages/user_profile.dart';
@@ -13,7 +14,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  final screens = [MainMenu(), RecognizeTextScreen(), UserProfile()];
+  final screens = [MainMenu(), IngredientAnalysis(), UserProfile()];
   int _selectedIndex = 0;
   _onTap() {
     // this has changed
@@ -45,7 +46,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             label: ""),
         BottomNavigationBarItem(
             icon: Icon(
-              Icons.qr_code_scanner_rounded,
+              Icons.assignment,
               color: Color(0xffBAB9D0),
             ),
             label: ""),

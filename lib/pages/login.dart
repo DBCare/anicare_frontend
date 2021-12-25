@@ -11,8 +11,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
-  TextEditingController emailController =
-      TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
+  TextEditingController emailController = TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
 
   Widget buildEmail() {

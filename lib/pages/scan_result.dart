@@ -73,9 +73,9 @@ class _scanResultState extends State<scanResult> {
                               color: Color(0xFF29303E)),
                         ),
                         backgroundColor: const Color(0xFFFFFFFF),
-                        title: Center(
+                        title: const Center(
                             child: Text("Scan Result",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Color(0xFF29303E), fontSize: 14))),
                         elevation: 0,
                       ),
@@ -157,19 +157,16 @@ class _scanResultState extends State<scanResult> {
                                 top: 5.0, left: 25.0, right: 25.0),
                             child: Column(
                               children: [
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0),
-                                      child: Text("Scan Result",
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 26,
-                                              fontWeight: FontWeight.bold)),
-                                    ),
+                                       Center(
+                                        child: Text("Scan Result",
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 26,
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+
                                   ],
                                 ),
                               ],
@@ -203,6 +200,32 @@ class _scanResultState extends State<scanResult> {
                                 style: const TextStyle(
                                     color: Color(0xffBAB9D0), fontSize: 13)),
                           ),
+                          SizedBox(
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/request');
+                                },
+                                child: const Text(
+                                  "Request a new Product",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: Color(0xFF4754F0)),
+                                ),
+                                style: ButtonStyle(
+                                    shadowColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.black.withOpacity(0)),
+                                    backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        const Color(0xFFF9F9F9)),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(21.0),
+                                            side: const BorderSide(
+                                                color: Color(0xFF4754F0)))))),
+                          )
                         ],
                       ),
                     ),
