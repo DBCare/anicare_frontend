@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -15,9 +16,35 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  static Future<User?> registerUsingEmailPassword({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = auth.currentUser;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    return user;
+  }
+
   bool doesAgree = false;
   TextEditingController nameController =
-      TextEditingController(); //nameController.text şeklinde kullanıcının girdiği değeri alabilirsin
+  TextEditingController(); //nameController.text şeklinde kullanıcının girdiği değeri alabilirsin
   TextEditingController emailController = TextEditingController();
   TextEditingController pw1Controller = TextEditingController();
   TextEditingController pw2Controller = TextEditingController();
@@ -58,7 +85,7 @@ class _RegisterState extends State<Register> {
               height: 60,
               child: TextField(
                   controller: nameController,
-                  obscureText: true,
+                  obscureText: false,
                   style: const TextStyle(
                     color: Colors.black87,
                   ),
@@ -177,7 +204,10 @@ class _RegisterState extends State<Register> {
                 elevation: 5,
                 padding: const EdgeInsets.all(10)),
             onPressed: () {
-              /*ELLERİNİZDEN ÖPER*/
+              registerUsingEmailPassword(
+                  name: nameController.text,
+                  email: emailController.text,
+                  password: pw1Controller.text);
             },
             child: const Text(
               'Sign up',
@@ -222,6 +252,7 @@ class _RegisterState extends State<Register> {
             onPressed: () {
               Future<UserCredential> userCredential = signInWithGoogle();
             },
+
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
               padding: const EdgeInsets.all(5),

@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,7 +14,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
-  TextEditingController emailController = TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
+  TextEditingController emailController =
+      TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
 
   Widget buildEmail() {
