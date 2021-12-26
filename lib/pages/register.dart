@@ -213,6 +213,7 @@ class _RegisterState extends State<Register> {
                 elevation: 5,
                 padding: const EdgeInsets.all(10)),
             onPressed: () async {
+              success = true;
               String error = "";
               if (nameController.text.isEmpty ||
                   emailController.text.isEmpty ||
@@ -238,6 +239,7 @@ class _RegisterState extends State<Register> {
               } else {
                 FirebaseAuth auth = FirebaseAuth.instance;
                 User? user;
+                String err = "";
                 try {
                   UserCredential userCredential =
                       await auth.createUserWithEmailAndPassword(
@@ -246,17 +248,18 @@ class _RegisterState extends State<Register> {
                   );
                   user = auth.currentUser;
                 } on FirebaseAuthException catch (e) {
-                  if (e.code == 'weak-password') {
-                    success = false;
-                    showMsg(errorTitle, 'The password provided is too weak.');
-                  } else if (e.code == 'email-already-in-use') {
-                    success = false;
-                    showMsg(errorTitle,
-                        'The account already exists for that email.');
-                  }
-                } catch (e) {
                   success = false;
-                  print(e);
+                  if (e.code == 'weak-password') {
+                    err += "The password provided is too weak.";
+                  } else if (e.code == 'email-already-in-use') {
+                    err += "The account already exists for that email.";
+                  } else if (e.code == 'invalid-email') {
+                    err += "Please enter a valid e-mail adress.";
+                  } else {
+                    err = "An error occured. Please try again.";
+                  }
+                  showMsg(errorTitle, err);
+                  debugPrint(e.toString());
                 }
 
                 if (success) {
