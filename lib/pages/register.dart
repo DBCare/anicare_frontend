@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:untitled/pages/login.dart';
 import 'package:untitled/pages/main_menu.dart';
 
 class Register extends StatefulWidget {
@@ -263,14 +264,15 @@ class _RegisterState extends State<Register> {
                 }
 
                 if (success) {
+                  user!.sendEmailVerification();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const MainMenu(),
+                        builder: (context) => const Login(),
                       ));
 
                   showMsg("Registration is successful!",
-                      "You've succesfully signed up.");
+                      "You've succesfully signed up. Please verify your e-mail address and log in.");
                 }
               }
             },

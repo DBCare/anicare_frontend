@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:untitled/pages/main_menu.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -13,10 +14,38 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String errorTitle = "Login is unsuccesful!";
   bool isRememberMe = false;
   TextEditingController emailController =
       TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
+
+  Future<void> showMsg(String title, String errorMsg) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(errorMsg),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Widget buildEmail() {
     return Column(
@@ -211,8 +240,39 @@ class _LoginState extends State<Login> {
               primary: Colors.grey[800],
               elevation: 5,
               padding: const EdgeInsets.all(10)),
-          onPressed: () {
-            /*ELLERİNİZDEN ÖPER*/
+          onPressed: () async {
+            bool success = true;
+            FirebaseAuth auth = FirebaseAuth.instance;
+            User? user;
+            String err = "";
+
+            try {
+              UserCredential userCredential =
+                  await auth.signInWithEmailAndPassword(
+                email: emailController.text,
+                password: passwordController.text,
+              );
+              user = userCredential.user;
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'user-not-found') {
+                err += 'No user found for that email.';
+              } else if (e.code == 'wrong-password') {
+                err += 'Wrong password provided.';
+              } else {
+                err = "An error occured. Please try again.";
+              }
+              showMsg(errorTitle, err);
+              debugPrint(e.toString());
+              success = false;
+            }
+
+            if (success) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MainMenu(),
+                  ));
+            }
           },
           child: const Text(
             'Sign in',
