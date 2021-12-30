@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/pages/login.dart';
 import 'package:untitled/pages/main_menu.dart';
 
@@ -17,36 +18,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  String errorTitle = "Registration is unsuccesful!";
-  bool success = true;
-  Future<void> showMsg(String title, String errorMsg) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(errorMsg),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   String errorFill = "Please fill in all fields.\n";
@@ -58,24 +30,6 @@ class _RegisterState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pw1Controller = TextEditingController();
   TextEditingController pw2Controller = TextEditingController();
-
-  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
 
   Widget buildNameField() {
     return Column(
@@ -214,56 +168,15 @@ class _RegisterState extends State<Register> {
                 elevation: 5,
                 padding: const EdgeInsets.all(10)),
             onPressed: () async {
-              success = true;
-              String error = "";
-              if (nameController.text.isEmpty ||
-                  emailController.text.isEmpty ||
-                  pw1Controller.text.isEmpty ||
-                  pw2Controller.text.isEmpty) {
-                success = false;
-                error += errorFill;
-              }
-
-              if (pw1Controller.text != pw2Controller.text) {
-                success = false;
-                error += errorPassword;
-              }
-
-              if (!doesAgree) {
-                success = false;
-                showMsg(
-                    errorTitle, "Please agree Terms & Conditions to continue.");
-              }
-
-              if (success == false) {
-                if (error.isNotEmpty) showMsg(errorTitle, error);
-              } else {
-                FirebaseAuth auth = FirebaseAuth.instance;
-                User? user;
-                String err = "";
-                try {
-                  UserCredential userCredential =
-                      await auth.createUserWithEmailAndPassword(
+              if (Auth.validateFields(emailController.text, nameController.text,
+                  pw1Controller.text, pw2Controller.text, doesAgree, context)) {
+                user = await Auth.registerUsingEmailPassword(
+                    name: nameController.text,
                     email: emailController.text,
                     password: pw1Controller.text,
-                  );
-                  user = auth.currentUser;
-                } on FirebaseAuthException catch (e) {
-                  success = false;
-                  if (e.code == 'weak-password') {
-                    err += "The password provided is too weak.";
-                  } else if (e.code == 'email-already-in-use') {
-                    err += "The account already exists for that email.";
-                  } else if (e.code == 'invalid-email') {
-                    err += "Please enter a valid e-mail adress.";
-                  } else {
-                    err = "An error occured. Please try again.";
-                  }
-                  showMsg(errorTitle, err);
-                  debugPrint(e.toString());
-                }
+                    context: context);
 
-                if (success) {
+                if (user != null) {
                   user!.sendEmailVerification();
                   Navigator.push(
                       context,
@@ -271,8 +184,10 @@ class _RegisterState extends State<Register> {
                         builder: (context) => const Login(),
                       ));
 
-                  showMsg("Registration is successful!",
-                      "You've succesfully signed up. Please verify your e-mail address and log in.");
+                  Auth.showMsg(
+                      "Registration is successful!",
+                      "You've succesfully signed up. Please verify your e-mail address and log in.",
+                      context);
                 }
               }
             },
@@ -316,8 +231,15 @@ class _RegisterState extends State<Register> {
           width: 40,
           height: 40,
           child: ElevatedButton(
-            onPressed: () {
-              Future<UserCredential> userCredential = signInWithGoogle();
+            onPressed: () async {
+              User? user = await Auth.signInWithGoogle(context: context);
+              if (user != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MainMenu(),
+                    ));
+              }
             },
 
             style: ElevatedButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:analyzer_plugin/utilities/pair.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/search_product.dart';
 
@@ -23,7 +25,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final database = FirebaseDatabase.instance.reference();
-
+  User? user = Auth.getCurrUser();
   String _scanBarcode = 'Unknown';
 
   @override
@@ -93,23 +95,29 @@ class _MainMenuState extends State<MainMenu> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 8, horizontal: 20),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              const Text("Hello, Sinem",
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xffF9F9F9))),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4.0),
-                                child: Text("What are you looking for today?",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xffF9F9F9)
-                                            .withOpacity(0.6))),
-                              )
-                            ],
-                          ),
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                if (user == null)
+                                  const Text("Hello, Guest",
+                                      style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xffF9F9F9))),
+                                if (user != null)
+                                  Text("Hello, " + user!.displayName.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xffF9F9F9))),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text("What are you looking for today?",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xffF9F9F9)
+                                              .withOpacity(0.6))),
+                                )
+                              ]),
                         ),
                         Padding(
                           //SEARCH BAR YUNUS SENDE
@@ -127,8 +135,8 @@ class _MainMenuState extends State<MainMenu> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 0.0, right: 10.0),
+                                  padding:
+                                      EdgeInsets.only(left: 0.0, right: 10.0),
                                   child: Icon(Icons.search,
                                       color: Color(0xff4754F0)),
                                 ),
@@ -141,8 +149,7 @@ class _MainMenuState extends State<MainMenu> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                         SearchProduct(),
+                                    builder: (context) => SearchProduct(),
                                   ));
                             },
                           ),
@@ -244,4 +251,3 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 }
-
