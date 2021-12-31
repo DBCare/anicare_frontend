@@ -17,9 +17,11 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
+  bool isForget = false;
   TextEditingController emailController =
       TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
+  TextEditingController forgetPasswordController = TextEditingController();
 
   Future<FirebaseApp> initializeFirebaseWithUser() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
@@ -32,6 +34,39 @@ class _LoginState extends State<Login> {
       );
     }
     return firebaseApp;
+  }
+
+  Future<void> getEmailForForgetPw(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Please enter your e-mail:'),
+            content: TextField(
+              controller: forgetPasswordController,
+              decoration: const InputDecoration(hintText: "your@email.com"),
+              keyboardType: TextInputType.emailAddress,
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isForget = true;
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xFF4754F0),
+                  padding: const EdgeInsets.all(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: const Text("Ok"),
+              ),
+            ],
+          );
+        });
   }
 
   Widget buildEmail() {
@@ -102,7 +137,16 @@ class _LoginState extends State<Login> {
         child: Row(children: <Widget>[
           TextButton(
             onPressed: () async {
-              FirebaseApp firebaseApp = await initializeFirebaseWithUser();
+              isForget = false;
+              await getEmailForForgetPw(context);
+              if (isForget && forgetPasswordController.text.isNotEmpty) {
+                await Auth.sendPasswordResetEmail(
+                    forgetPasswordController.text);
+                Auth.showMsg(
+                    "E-mail has been sent!",
+                    "Please check your e-mail to reset your password.",
+                    context);
+              }
             },
             child: const Text(
               'Forgot Password?',

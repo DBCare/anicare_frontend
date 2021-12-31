@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Auth {
-  static Future<void> showMsg(
-      String title, String errorMsg, BuildContext context) async {
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+
+  static showMsg(String title, String errorMsg, BuildContext context) {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -38,7 +39,6 @@ class Auth {
     required BuildContext context,
   }) async {
     String err = "";
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
@@ -62,7 +62,6 @@ class Auth {
   }
 
   static User? getCurrUser() {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? refreshedUser = auth.currentUser;
 
     return refreshedUser;
@@ -97,7 +96,6 @@ class Auth {
     required String password,
     required BuildContext context,
   }) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     String err = "";
     try {
@@ -126,7 +124,6 @@ class Auth {
   }
 
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     String err = "";
 
@@ -161,5 +158,13 @@ class Auth {
     }
 
     return user;
+  }
+
+  static signOut() {
+    return auth.signOut();
+  }
+
+  static Future sendPasswordResetEmail(String email) async {
+    return auth.sendPasswordResetEmail(email: email);
   }
 }
