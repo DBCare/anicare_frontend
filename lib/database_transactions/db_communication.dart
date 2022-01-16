@@ -9,10 +9,12 @@ import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/models/request.dart';
 import 'package:untitled/models/user.dart';
 
 const String brandPath = 'brands/';
 const String categoryPath = 'categories/';
+const String requestPath = 'requests/';
 
 Future<List<Map<String, dynamic>>> searchSuggestion(
     String begin, DatabaseReference db) async {
@@ -308,6 +310,19 @@ Future<List> getCategories() async {
   });
 
   return categories;
+}
+
+String addRequest(Request req) {
+  final db = FirebaseDatabase.instance.reference();
+  DatabaseReference ref = db.child(requestPath);
+  DatabaseReference push = ref.push();
+
+  String pushKey = push.key;
+  Map<String, dynamic> reqJSON = req.toJson();
+  reqJSON['id'] = pushKey;
+
+  push.set(reqJSON);
+  return pushKey;
 }
 
 extension StringCasingExtension on String {
