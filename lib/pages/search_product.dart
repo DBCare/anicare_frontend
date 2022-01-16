@@ -6,19 +6,22 @@ import 'package:untitled/customWidgets/search_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:untitled/models/filter.dart';
 import 'product_details.dart';
 
 class SearchProduct extends StatefulWidget {
-  const SearchProduct({Key? key}) : super(key: key);
+  final filter;
+  const SearchProduct({Key? key, required this.filter}) : super(key: key);
 
   @override
-  State<SearchProduct> createState() => _SearchProductState();
+  State<SearchProduct> createState() => _SearchProductState(filter);
 }
 
 class _SearchProductState extends State<SearchProduct> {
   String query = '';
   String searchResult = "";
-
+  late Filter filter;
+  _SearchProductState(this.filter);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,7 +71,8 @@ class _SearchProductState extends State<SearchProduct> {
                     AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
-                      List<Map<String, dynamic>> items = snapshot.data!;
+                      List<Map<String, dynamic>> items =
+                          filter.applyFilter(snapshot.data!);
                       return Expanded(
                         child: Scrollbar(
                           child: ListView.builder(
@@ -147,7 +151,9 @@ class _SearchProductState extends State<SearchProduct> {
                           style: TextButton.styleFrom(
                             backgroundColor: Color(0xff4754F0),
                           ),
-                          onPressed: () {Navigator.pushNamed(context, '/request');},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/request');
+                          },
                           child: const Text("Couldn't find it? Suggest us.",
                               style: TextStyle(
                                   fontSize: 16, color: Colors.white))),
@@ -157,7 +163,7 @@ class _SearchProductState extends State<SearchProduct> {
           ],
         ),
         bottomNavigationBar: const CustomBottomNavigationBar(),
-        endDrawer: CustomDrawer(),
+        endDrawer: CustomDrawer(filter: filter),
       ),
     );
   }

@@ -11,6 +11,9 @@ import 'package:untitled/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/models/user.dart';
 
+const String brandPath = 'brands/';
+const String categoryPath = 'categories/';
+
 Future<List<Map<String, dynamic>>> searchSuggestion(
     String begin, DatabaseReference db) async {
   final productRef = db.child('products');
@@ -41,6 +44,7 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
   for (int i = 0; i < itemMapList.length; ++i) {
     await db.child('brands/' + itemMapList[i]['brand_id']).once().then((value) {
       LinkedHashMap arr = value.value;
+      itemMapList[i]['brand_name'] = arr['name'];
       itemMapList[i]['vegan'] = arr['vegan'] == '1';
       itemMapList[i]['category'] = arr['category'];
       itemMapList[i]['cer_peta'] = arr['cer_peta'] == '1';
@@ -270,6 +274,40 @@ Future<UserProfile> getUser(String uid) async {
   }
 
   return UserProfile.fromMap(map, uid, favBrands, favProducts);
+}
+
+Future<List> getBrands() async {
+  final db = FirebaseDatabase.instance.reference();
+  DatabaseReference ref = db.child(brandPath);
+  List<String> brands = [];
+
+  await ref.once().then((value) {
+    if (value.value != null) {
+      LinkedHashMap arr = value.value;
+      arr.forEach((key, value) {
+        brands.add(value['name']);
+      });
+    }
+  });
+
+  return brands;
+}
+
+Future<List> getCategories() async {
+  final db = FirebaseDatabase.instance.reference();
+  DatabaseReference ref = db.child(categoryPath);
+  List<String> categories = [];
+
+  await ref.once().then((value) {
+    if (value.value != null) {
+      LinkedHashMap arr = value.value;
+      arr.forEach((key, value) {
+        categories.add(key);
+      });
+    }
+  });
+
+  return categories;
 }
 
 extension StringCasingExtension on String {
