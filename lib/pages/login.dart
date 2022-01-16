@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/functions/auth.dart';
 
@@ -140,12 +142,17 @@ class _LoginState extends State<Login> {
               isForget = false;
               await getEmailForForgetPw(context);
               if (isForget && forgetPasswordController.text.isNotEmpty) {
-                await Auth.sendPasswordResetEmail(
-                    forgetPasswordController.text);
-                Auth.showMsg(
-                    "E-mail has been sent!",
-                    "Please check your e-mail to reset your password.",
-                    context);
+                try {
+                  await Auth.sendPasswordResetEmail(
+                      forgetPasswordController.text);
+                  Auth.showMsg(
+                      "E-mail has been sent!",
+                      "Please check your e-mail to reset your password.",
+                      context);
+                } catch (e) {
+                  Auth.showMsg("Wrong e-mail!",
+                      "This e-mail is not registered in our system.", context);
+                }
               }
             },
             child: const Text(
@@ -293,6 +300,8 @@ class _LoginState extends State<Login> {
                   MaterialPageRoute(
                     builder: (context) => const MainMenu(),
                   ));
+
+              Auth.userProfile = await getUser(user.uid);
             }
           },
           child: const Text(

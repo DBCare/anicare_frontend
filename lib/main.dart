@@ -16,6 +16,7 @@ import 'package:untitled/pages/terms_conditions.dart';
 import 'package:untitled/pages/user_profile.dart';
 
 List<CameraDescription> cameras = [];
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

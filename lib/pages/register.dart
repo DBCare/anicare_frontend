@@ -177,7 +177,7 @@ class _RegisterState extends State<Register> {
                     context: context);
 
                 if (user != null) {
-                  user!.sendEmailVerification();
+                  //user!.sendEmailVerification();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

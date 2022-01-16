@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:analyzer_plugin/utilities/pair.dart';
@@ -8,6 +9,7 @@ import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/models/user.dart';
 
 Future<List<Map<String, dynamic>>> searchSuggestion(
     String begin, DatabaseReference db) async {
@@ -217,6 +219,57 @@ String pushBrand(Brand brand, String path) {
 String pushProduct(Product prod, String path) {
   String pushId = pushBrand(prod.brand, path);
   return pushId;
+}
+
+String pushUser(UserProfile userProfile) {
+  final db = FirebaseDatabase.instance.reference();
+  DatabaseReference ref = db.child('users');
+  String pushId = ref.key;
+
+  ref.update(userProfile.toJson());
+  return pushId;
+}
+
+String updateUser(UserProfile userProfile) {
+  final db = FirebaseDatabase.instance.reference();
+  String path = 'users/' + userProfile.uid;
+  DatabaseReference ref = db.child(path);
+  String pushId = ref.key;
+
+  ref.update(userProfile.toJson());
+  return pushId;
+}
+
+Future<UserProfile> getUser(String uid) async {
+  final db = FirebaseDatabase.instance.reference();
+  String path = 'users/' + uid;
+  final DatabaseReference ref = db.child(path);
+
+  String info = '';
+  List favBr = List.empty();
+  List favPr = List.empty();
+  List<Brand> favBrands = List.empty();
+  List<Product> favProducts = List.empty();
+
+  LinkedHashMap map = LinkedHashMap();
+  await ref.once().then((value) {
+    info = value.value.toString();
+    debugPrint("User Info: " + info);
+    map = value.value;
+    favBr = jsonDecode(map['favBrands']);
+    favPr = jsonDecode(map['favProducts']);
+  });
+
+  for (var br in favBr) {
+    await createBrand(br.toString(), db).then((value) => favBrands.add(value));
+  }
+
+  for (var pr in favPr) {
+    await createProduct(pr.toString(), db)
+        .then((value) => favProducts.add(value));
+  }
+
+  return UserProfile.fromMap(map, uid, favBrands, favProducts);
 }
 
 extension StringCasingExtension on String {

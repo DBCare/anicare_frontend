@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/models/user.dart';
 
 class Auth {
   static final FirebaseAuth auth = FirebaseAuth.instance;
+  static late UserProfile userProfile;
 
   static showMsg(String title, String errorMsg, BuildContext context) {
     return showDialog<void>(
@@ -107,6 +110,9 @@ class Auth {
       await user!.updateDisplayName(name);
       await user.reload();
       user = auth.currentUser;
+      userProfile = UserProfile(user!.uid, name, email, null, List.empty(),
+          List.empty(), List.empty());
+      pushUser(userProfile);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         err += "The password provided is too weak.";
@@ -119,8 +125,9 @@ class Auth {
       }
       showMsg("Registration is unsuccessful!", err, context);
       debugPrint(e.toString());
-      return user;
     }
+
+    return user;
   }
 
   static Future<User?> signInWithGoogle({required BuildContext context}) async {
@@ -146,6 +153,9 @@ class Auth {
             await auth.signInWithCredential(credential);
 
         user = userCredential.user;
+        userProfile = UserProfile(user!.uid, user.displayName!, user.email!, "",
+            List.empty(), List.empty(), List.empty());
+        await pushUser(userProfile);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           err = "This account exists with a different credential.";
