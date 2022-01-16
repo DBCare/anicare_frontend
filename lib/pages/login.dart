@@ -1,6 +1,12 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:untitled/pages/main_menu.dart';
+import 'package:untitled/functions/auth.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,8 +17,57 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isRememberMe = false;
-  TextEditingController emailController = TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
+  bool isForget = false;
+  TextEditingController emailController =
+      TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
   TextEditingController passwordController = TextEditingController();
+  TextEditingController forgetPasswordController = TextEditingController();
+
+  Future<FirebaseApp> initializeFirebaseWithUser() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const MainMenu(),
+        ),
+      );
+    }
+    return firebaseApp;
+  }
+
+  Future<void> getEmailForForgetPw(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Please enter your e-mail:'),
+            content: TextField(
+              controller: forgetPasswordController,
+              decoration: const InputDecoration(hintText: "your@email.com"),
+              keyboardType: TextInputType.emailAddress,
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isForget = true;
+                    Navigator.pop(context);
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xFF4754F0),
+                  padding: const EdgeInsets.all(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: const Text("Ok"),
+              ),
+            ],
+          );
+        });
+  }
 
   Widget buildEmail() {
     return Column(
@@ -81,7 +136,18 @@ class _LoginState extends State<Login> {
         height: 35,
         child: Row(children: <Widget>[
           TextButton(
-            onPressed: () => {/*ELİNİZDEN ÖPER*/},
+            onPressed: () async {
+              isForget = false;
+              await getEmailForForgetPw(context);
+              if (isForget && forgetPasswordController.text.isNotEmpty) {
+                await Auth.sendPasswordResetEmail(
+                    forgetPasswordController.text);
+                Auth.showMsg(
+                    "E-mail has been sent!",
+                    "Please check your e-mail to reset your password.",
+                    context);
+              }
+            },
             child: const Text(
               'Forgot Password?',
               style:
@@ -139,7 +205,16 @@ class _LoginState extends State<Login> {
           width: 40,
           height: 40,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              User? user = await Auth.signInWithGoogle(context: context);
+              if (user != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MainMenu(),
+                    ));
+              }
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
               padding: const EdgeInsets.all(5),
@@ -207,8 +282,18 @@ class _LoginState extends State<Login> {
               primary: Colors.grey[800],
               elevation: 5,
               padding: const EdgeInsets.all(10)),
-          onPressed: () {
-            /*ELLERİNİZDEN ÖPER*/
+          onPressed: () async {
+            User? user = await Auth.loginApp(
+                email: emailController.text,
+                password: passwordController.text,
+                context: context);
+            if (user != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MainMenu(),
+                  ));
+            }
           },
           child: const Text(
             'Sign in',

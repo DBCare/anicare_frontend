@@ -19,7 +19,6 @@ List<CameraDescription> cameras = [];
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   cameras = await availableCameras();
   runApp(MaterialApp(initialRoute: '/main', routes: {
     //'/': (context) => Loading(),
@@ -33,8 +32,7 @@ Future<void> main() async {
     '/terms': (context) => const TermsConditions(),
     '/product_details': (context) => ProductDetails(),
     '/brand_details': (context) => BrandDetails(),
-    'profile': (context) => UserProfile(),
     '/request': (context) => RequestProduct(),
-    '/analysis' : (context) => IngredientAnalysis()
+    '/analysis': (context) => IngredientAnalysis()
   }));
 }
