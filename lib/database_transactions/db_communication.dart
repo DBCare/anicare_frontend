@@ -238,7 +238,7 @@ String pushUser(UserProfile userProfile) {
   return pushId;
 }
 
-Future<UserProfile> getUser(String uid) async {
+Future<UserProfile?> getUser(String uid) async {
   final db = FirebaseDatabase.instance.reference();
   String path = 'users/' + uid;
   final DatabaseReference ref = db.child(path);
