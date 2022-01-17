@@ -99,7 +99,7 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
   String brandId = '';
   String ingr = '';
   List<String> ingrList = [];
-  List analyze = [];
+  List<String> analyze = [];
   LinkedHashMap map = LinkedHashMap();
 
   await prodRef.once().then((value) {
@@ -114,7 +114,9 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
   debugPrint("Ingr: " + ingr);
 
   await analyzeIngredients(ingr, db).then((value) {
-    analyze = value;
+    for (var item in value) {
+      analyze.add(item.toString());
+    }
   });
 
   debugPrint("PRODUCT INFO:");
@@ -224,16 +226,6 @@ String pushProduct(Product prod, String path) {
 String pushUser(UserProfile userProfile) {
   final db = FirebaseDatabase.instance.reference();
   DatabaseReference ref = db.child('users');
-  String pushId = ref.key;
-
-  ref.update(userProfile.toJson());
-  return pushId;
-}
-
-String updateUser(UserProfile userProfile) {
-  final db = FirebaseDatabase.instance.reference();
-  String path = 'users/' + userProfile.uid;
-  DatabaseReference ref = db.child(path);
   String pushId = ref.key;
 
   ref.update(userProfile.toJson());

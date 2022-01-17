@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/product.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
@@ -26,6 +28,77 @@ class _ProductDetailsState extends State<ProductDetails> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final database = FirebaseDatabase.instance.reference();
   late String productId;
+
+  Widget certificateBox(
+      Product foundProduct, double height, String img, bool cond) {
+    return SizedBox(
+      height: height * 0.0625,
+      width: height * 0.0625,
+      child: Opacity(
+        opacity: cond ? 1 : 0.0,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                img,
+              ),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget tagContainers(String tag, Color color) {
+    return Container(
+      child: Center(
+        child: Text(tag,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+            )),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(21),
+        color: color.withOpacity(0.2),
+      ),
+      width: 105,
+      height: 38,
+    );
+  }
+
+  Widget getListItems(List<String> list) {
+    return Row(
+      children: [
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                for (var item in list)
+                  Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Container(
+                        child: Center(
+                          child: Text(item.toCapitalized(),
+                              style: const TextStyle(
+                                color: Color(0xFFE64A45),
+                                fontSize: 12,
+                              )),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(21),
+                          color: const Color(0xFFE64A45).withOpacity(0.2),
+                        ),
+                        width: 105,
+                        height: 38,
+                      ))
+              ],
+            )),
+      ],
+    );
+  }
 
   _ProductDetailsState(this.productId);
   Future<Product> _createProduct(id, db) async {
@@ -108,63 +181,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      SizedBox(
-                                        height: height * 0.0625,
-                                        width: height * 0.0625,
-                                        child: Opacity(
-                                          opacity: foundProduct.brand.cerPeta
-                                              ? 1
-                                              : 0.0,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                  'assets/certificate_1.png',
-                                                ),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * 0.0625,
-                                        width: height * 0.0625,
-                                        child: Opacity(
-                                          opacity: foundProduct.brand.cerLB
-                                              ? 1
-                                              : 0.0,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                  'assets/certificate_2.png',
-                                                ),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * 0.0625,
-                                        width: height * 0.0625,
-                                        child: Opacity(
-                                          opacity: foundProduct.brand.cerCCF
-                                              ? 1
-                                              : 0.0,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                  'assets/certificate_3.png',
-                                                ),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      certificateBox(
+                                          foundProduct,
+                                          height,
+                                          'assets/certificate_1.png',
+                                          foundProduct.brand.cerPeta),
+                                      certificateBox(
+                                          foundProduct,
+                                          height,
+                                          'assets/certificate_2.png',
+                                          foundProduct.brand.cerLB),
+                                      certificateBox(
+                                          foundProduct,
+                                          height,
+                                          'assets/certificate_3.png',
+                                          foundProduct.brand.cerCCF),
                                     ],
                                   ))
                             ],
@@ -178,63 +209,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 Row(
                                   children: [
                                     if (foundProduct.brand.crueltyFree)
-                                      Container(
-                                        child: const Center(
-                                          child: Text("Cruelty-Free",
-                                              style: TextStyle(
-                                                color: Color(0xFF4754F0),
-                                                fontSize: 12,
-                                              )),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(21),
-                                          color: const Color(0xFF4754F0)
-                                              .withOpacity(0.2),
-                                        ),
-                                        width: 105,
-                                        height: 38,
-                                      ),
+                                      tagContainers("Cruelty-Free",
+                                          const Color(0xFF4754F0)),
                                     if (!foundProduct.brand.crueltyFree)
-                                      Container(
-                                        child: const Center(
-                                          child: Text("Not Cruelty-Free",
-                                              style: TextStyle(
-                                                color: Color(0xFFE64A45),
-                                                fontSize: 12,
-                                              )),
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(21),
-                                          color: const Color(0xFFE64A45)
-                                              .withOpacity(0.2),
-                                        ),
-                                        width: 105,
-                                        height: 38,
-                                      ),
+                                      tagContainers("Not Cruelty-Free",
+                                          const Color(0xFFE64A45)),
                                     if (foundProduct.vegan)
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 5.0),
-                                        child: Container(
-                                          child: const Center(
-                                            child: Text("Vegan",
-                                                style: TextStyle(
-                                                  color: Color(0xFF4754F0),
-                                                  fontSize: 12,
-                                                )),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(21),
-                                            color: const Color(0xFF4754F0)
-                                                .withOpacity(0.2),
-                                          ),
-                                          width: 105,
-                                          height: 38,
-                                        ),
-                                      ),
+                                      tagContainers(
+                                          "Vegan", const Color(0xFF4754F0))
                                   ],
                                 ),
                                 SizedBox(
@@ -247,109 +229,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ],
                             ),
                           ),
-                          if (foundProduct.ingredientAnalyze.length > 3)
+                          if (Auth.userProfile!.allergies.length +
+                                  foundProduct.ingredientAnalyze.length >
+                              3)
                             Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 25.0, vertical: 7),
-                                          child: Row(
-                                            children: <Widget>[
-                                              for (int i = 0;
-                                                  i <
-                                                      foundProduct
-                                                          .ingredientAnalyze
-                                                          .length;
-                                                  i++)
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 4.0),
-                                                    child: Container(
-                                                      child: Center(
-                                                        child: Text(
-                                                            foundProduct
-                                                                .ingredientAnalyze[
-                                                                    i]
-                                                                .toString()
-                                                                .toCapitalized(),
-                                                            style:
-                                                                const TextStyle(
-                                                              color: Color(
-                                                                  0xFFE64A45),
-                                                              fontSize: 12,
-                                                            )),
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(21),
-                                                        color: const Color(
-                                                                0xFFE64A45)
-                                                            .withOpacity(0.2),
-                                                      ),
-                                                      width: 105,
-                                                      height: 38,
-                                                    ))
-                                            ],
-                                          )),
-                                    ],
-                                  )),
+                                  child: getListItems(List.from(
+                                      Auth.userProfile!.allergies +
+                                          foundProduct.ingredientAnalyze))),
                             ),
-                          if (foundProduct.ingredientAnalyze.length <= 3)
-                            Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 25.0, vertical: 7),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          for (int i = 0;
-                                              i <
-                                                  foundProduct
-                                                      .ingredientAnalyze.length;
-                                              i++)
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 4.0),
-                                                child: Container(
-                                                  child: Center(
-                                                    child: Text(
-                                                        foundProduct
-                                                            .ingredientAnalyze[
-                                                                i]
-                                                            .toString()
-                                                            .toCapitalized(),
-                                                        style: const TextStyle(
-                                                          color:
-                                                              Color(0xFFE64A45),
-                                                          fontSize: 12,
-                                                        )),
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            21),
-                                                    color:
-                                                        const Color(0xFFE64A45)
-                                                            .withOpacity(0.2),
-                                                  ),
-                                                  width: 105,
-                                                  height: 38,
-                                                ))
-                                        ],
-                                      )),
-                                ],
-                              ),
-                            ),
+                          if (Auth.userProfile!.allergies.length +
+                                  foundProduct.ingredientAnalyze.length <=
+                              3)
+                            getListItems(List.from(Auth.userProfile!.allergies +
+                                foundProduct.ingredientAnalyze)),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 5.0, left: 25.0, right: 25.0),

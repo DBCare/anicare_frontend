@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/product.dart';
 
 import 'brand.dart';
@@ -32,6 +33,16 @@ class UserProfile {
     }
 
     return res;
+  }
+
+  bool addAllergy(String allergy) {
+    if (!allergies.contains(allergy)) {
+      allergies.add(allergy);
+      pushUser(this);
+      return true;
+    }
+
+    return false;
   }
 
   toJson() => {

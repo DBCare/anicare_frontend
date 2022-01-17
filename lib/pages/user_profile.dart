@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/functions/auth.dart';
+import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/pages/login.dart';
+
+import 'main_menu.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -12,6 +17,75 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  TextEditingController allergyController = TextEditingController();
+  Future<void> allergyView(BuildContext context, List allergies) async {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(children: <Widget>[
+            Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 300,
+                      child: TextField(
+                        controller: allergyController,
+                        decoration: const InputDecoration(
+                          labelText: 'New Allergic Ingredient:',
+                        ),
+                      ),
+                    ),
+                    Container(
+                      //color: Colors.green,
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            Auth.userProfile!.addAllergy(allergyController.text
+                                .toString()
+                                .toCapitalized());
+                            allergyController.clear();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF4754F0),
+                          padding: const EdgeInsets.all(5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                        child: const Text("Add"),
+                      ),
+                    ),
+                  ],
+                )),
+            Expanded(
+              child: allergies.isNotEmpty
+                  ? ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: allergies.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                            child: ListTile(
+                          title:
+                              Text(allergies[index].toString().toCapitalized()),
+                        ));
+                      })
+                  : const Center(
+                      child: Text(
+                          "You haven't add any allergic ingredient yet.",
+                          style: TextStyle(
+                              color: Color(0xff4754F0),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14))),
+            )
+          ]);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -59,12 +133,22 @@ class _UserProfileState extends State<UserProfile> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const CircleAvatar(
-                                radius: 50,
-                                backgroundImage:
-                                    AssetImage('assets/mehmet.jpg'),
-                              ),
-                              Text(Auth.userProfile.name,
+                              if ((Auth.userProfile!.imgURL == null) ||
+                                  (Auth.userProfile!.imgURL != null &&
+                                      Auth.userProfile!.imgURL!.isEmpty))
+                                const CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      AssetImage('assets/avatar.png'),
+                                ),
+                              if (Auth.userProfile!.imgURL != null &&
+                                  Auth.userProfile!.imgURL!.isNotEmpty)
+                                const CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      AssetImage('assets/avatar.png'),
+                                ),
+                              Text(Auth.userProfile!.name,
                                   style: const TextStyle(
                                       color: Color(0xff29303E),
                                       fontSize: 22,
@@ -73,57 +157,91 @@ class _UserProfileState extends State<UserProfile> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Row(
-                                    children: const [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundImage: AssetImage(
-                                            "assets/allergy_icon.png"),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 4.0),
-                                        child: Text("2 Allergies",
-                                            style: TextStyle(
-                                                color: Color(0xff29303E),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14)),
-                                      ) //Variable eklenecek
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainMenu(),
+                                          ));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.favorite,
+                                            color: Color(0xff4754F0)),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 4.0),
+                                          child: Text(
+                                              Auth.userProfile!.favProducts
+                                                      .length
+                                                      .toString() +
+                                                  " Favorite Products",
+                                              style: const TextStyle(
+                                                  color: Color(0xff4754F0),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14)),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: const [
-                                      Icon(Icons.favorite,
-                                          color: Color(0xff4754F0)),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 4.0),
-                                        child: Text("30 Favorites",
-                                            style: TextStyle(
-                                                color: Color(0xff4754F0),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14)),
-                                      ) //Variable eklenecek
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainMenu(),
+                                          ));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.favorite,
+                                            color: Color(0xff4754F0)),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 4.0),
+                                          child: Text(
+                                              Auth.userProfile!.favBrands.length
+                                                      .toString() +
+                                                  " Favorite Brands",
+                                              style: const TextStyle(
+                                                  color: Color(0xff4754F0),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14)),
+                                        ) //Variable eklenecek
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 10,
-                                    backgroundImage: ExactAssetImage(
-                                        "assets/badge_icon.png"),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 4.0),
-                                    child: Text("5 Badges",
-                                        style: TextStyle(
-                                            color: Color(0xff29303E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14)),
-                                  ) //Variable eklenecek
-                                ],
+                              GestureDetector(
+                                onTap: () {
+                                  allergyView(
+                                      context, Auth.userProfile!.allergies);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const CircleAvatar(
+                                      radius: 10,
+                                      backgroundImage:
+                                          AssetImage("assets/allergy_icon.png"),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Text(
+                                          Auth.userProfile!.allergies.length
+                                                  .toString() +
+                                              " Allergies",
+                                          style: const TextStyle(
+                                              color: Color(0xff29303E),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14)),
+                                    ) //Variable eklenecek
+                                  ],
+                                ),
                               )
                             ],
                           )),

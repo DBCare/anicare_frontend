@@ -7,7 +7,7 @@ import 'package:untitled/models/user.dart';
 
 class Auth {
   static final FirebaseAuth auth = FirebaseAuth.instance;
-  static late UserProfile userProfile;
+  static UserProfile? userProfile;
 
   static showMsg(String title, String errorMsg, BuildContext context) {
     return showDialog<void>(
@@ -112,7 +112,7 @@ class Auth {
       user = auth.currentUser;
       userProfile = UserProfile(user!.uid, name, email, null, List.empty(),
           List.empty(), List.empty());
-      pushUser(userProfile);
+      pushUser(userProfile!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         err += "The password provided is too weak.";
@@ -155,7 +155,7 @@ class Auth {
         user = userCredential.user;
         userProfile = UserProfile(user!.uid, user.displayName!, user.email!, "",
             List.empty(), List.empty(), List.empty());
-        await pushUser(userProfile);
+        pushUser(userProfile!);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           err = "This account exists with a different credential.";

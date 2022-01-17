@@ -13,7 +13,7 @@ class Product {
   late String barcode;
   late String ingredients;
   late List ingredientList;
-  late List ingredientAnalyze;
+  late List<String> ingredientAnalyze;
   late String picURL;
   late String id;
 
@@ -30,8 +30,8 @@ class Product {
       this.picURL,
       this.id) {/*INTENTIONALLY EMPTY*/}
 
-  Product.fromMap(LinkedHashMap infoMap, Brand br, List ingrList, List analyze,
-      String ingr) {
+  Product.fromMap(LinkedHashMap infoMap, Brand br, List ingrList,
+      List<String> analyze, String ingr) {
     debugPrint(infoMap.toString());
     brand = br;
     vegan = (infoMap['status_vegan'] == '1');

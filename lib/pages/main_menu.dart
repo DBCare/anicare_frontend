@@ -97,14 +97,14 @@ class _MainMenuState extends State<MainMenu> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
-                                if (user == null)
+                                if (Auth.userProfile == null)
                                   const Text("Hello, Guest",
                                       style: TextStyle(
                                           fontSize: 26,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xffF9F9F9))),
-                                if (user != null)
-                                  Text("Hello, " + user!.displayName.toString(),
+                                if (Auth.userProfile != null)
+                                  Text("Hello, " + Auth.userProfile!.name,
                                       style: const TextStyle(
                                           fontSize: 26,
                                           fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class _MainMenuState extends State<MainMenu> {
                                   child: Text("What are you looking for today?",
                                       style: TextStyle(
                                           fontSize: 14,
-                                          color: Color(0xffF9F9F9)
+                                          color: const Color(0xffF9F9F9)
                                               .withOpacity(0.6))),
                                 )
                               ]),
