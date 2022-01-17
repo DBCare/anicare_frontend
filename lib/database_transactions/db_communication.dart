@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
@@ -185,6 +186,14 @@ Future<List> analyzeIngredients(String ingr, DatabaseReference db) async {
           .toLowerCase()
           .contains(ingredients[i][j].toString().toLowerCase())) {
         ingredientStatus.add(categories[i]);
+      }
+    }
+  }
+
+  if (Auth.userProfile != null) {
+    for (var item in Auth.userProfile!.allergies) {
+      if (ingr.toLowerCase().contains(item.toString().toLowerCase())) {
+        ingredientStatus.add(item.toString());
       }
     }
   }

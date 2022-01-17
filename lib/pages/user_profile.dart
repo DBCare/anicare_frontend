@@ -18,71 +18,117 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   TextEditingController allergyController = TextEditingController();
-  Future<void> allergyView(BuildContext context, List allergies) async {
+
+  Widget dismissibleCard(List list, int index, BuildContext context) {
+    return Dismissible(
+      key: UniqueKey(),
+      direction: DismissDirection.endToStart,
+      onDismissed: (_) {
+        setState(() {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(list[index].toString().toCapitalized() +
+                " is removed from the allergies."),
+          ));
+          Auth.userProfile!.removeAllergy(index);
+        });
+      },
+      child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          child: ListTile(
+            title: Text(list[index].toString().toCapitalized()),
+          )),
+      background: Container(
+        color: Colors.red,
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        alignment: Alignment.centerRight,
+        child: const Icon(
+          Icons.delete,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Future<void> allergyView(List allergies) async {
+    final GlobalKey<ScaffoldState> _modelScaffoldKey =
+        GlobalKey<ScaffoldState>();
     return showModalBottomSheet(
         context: context,
         builder: (context) {
-          return Column(children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 300,
-                      child: TextField(
-                        controller: allergyController,
-                        decoration: const InputDecoration(
-                          labelText: 'New Allergic Ingredient:',
-                        ),
-                      ),
-                    ),
-                    Container(
-                      //color: Colors.green,
-                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            Auth.userProfile!.addAllergy(allergyController.text
-                                .toString()
-                                .toCapitalized());
-                            allergyController.clear();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFF4754F0),
-                          padding: const EdgeInsets.all(5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
+          return Scaffold(
+            extendBody: false,
+            key: _modelScaffoldKey,
+            resizeToAvoidBottomInset: true,
+            body: Column(children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 300,
+                        child: TextField(
+                          controller: allergyController,
+                          decoration: const InputDecoration(
+                            labelText: 'New Allergic Ingredient:',
                           ),
                         ),
-                        child: const Text("Add"),
                       ),
-                    ),
-                  ],
-                )),
-            Expanded(
-              child: allergies.isNotEmpty
-                  ? ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: allergies.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                            child: ListTile(
-                          title:
-                              Text(allergies[index].toString().toCapitalized()),
-                        ));
-                      })
-                  : const Center(
-                      child: Text(
-                          "You haven't add any allergic ingredient yet.",
-                          style: TextStyle(
-                              color: Color(0xff4754F0),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14))),
-            )
-          ]);
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              final String item = allergyController.text;
+                              if (Auth.userProfile!.addAllergy(item)) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                      item.toString().toCapitalized() +
+                                          " is added to the allergies."),
+                                ));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                      "You can't add the same ingredient twice."),
+                                ));
+                              }
+
+                              allergyController.clear();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF4754F0),
+                            padding: const EdgeInsets.all(5),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
+                          child: const Text("Add"),
+                        ),
+                      ),
+                    ],
+                  )),
+              Expanded(
+                child: allergies.isNotEmpty
+                    ? ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: allergies.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return dismissibleCard(allergies, index, context);
+                        })
+                    : const Center(
+                        child: Text(
+                            "You haven't add any allergic ingredient yet.",
+                            style: TextStyle(
+                                color: Color(0xff4754F0),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14))),
+              )
+            ]),
+          );
         });
   }
 
@@ -218,8 +264,7 @@ class _UserProfileState extends State<UserProfile> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  allergyView(
-                                      context, Auth.userProfile!.allergies);
+                                  allergyView(Auth.userProfile!.allergies);
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -263,9 +308,9 @@ class _UserProfileState extends State<UserProfile> {
                         width: double.infinity,
                         child: TextButton.icon(
                           onPressed: () {},
-                          label: Align(
+                          label: const Align(
                               alignment: Alignment.centerLeft,
-                              child: const Text("Account Settings",
+                              child: Text("Account Settings",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,

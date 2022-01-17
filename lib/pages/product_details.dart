@@ -229,22 +229,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ],
                             ),
                           ),
-                          if (Auth.userProfile!.allergies.length +
-                                  foundProduct.ingredientAnalyze.length >
-                              3)
+                          if (foundProduct.ingredientAnalyze.length > 3)
                             Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  child: getListItems(List.from(
-                                      Auth.userProfile!.allergies +
-                                          foundProduct.ingredientAnalyze))),
+                                  child: getListItems(
+                                      foundProduct.ingredientAnalyze)),
                             ),
-                          if (Auth.userProfile!.allergies.length +
-                                  foundProduct.ingredientAnalyze.length <=
-                              3)
-                            getListItems(List.from(Auth.userProfile!.allergies +
-                                foundProduct.ingredientAnalyze)),
+                          if (foundProduct.ingredientAnalyze.length <= 3)
+                            getListItems(foundProduct.ingredientAnalyze),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 5.0, left: 25.0, right: 25.0),

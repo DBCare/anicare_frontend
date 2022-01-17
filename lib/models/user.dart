@@ -36,8 +36,19 @@ class UserProfile {
   }
 
   bool addAllergy(String allergy) {
-    if (!allergies.contains(allergy)) {
-      allergies.add(allergy);
+    for (var item in allergies) {
+      if (item.toString().toLowerCase() == allergy.toLowerCase()) {
+        return false;
+      }
+    }
+    allergies.add(allergy.toLowerCase());
+    pushUser(this);
+    return true;
+  }
+
+  bool removeAllergy(int index) {
+    if (index < allergies.length) {
+      allergies.removeAt(index);
       pushUser(this);
       return true;
     }

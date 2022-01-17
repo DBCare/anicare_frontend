@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
@@ -8,6 +7,7 @@ import 'package:untitled/models/user.dart';
 class Auth {
   static final FirebaseAuth auth = FirebaseAuth.instance;
   static UserProfile? userProfile;
+  static bool isRememberMe = false;
 
   static showMsg(String title, String errorMsg, BuildContext context) {
     return showDialog<void>(
@@ -171,6 +171,7 @@ class Auth {
   }
 
   static signOut() {
+    userProfile == null;
     return auth.signOut();
   }
 

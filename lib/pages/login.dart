@@ -18,7 +18,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool isRememberMe = false;
   bool isForget = false;
   TextEditingController emailController =
       TextEditingController(); // emailController.text kullanarak girilen maili alabilirsin
@@ -170,12 +169,12 @@ class _LoginState extends State<Login> {
           Theme(
             data: ThemeData(unselectedWidgetColor: Colors.white),
             child: Checkbox(
-              value: isRememberMe,
+              value: Auth.isRememberMe,
               checkColor: Colors.black,
               activeColor: Colors.white,
               onChanged: (value) {
                 setState(() {
-                  isRememberMe = value!;
+                  Auth.isRememberMe = value!;
                 });
               },
             ),
