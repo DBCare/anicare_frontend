@@ -246,7 +246,7 @@ String updateUser(UserProfile userProfile) {
   return pushId;
 }
 
-Future<UserProfile> getUser(String uid) async {
+Future<UserProfile?> getUser(String uid) async {
   final db = FirebaseDatabase.instance.reference();
   String path = 'users/' + uid;
   final DatabaseReference ref = db.child(path);
@@ -256,8 +256,9 @@ Future<UserProfile> getUser(String uid) async {
   List favPr = List.empty();
   List<Brand> favBrands = List.empty();
   List<Product> favProducts = List.empty();
-
   LinkedHashMap map = LinkedHashMap();
+  DataSnapshot snapshot = await ref.once();
+  if (snapshot.value == null) return null;
   await ref.once().then((value) {
     info = value.value.toString();
     debugPrint("User Info: " + info);
