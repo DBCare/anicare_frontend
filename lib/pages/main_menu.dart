@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
+import 'package:untitled/models/filter.dart';
 import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/search_product.dart';
 
@@ -119,41 +120,95 @@ class _MainMenuState extends State<MainMenu> {
                                 )
                               ]),
                         ),
-                        Padding(
-                          //SEARCH BAR YUNUS SENDE
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 8),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xffFCFCFF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(8), // <-- Radius
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 0.0, right: 10.0),
-                                  child: Icon(Icons.search,
-                                      color: Color(0xff4754F0)),
+                        FutureBuilder(
+                            future: Future.wait([getBrands(), getCategories()]),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  return Padding(
+                                    //SEARCH BAR YUNUS SENDE
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 8),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: const Color(0xffFCFCFF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              8), // <-- Radius
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: const [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 0.0, right: 10.0),
+                                            child: Icon(Icons.search,
+                                                color: Color(0xff4754F0)),
+                                          ),
+                                          Text("Vegan eyeshadow palette",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color(0xffBAB9D0)))
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SearchProduct(
+                                                      filter: Filter(
+                                                          snapshot.data![0],
+                                                          snapshot.data![1])),
+                                            ));
+                                      },
+                                    ),
+                                  );
+                                }
+                              }
+                              return Padding(
+                                //SEARCH BAR YUNUS SENDE
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 8),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffFCFCFF),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          8), // <-- Radius
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 0.0, right: 10.0),
+                                        child: Icon(Icons.search,
+                                            color: Color(0xff4754F0)),
+                                      ),
+                                      Text("Vegan eyeshadow palette",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffBAB9D0)))
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SearchProduct(
+                                            filter: Filter([], []),
+                                          ),
+                                        ));
+                                  },
                                 ),
-                                Text("Vegan eyeshadow palette",
-                                    style: TextStyle(
-                                        fontSize: 14, color: Color(0xffBAB9D0)))
-                              ],
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SearchProduct(),
-                                  ));
-                            },
-                          ),
-                        ),
+                              );
+                            }),
                       ],
                     )),
                 Positioned(
