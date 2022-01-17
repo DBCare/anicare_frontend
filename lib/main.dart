@@ -25,7 +25,11 @@ Future<void> main() async {
   cameras = await availableCameras();
   if (Auth.getCurrUser() != null) {
     UserProfile? tempProfile = await getUser(Auth.getCurrUser()!.uid);
-    if (tempProfile == null) Auth.signOut();
+    if (tempProfile == null) {
+      Auth.signOut();
+    } else {
+      Auth.userProfile = tempProfile;
+    }
   }
   runApp(MaterialApp(
       initialRoute: Auth.getCurrUser() == null ? '/main' : '/home',
