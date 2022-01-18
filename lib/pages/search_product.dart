@@ -69,7 +69,7 @@ class _SearchProductState extends State<SearchProduct> {
                       height: 45,
                       child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff4754F0),
+                            backgroundColor: const Color(0xff4754F0),
                           ),
                           onPressed: () {
                             Navigator.pushNamed(context, '/request');

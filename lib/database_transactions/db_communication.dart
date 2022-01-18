@@ -16,6 +16,7 @@ import 'package:untitled/models/user.dart';
 const String brandPath = 'brands/';
 const String categoryPath = 'categories/';
 const String requestPath = 'requests/';
+const String userPath = 'users/';
 
 Future<List<Map<String, dynamic>>> searchSuggestion(
     String begin, DatabaseReference db) async {
@@ -252,29 +253,33 @@ Future<UserProfile?> getUser(String uid) async {
   String path = 'users/' + uid;
   final DatabaseReference ref = db.child(path);
 
-  String info = '';
-  List favBr = List.empty();
-  List favPr = List.empty();
-  List<Brand> favBrands = List.empty();
-  List<Product> favProducts = List.empty();
+  List<Brand> favBrands = [];
+  List<Product> favProducts = [];
+  List? br = [];
+  List? pr = [];
   LinkedHashMap map = LinkedHashMap();
   DataSnapshot snapshot = await ref.once();
   if (snapshot.value == null) return null;
+
   await ref.once().then((value) {
-    info = value.value.toString();
-    debugPrint("User Info: " + info);
     map = value.value;
-    favBr = jsonDecode(map['favBrands']);
-    favPr = jsonDecode(map['favProducts']);
+    debugPrint("User Info: " + map.toString());
+    br = map['favBrands'];
+    pr = map['favProducts'];
   });
 
-  for (var br in favBr) {
-    await createBrand(br.toString(), db).then((value) => favBrands.add(value));
+  if (pr != null) {
+    for (var i = 0; i < pr!.length; i++) {
+      await createProduct(pr![i].toString(), db)
+          .then((value) => favProducts.add(value));
+    }
   }
 
-  for (var pr in favPr) {
-    await createProduct(pr.toString(), db)
-        .then((value) => favProducts.add(value));
+  if (br != null) {
+    for (var i = 0; i < br!.length; i++) {
+      await createBrand(br![i].toString(), db)
+          .then((value) => favBrands.add(value));
+    }
   }
 
   return UserProfile.fromMap(map, uid, favBrands, favProducts);

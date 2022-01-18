@@ -110,8 +110,7 @@ class Auth {
       await user!.updateDisplayName(name);
       await user.reload();
       user = auth.currentUser;
-      userProfile = UserProfile(user!.uid, name, email, null, List.empty(),
-          List.empty(), List.empty());
+      userProfile = UserProfile(user!.uid, name, email, null, [], [], []);
       pushUser(userProfile!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -153,8 +152,8 @@ class Auth {
             await auth.signInWithCredential(credential);
 
         user = userCredential.user;
-        userProfile = UserProfile(user!.uid, user.displayName!, user.email!, "",
-            List.empty(), List.empty(), List.empty());
+        userProfile = UserProfile(
+            user!.uid, user.displayName!, user.email!, "", [], [], []);
         pushUser(userProfile!);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {

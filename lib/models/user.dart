@@ -1,5 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/product.dart';
 
@@ -18,7 +20,7 @@ class UserProfile {
       this.favProducts, this.allergies);
 
   List<String> getBrandID(List<Brand> brands) {
-    List<String> res = List.empty();
+    List<String> res = [];
     for (var brand in brands) {
       res.add(brand.id);
     }
@@ -27,7 +29,7 @@ class UserProfile {
   }
 
   List<String> getProductID(List<Product> products) {
-    List<String> res = List.empty();
+    List<String> res = [];
     for (var pr in products) {
       res.add(pr.id);
     }
@@ -56,14 +58,40 @@ class UserProfile {
     return false;
   }
 
+  bool addFavoriteProduct(Product pr) {
+    if (isFavoriteProduct(pr)) return false;
+    favProducts.add(pr);
+    pushUser(this);
+    return true;
+  }
+
+  bool removeFavoriteProduct(Product pr) {
+    for (var i = 0; i < favProducts.length; i++) {
+      if (favProducts[i].id == pr.id) {
+        favProducts.removeAt(i);
+        pushUser(this);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool isFavoriteProduct(Product pr) {
+    for (var item in favProducts) {
+      if (item.id == pr.id) return true;
+    }
+    return false;
+  }
+
   toJson() => {
         uid: {
           'name': name,
           'email': email,
           'imgURL': imgURL,
-          'allergies': jsonEncode(allergies),
-          'favBrands': jsonEncode(getBrandID(favBrands)),
-          'favProducts': jsonEncode(getProductID(favProducts)),
+          'allergies': allergies,
+          'favBrands': getBrandID(favBrands),
+          'favProducts': getProductID(favProducts),
         }
       };
 
@@ -72,6 +100,6 @@ class UserProfile {
     name = infoMap['name'];
     email = infoMap['email'];
     imgURL = infoMap['imgURL'];
-    allergies = jsonDecode(infoMap['allergies']);
+    allergies = List.of(infoMap['allergies']);
   }
 }

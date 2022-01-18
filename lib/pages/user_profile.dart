@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/pages/favorites.dart';
 import 'package:untitled/pages/login.dart';
 
 import 'main_menu.dart';
@@ -30,6 +33,7 @@ class _UserProfileState extends State<UserProfile> {
                 " is removed from the allergies."),
           ));
           Auth.userProfile!.removeAllergy(index);
+          sleep(const Duration(seconds: 1));
         });
       },
       child: Card(
@@ -209,7 +213,7 @@ class _UserProfileState extends State<UserProfile> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const MainMenu(),
+                                                const Favorites(),
                                           ));
                                     },
                                     child: Row(
@@ -238,7 +242,7 @@ class _UserProfileState extends State<UserProfile> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const MainMenu(),
+                                                const Favorites(),
                                           ));
                                     },
                                     child: Row(

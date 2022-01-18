@@ -34,6 +34,7 @@ class Product {
       List<String> analyze, String ingr) {
     debugPrint(infoMap.toString());
     brand = br;
+    id = infoMap['id'];
     vegan = (infoMap['status_vegan'] == '1');
     name = infoMap['name'];
     category = infoMap['category'];
@@ -47,17 +48,15 @@ class Product {
   }
 
   Map<String, dynamic> toJson() => {
-        'product': {
-          'barcode': barcode,
-          'name': name,
-          'brand_id': brand.id,
-          'category': category,
-          'description': description,
-          'id': id,
-          'ingredients': ingredients,
-          'status_vegan': vegan,
-          'sub_category': subCategory,
-          'pic-url': picURL,
-        }
+        'barcode': barcode,
+        'name': name,
+        'brand_id': brand.id,
+        'category': category,
+        'description': description,
+        'id': id,
+        'ingredients': ingredients,
+        'status_vegan': vegan,
+        'sub_category': subCategory,
+        'pic-url': picURL,
       };
 }

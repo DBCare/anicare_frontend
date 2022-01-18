@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
 
@@ -7,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/product.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
@@ -14,7 +16,9 @@ import 'package:untitled/models/product.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
+import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/home.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 class ProductDetails extends StatefulWidget {
   final productID;
@@ -28,6 +32,47 @@ class _ProductDetailsState extends State<ProductDetails> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final database = FirebaseDatabase.instance.reference();
   late String productId;
+  UserProfile? currUser = Auth.userProfile;
+
+  Widget addFav(Product foundProduct) {
+    bool _isFavorite = false;
+    Color color;
+    if (currUser != null) {
+      color = const Color(0xFF4754F0);
+    } else {
+      color = Colors.grey.shade400;
+    }
+
+    String message = "";
+
+    if (currUser != null && currUser!.isFavoriteProduct(foundProduct)) {
+      _isFavorite = true;
+    }
+
+    return FavoriteButton(
+        iconColor: color,
+        isFavorite: _isFavorite,
+        valueChanged: (_isFavorite) {
+          if (currUser == null) {
+            message = "You should login to use this feauture.";
+          } else {
+            if (_isFavorite) {
+              currUser!.addFavoriteProduct(foundProduct);
+              message = foundProduct.name.toString().toCapitalized() +
+                  " is added to the favorite products.";
+            } else {
+              if (currUser!.removeFavoriteProduct(foundProduct)) {
+                message = foundProduct.name.toString().toCapitalized() +
+                    " is removed from the favorite products.";
+              }
+            }
+          }
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+        });
+  }
 
   Widget certificateBox(
       Product foundProduct, double height, String img, bool cond) {
@@ -220,11 +265,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   ],
                                 ),
                                 SizedBox(
-                                  child: Icon(Icons.favorite,
-                                      color: const Color(0xFFC2C2FE)
-                                          .withOpacity(1)),
-                                  height: 24,
-                                  width: 26,
+                                  child: addFav(foundProduct),
                                 ),
                               ],
                             ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/customWidgets/product_listing.dart';
+import 'package:untitled/functions/auth.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);
@@ -12,14 +13,9 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  List<Map<String, dynamic>> list = [];
-  Map<String, dynamic> map = {
-    'name': 'test',
-    'id': "-MnRnjjvcXl7OH_lGlM5",
-    'category': 'test',
-    'pic-url':
-        "https://cdn.shopify.com/s/files/1/0513/8923/5351/products/lavender_Geranium_Conditioner400ml_x2_65f65fed-b22d-4a9d-a5d2-d9f1c45abf8e.png?v=1625831210"
-  };
+  List<Map<String, dynamic>> list = List.generate(
+      Auth.userProfile!.favProducts.length,
+      (index) => Auth.userProfile!.favProducts[index].toJson());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +24,7 @@ class _FavoritesState extends State<Favorites> {
         pageContext: context,
         title: 'Favorites',
       ),
-      body: Column(children: [
-        ProductListing(items: [map], boldLength: 0)
-      ]),
+      body: Column(children: [ProductListing(items: list, boldLength: 0)]),
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
