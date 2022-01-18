@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/customWidgets/product_listing.dart';
 
 class Favorites extends StatefulWidget {
@@ -22,9 +24,14 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF9F9F9),
+      appBar: CustomUpInformationBar(
+        pageContext: context,
+        title: 'Favorites',
+      ),
       body: Column(children: [
         ProductListing(items: [map], boldLength: 0)
       ]),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

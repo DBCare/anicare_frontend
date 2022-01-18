@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/brand_details.dart';
+import 'package:untitled/pages/favorites.dart';
 import 'package:untitled/pages/home.dart';
 import 'package:untitled/pages/barcode_results.dart';
 import 'package:untitled/pages/ingredien_analysis.dart';

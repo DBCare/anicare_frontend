@@ -2,6 +2,7 @@ import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/customWidgets/custom_drawer.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/customWidgets/product_listing.dart';
 import 'package:untitled/customWidgets/search_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
@@ -34,27 +35,9 @@ class _SearchProductState extends State<SearchProduct> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xffF9F9F9),
-        appBar: PreferredSize(
-          preferredSize: Size(size.width, height * 0.1),
-          child: Center(
-            child: AppBar(
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    color: const Color(0xFF29303E),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-              ),
-              backgroundColor: const Color(0xffF9F9F9),
-              title: const Center(
-                  child: Text("Search Results",
-                      style:
-                          TextStyle(color: Color(0xFF29303E), fontSize: 14))),
-              elevation: 0,
-            ),
-          ),
+        appBar: CustomUpInformationBar(
+          pageContext: context,
+          title: 'Search Suggestions',
         ),
         body: Column(
           children: [
