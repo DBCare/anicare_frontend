@@ -51,7 +51,8 @@ class ProductListing extends StatelessWidget {
                         )
                       ])),
                   subtitle: Text(items[index]['category'],
-                      style: TextStyle(color: Color(0xff4754F0), fontSize: 13)),
+                      style: const TextStyle(
+                          color: Color(0xff4754F0), fontSize: 13)),
                   trailing: const Icon(Icons.arrow_forward_ios_rounded,
                       color: Color(0xffBAB9D0)),
                   shape: const RoundedRectangleBorder(

@@ -187,7 +187,7 @@ class _LoginState extends State<Login> {
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
+        /*SizedBox(
           width: 40,
           height: 40,
           child: ElevatedButton(
@@ -205,7 +205,7 @@ class _LoginState extends State<Login> {
               height: 20,
             ), // <-- Use 'Image.asset(...)' here
           ),
-        ),
+        ),*/
         const SizedBox(width: 20),
         SizedBox(
           width: 40,
@@ -235,7 +235,7 @@ class _LoginState extends State<Login> {
             ), // <-- Use 'Image.asset(...)' here
           ),
         ),
-        const SizedBox(width: 20),
+        /*const SizedBox(width: 20),
         SizedBox(
           width: 40,
           height: 40,
@@ -254,7 +254,7 @@ class _LoginState extends State<Login> {
               height: 20,
             ), // <-- Use 'Image.asset(...)' here
           ),
-        )
+        )*/
       ],
     ));
   }
