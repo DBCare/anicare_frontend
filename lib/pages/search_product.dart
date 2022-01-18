@@ -2,6 +2,7 @@ import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/customWidgets/custom_drawer.dart';
+import 'package:untitled/customWidgets/product_listing.dart';
 import 'package:untitled/customWidgets/search_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -73,72 +74,8 @@ class _SearchProductState extends State<SearchProduct> {
                     if (snapshot.hasData) {
                       List<Map<String, dynamic>> items =
                           filter.applyFilter(snapshot.data!);
-                      return Expanded(
-                        child: Scrollbar(
-                          child: ListView.builder(
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 8),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(4)),
-                                width: double.infinity,
-                                height: 70,
-                                child: Center(
-                                  child: ListTile(
-                                    contentPadding: const EdgeInsets.all(0),
-                                    onTap: () {
-                                      searchResult = items[index]['id'];
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProductDetails(
-                                              productID: searchResult,
-                                            ),
-                                          ));
-                                    },
-                                    leading: CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(items[index]['pic-url']),
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    title: RichText(
-                                        text: TextSpan(
-                                            text: items[index]['name']
-                                                .substring(0, query.length),
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                            children: [
-                                          TextSpan(
-                                            text: items[index]['name']
-                                                .substring(query.length),
-                                            style: const TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 16),
-                                          )
-                                        ])),
-                                    subtitle: Text(items[index]['category'],
-                                        style: TextStyle(
-                                            color: Color(0xff4754F0),
-                                            fontSize: 13)),
-                                    trailing: const Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: Color(0xffBAB9D0)),
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(4))),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            itemCount: items.length,
-                          ),
-                        ),
-                      );
+                      return ProductListing(
+                          items: items, boldLength: query.length);
                     }
                   }
                   return Padding(
