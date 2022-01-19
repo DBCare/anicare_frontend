@@ -23,17 +23,16 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:untitled/pages/main_menu.dart';
 
 class ProductDetails extends StatefulWidget {
-  final productID;
-  const ProductDetails({Key? key, @required this.productID}) : super(key: key);
+  const ProductDetails({Key? key}) : super(key: key);
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState(productID);
+  _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final database = FirebaseDatabase.instance.reference();
-  late String productId;
+
   UserProfile? currUser = Auth.userProfile;
 
   Widget addFav(Product foundProduct) {
@@ -147,7 +146,6 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  _ProductDetailsState(this.productId);
   Future<Product?> _createProduct(id, db) async {
     try {
       return await createProduct(id, db);
@@ -170,6 +168,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   Widget buildBody(BuildContext context) {
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
     return FutureBuilder(
       future: _createProduct(productId, database),
       builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
@@ -329,7 +328,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/brand_details',
-                                      arguments: foundProduct.brand);
+                                      arguments: foundProduct.brand.id);
                                 },
                                 child: const Text(
                                   "View Brand Details",

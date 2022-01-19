@@ -24,7 +24,13 @@ class _FavoritesState extends State<Favorites> {
         pageContext: context,
         title: 'Favorites',
       ),
-      body: Column(children: [ProductListing(items: list, boldLength: 0)]),
+      body: Column(children: [
+        ProductListing(
+          items: list,
+          boldLength: 0,
+          route: '/product_details',
+        )
+      ]),
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }

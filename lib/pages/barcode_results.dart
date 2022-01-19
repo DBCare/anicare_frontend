@@ -25,14 +25,7 @@ class _BarcodeResultsState extends State<BarcodeResults> {
     await findBarcode(barcode, db).then((String result) {
       id = result;
     });
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return ProductDetails(productID: id);
-        },
-      ),
-    );
+    Navigator.pushNamed(context, '/product_details', arguments: id);
 
     return "error";
   }

@@ -79,7 +79,9 @@ class _SearchProductState extends State<SearchProduct> {
                         );
                       }
                       return ProductListing(
-                          items: items, boldLength: query.length);
+                          items: items,
+                          boldLength: query.length,
+                          route: '/product_details');
                     }
                   }
                   return Padding(

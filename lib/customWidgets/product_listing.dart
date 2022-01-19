@@ -4,7 +4,9 @@ import 'package:untitled/pages/product_details.dart';
 class ProductListing extends StatelessWidget {
   List<Map<String, dynamic>> items;
   int boldLength;
-  ProductListing({required this.items, required this.boldLength});
+  String route;
+  ProductListing(
+      {required this.items, required this.boldLength, required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +26,7 @@ class ProductListing extends StatelessWidget {
                   contentPadding: const EdgeInsets.all(0),
                   onTap: () {
                     result = items[index]['id'];
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetails(
-                            productID: result,
-                          ),
-                        ));
+                    Navigator.pushNamed(context, route, arguments: result);
                   },
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(items[index]['pic-url']),
