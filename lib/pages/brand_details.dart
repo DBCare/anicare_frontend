@@ -1,5 +1,7 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/product.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
@@ -7,6 +9,7 @@ import 'package:untitled/models/product.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
+import 'package:untitled/models/user.dart';
 
 class BrandDetails extends StatefulWidget {
   final product_id;
@@ -24,6 +27,48 @@ class _BrandDetailsState extends State<BrandDetails> {
   //late String productId;
 
   //_ProductDetailsState(this.productId);
+
+  UserProfile? currUser = Auth.userProfile;
+
+  Widget addFav(Brand brand) {
+    bool _isFavorite = false;
+    Color color;
+    if (currUser != null) {
+      color = const Color(0xFF4754F0);
+    } else {
+      color = Colors.grey.shade400;
+    }
+
+    String message = "";
+
+    if (currUser != null && currUser!.isFavoriteBrand(brand)) {
+      _isFavorite = true;
+    }
+
+    return FavoriteButton(
+        iconColor: color,
+        isFavorite: _isFavorite,
+        valueChanged: (_isFavorite) {
+          if (currUser == null) {
+            message = "You should login to use this feauture.";
+          } else {
+            if (_isFavorite) {
+              currUser!.addFavoriteBrand(brand);
+              message = brand.name.toString().toCapitalized() +
+                  " is added to the favorite brands.";
+            } else {
+              if (currUser!.removeFavoriteBrand(brand)) {
+                message = brand.name.toString().toCapitalized() +
+                    " is removed from the favorite brands.";
+              }
+            }
+          }
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,11 +201,7 @@ class _BrandDetailsState extends State<BrandDetails> {
                                             ),
                                           ),
                                         SizedBox(
-                                          child: Icon(Icons.favorite,
-                                              color: const Color(0xFFC2C2FE)
-                                                  .withOpacity(1)),
-                                          height: 24,
-                                          width: 26,
+                                          child: addFav(brand),
                                         ),
                                       ],
                                     ),

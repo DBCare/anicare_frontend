@@ -212,8 +212,11 @@ class _UserProfileState extends State<UserProfile> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Favorites(),
+                                            builder: (context) => Favorites(
+                                              itemList:
+                                                  Auth.userProfile!.favProducts,
+                                              route: '/product_details',
+                                            ),
                                           ));
                                     },
                                     child: Row(
@@ -241,8 +244,11 @@ class _UserProfileState extends State<UserProfile> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Favorites(),
+                                            builder: (context) => Favorites(
+                                              itemList:
+                                                  Auth.userProfile!.favBrands,
+                                              route: '/brand_details',
+                                            ),
                                           ));
                                     },
                                     child: Row(

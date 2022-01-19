@@ -84,6 +84,32 @@ class UserProfile {
     return false;
   }
 
+  bool addFavoriteBrand(Brand br) {
+    if (isFavoriteBrand(br)) return false;
+    favBrands.add(br);
+    pushUser(this);
+    return true;
+  }
+
+  bool removeFavoriteBrand(Brand br) {
+    for (var i = 0; i < favBrands.length; i++) {
+      if (favBrands[i].id == br.id) {
+        favBrands.removeAt(i);
+        pushUser(this);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool isFavoriteBrand(Brand br) {
+    for (var item in favBrands) {
+      if (item.id == br.id) return true;
+    }
+    return false;
+  }
+
   toJson() => {
         uid: {
           'name': name,

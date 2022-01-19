@@ -1,6 +1,8 @@
 import 'dart:collection';
 
-class Company {
+import 'main_data_interface.dart';
+
+class Company implements MainData {
   late String id;
   late String name;
   late String countryCode;

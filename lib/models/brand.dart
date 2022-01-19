@@ -1,7 +1,9 @@
 import 'dart:collection';
 import 'package:untitled/models/company.dart';
 
-class Brand {
+import 'main_data_interface.dart';
+
+class Brand implements MainData {
   late Company company;
   late String id;
   late String name;
@@ -57,23 +59,21 @@ class Brand {
   }
 
   Map<String, dynamic> toJson() => {
-        'brand': {
-          'company_id': company.id,
-          'id': id,
-          'name': name,
-          'cer_ccf': cerCCF,
-          'cer_lb': cerLB,
-          'cer_peta': cerPeta,
-          'category': category,
-          'cruelty_free': crueltyFree,
-          'pic-url': picURL,
-          'status_cfk': statusCFK,
-          'status_china': statusChina,
-          'status_ee': statusEE,
-          'status_es': statusES,
-          'status_lh': statusLH,
-          'vegan': vegan,
-          'barcode_prefix': barcodePrefix,
-        }
+        'company_id': company.id,
+        'id': id,
+        'name': name,
+        'cer_ccf': cerCCF,
+        'cer_lb': cerLB,
+        'cer_peta': cerPeta,
+        'category': category,
+        'cruelty_free': crueltyFree,
+        'pic-url': picURL,
+        'status_cfk': statusCFK,
+        'status_china': statusChina,
+        'status_ee': statusEE,
+        'status_es': statusES,
+        'status_lh': statusLH,
+        'vegan': vegan,
+        'barcode_prefix': barcodePrefix,
       };
 }

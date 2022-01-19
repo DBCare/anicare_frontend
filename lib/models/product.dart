@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/brand.dart';
 
-class Product {
+import 'main_data_interface.dart';
+
+class Product implements MainData {
   late Brand brand;
   late bool vegan;
   late String name;
