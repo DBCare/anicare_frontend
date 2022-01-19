@@ -3,8 +3,12 @@ import 'package:analyzer_plugin/utilities/pair.dart';
 class Filter {
   late List<Pair<String, bool>> brandFilter;
   late List<Pair<String, bool>> categoryFilter;
+  late bool crueltyFreeFilter;
+  late bool veganFilter;
+  late bool allergyFreeFilter;
 
-  Filter(List<String> brands, List<String> categories) {
+  Filter(List<String> brands, List<String> categories, this.crueltyFreeFilter,
+      this.veganFilter, this.allergyFreeFilter) {
     brandFilter =
         List.generate(brands.length, (index) => Pair(brands[index], false));
     categoryFilter = List.generate(
@@ -59,7 +63,10 @@ class Filter {
               getBrandFilterValue(element['brand_name'])) &&
           (!isCategoryFilterActive() ||
               getCategoryFilterValue(element['category']))) {
-        returnVal.add(element);
+        if ((!crueltyFreeFilter || element['cruelty_free']) &&
+            (!veganFilter || element['vegan'])) {
+          returnVal.add(element);
+        }
       }
     }
     return returnVal;

@@ -128,7 +128,6 @@ class _MainMenuState extends State<MainMenu> {
                                   ConnectionState.done) {
                                 if (snapshot.hasData) {
                                   return Padding(
-                                    //SEARCH BAR YUNUS SENDE
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 8),
                                     child: ElevatedButton(
@@ -161,9 +160,13 @@ class _MainMenuState extends State<MainMenu> {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   SearchProduct(
-                                                      filter: Filter(
-                                                          snapshot.data![0],
-                                                          snapshot.data![1])),
+                                                filter: Filter(
+                                                    snapshot.data![0],
+                                                    snapshot.data![1],
+                                                    false,
+                                                    false,
+                                                    false),
+                                              ),
                                             ));
                                       },
                                     ),
@@ -171,7 +174,6 @@ class _MainMenuState extends State<MainMenu> {
                                 }
                               }
                               return Padding(
-                                //SEARCH BAR YUNUS SENDE
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 8),
                                 child: ElevatedButton(
@@ -202,7 +204,8 @@ class _MainMenuState extends State<MainMenu> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => SearchProduct(
-                                            filter: Filter([], []),
+                                            filter: Filter(
+                                                [], [], false, false, false),
                                           ),
                                         ));
                                   },
@@ -227,13 +230,28 @@ class _MainMenuState extends State<MainMenu> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           MainMenuBadges(
-                              filePath: "assets/cf_badge.png",
-                              text: "Cruelty-Free"),
+                            mainContext: context,
+                            filePath: "assets/cf_badge.png",
+                            text: "Cruelty-Free",
+                            crueltyFreeFilter: true,
+                            veganFilter: false,
+                            allergyFreeFilter: false,
+                          ),
                           MainMenuBadges(
+                              mainContext: context,
                               filePath: "assets/ef_badge.png",
-                              text: "Allergy-Free"),
+                              text: "Allergy-Free",
+                              crueltyFreeFilter: false,
+                              veganFilter: false,
+                              allergyFreeFilter: true),
                           MainMenuBadges(
-                              filePath: "assets/vegan_badge.png", text: "Vegan")
+                            mainContext: context,
+                            filePath: "assets/vegan_badge.png",
+                            text: "Vegan",
+                            crueltyFreeFilter: false,
+                            veganFilter: true,
+                            allergyFreeFilter: false,
+                          )
                         ],
                       ),
                     ),

@@ -62,27 +62,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               indent: 30,
               endIndent: 30,
             ),
-            ExpansionTile(
-              title: Text("Categories"),
-              children: [
-                ListTile(
-                  title: Text("Body Care"),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("Cleaning"),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("Hygiene"),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("Skin Care"),
-                  onTap: () {},
-                ),
-              ],
-            ),
+            _buildTiles(filter.categoryFilter, 'Categories'),
             _buildTiles(filter.brandFilter, 'Brands'),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25.0),
