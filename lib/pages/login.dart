@@ -214,11 +214,14 @@ class _LoginState extends State<Login> {
             onPressed: () async {
               User? user = await Auth.signInWithGoogle(context: context);
               if (user != null) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MainMenu(),
-                    ));
+                UserProfile? tempProfile = await getUser(user.uid);
+                if (tempProfile != null) Auth.userProfile = tempProfile;
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => MainMenu()),
+                  ModalRoute.withName('/'),
+                );
               }
             },
             style: ElevatedButton.styleFrom(

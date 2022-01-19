@@ -3,20 +3,24 @@ class Request {
   late String brandName;
   late String name;
   late String description;
+  late String status;
 
-  Request(this.name, this.brandName, this.category, this.description);
+  Request(
+      this.name, this.brandName, this.category, this.description, this.status);
 
   bool validateRequest() {
     return (category != '' &&
         brandName != '' &&
         name != '' &&
-        description != '');
+        description != '' &&
+        status != '');
   }
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'category': category,
         'description': description,
-        'brand_name': brandName
+        'brand_name': brandName,
+        'state': status
       };
 }

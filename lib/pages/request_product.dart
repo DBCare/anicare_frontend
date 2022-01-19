@@ -187,9 +187,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                         productNameController.text,
                         brandController.text,
                         value!,
-                        descriptionController.text);
+                        descriptionController.text,
+                        'pending');
                     if (req.validateRequest()) {
-                      addRequest(req);
+                      try {
+                        addRequest(req);
+                      } catch (exception) {
+                        Auth.showMsg('Request',
+                            "Couldn't send request. Network error!", context);
+                      }
                       Auth.showMsg(
                           'Request', 'Request sent successfully', context);
                     } else {
