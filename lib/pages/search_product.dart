@@ -57,6 +57,27 @@ class _SearchProductState extends State<SearchProduct> {
                     if (snapshot.hasData) {
                       List<Map<String, dynamic>> items =
                           filter.applyFilter(snapshot.data!);
+                      if (items.length == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 45,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: const Color(0xff4754F0),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/request');
+                                },
+                                child: const Text(
+                                    "Couldn't find it? Suggest us.",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white))),
+                          ),
+                        );
+                      }
                       return ProductListing(
                           items: items, boldLength: query.length);
                     }

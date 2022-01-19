@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
@@ -19,6 +20,7 @@ import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/home.dart';
 import 'package:favorite_button/favorite_button.dart';
+import 'package:untitled/pages/main_menu.dart';
 
 class ProductDetails extends StatefulWidget {
   final productID;
@@ -146,18 +148,18 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   _ProductDetailsState(this.productId);
-  Future<Product> _createProduct(id, db) async {
-    try {} on ItemNotFound {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return ProductDetails(productID: id);
-          },
-        ),
-      );
+  Future<Product?> _createProduct(id, db) async {
+    try {
+      return await createProduct(id, db);
+    } catch (exception) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainMenu(),
+          ));
+      Auth.showMsg('Product Not Found', "Couldn't Find Product", context);
     }
-    return createProduct(id, db);
+    return null;
   }
 
   @override
@@ -170,7 +172,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget buildBody(BuildContext context) {
     return FutureBuilder(
       future: _createProduct(productId, database),
-      builder: (BuildContext context, AsyncSnapshot<Product> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
         Size size = MediaQuery.of(context).size;
         final height = MediaQuery.of(context).size.height -
             MediaQuery.of(context).padding.top -
@@ -181,24 +183,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             return SafeArea(
               child: Scaffold(
                   backgroundColor: const Color(0xFFF9F9F9),
-                  appBar: PreferredSize(
-                    preferredSize: Size(size.width, height * 0.1),
-                    child: Center(
-                      child: AppBar(
-                        leading: const Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Icon(Icons.arrow_back_ios,
-                              color: Color(0xFF29303E)),
-                        ),
-                        backgroundColor: const Color(0xFFFFFFFF),
-                        title: Center(
-                            child: Text(foundProduct.name,
-                                style: const TextStyle(
-                                    color: Color(0xFF29303E), fontSize: 14))),
-                        elevation: 0,
-                      ),
-                    ),
-                  ),
+                  appBar: CustomUpInformationBar(
+                      pageContext: context, title: foundProduct.name),
                   body: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Container(

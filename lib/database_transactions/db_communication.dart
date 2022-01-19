@@ -40,8 +40,8 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
         item['brand_id'] = value['brand_id'];
         item['description'] = value['description'].substring(0, 20);
         item['pic-url'] = value['pic-url'];
-
-        itemMapList.add(item);
+        if (item['name'].toString().toLowerCase().contains(begin.toLowerCase()))
+          itemMapList.add(item);
       });
     }
   });
@@ -96,10 +96,11 @@ Future<Brand> createBrand(String brandId, DatabaseReference db) async {
   return Brand.fromMap(map, comp);
 }
 
-Future<Product> createProduct(String productId, DatabaseReference db) async {
+Future<Product?> createProduct(String productId, DatabaseReference db) async {
   DatabaseReference prodRef = db.child('products/' + productId);
-  if (prodRef == null) {
-    throw ItemNotFound("No such product found in database! (EXCEPTION)");
+  DataSnapshot prodRefCheck = await prodRef.once();
+  if (prodRefCheck.value == null) {
+    throw ItemNotFound('Cant find');
   }
 
   debugPrint(productId);
@@ -137,7 +138,7 @@ Future<Product> createProduct(String productId, DatabaseReference db) async {
 }
 
 Future<String> findBarcode(String barcode, DatabaseReference db) async {
-  String productID = '';
+  String productID = '-1';
 
   final DatabaseReference productRef = db.child('products');
   debugPrint("BARCODE:");
@@ -271,7 +272,7 @@ Future<UserProfile?> getUser(String uid) async {
   if (pr != null) {
     for (var i = 0; i < pr!.length; i++) {
       await createProduct(pr![i].toString(), db)
-          .then((value) => favProducts.add(value));
+          .then((value) => favProducts.add(value!));
     }
   }
 

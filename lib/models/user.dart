@@ -100,6 +100,7 @@ class UserProfile {
     name = infoMap['name'];
     email = infoMap['email'];
     imgURL = infoMap['imgURL'];
-    allergies = List.of(infoMap['allergies']);
+    allergies =
+        infoMap['allergies'] == null ? [] : List.of(infoMap['allergies']);
   }
 }

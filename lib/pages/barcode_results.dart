@@ -18,7 +18,7 @@ class _BarcodeResultsState extends State<BarcodeResults> {
   final database = FirebaseDatabase.instance.reference();
 
   Future<String> _findBarcode(barcode, db) async {
-    String id = "";
+    String id = "-1";
     debugPrint("BARCODE RES:");
     debugPrint(barcodeRes);
 

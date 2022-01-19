@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
+import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/product.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
@@ -13,6 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/pages/home.dart';
+import 'package:untitled/pages/main_menu.dart';
 
 class scanResult extends StatefulWidget {
   final ingredientL;
@@ -28,19 +30,6 @@ class _scanResultState extends State<scanResult> {
   late String ingredient;
 
   _scanResultState(this.ingredient);
-  Future<Product> _createProduct(id, db) async {
-    try {} on ItemNotFound {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return scanResult(ingredientL: id);
-          },
-        ),
-      );
-    }
-    return createProduct(id, db);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,14 +148,13 @@ class _scanResultState extends State<scanResult> {
                               children: [
                                 Row(
                                   children: [
-                                       Center(
-                                        child: Text("Scan Result",
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 26,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-
+                                    Center(
+                                      child: Text("Scan Result",
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 26,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -213,16 +201,16 @@ class _scanResultState extends State<scanResult> {
                                 ),
                                 style: ButtonStyle(
                                     shadowColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.black.withOpacity(0)),
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.black.withOpacity(0)),
                                     backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color(0xFFF9F9F9)),
+                                        MaterialStateProperty.all<Color>(
+                                            const Color(0xFFF9F9F9)),
                                     shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
+                                            RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(21.0),
+                                                BorderRadius.circular(21.0),
                                             side: const BorderSide(
                                                 color: Color(0xFF4754F0)))))),
                           )

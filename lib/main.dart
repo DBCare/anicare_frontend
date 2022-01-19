@@ -33,7 +33,7 @@ Future<void> main() async {
     }
   }
   runApp(MaterialApp(
-      initialRoute: Auth.getCurrUser() == null ? '/main' : '/home',
+      initialRoute: Auth.userProfile == null ? '/main' : '/home',
       routes: {
         //'/': (context) => Loading(),
         '/main': (context) => const MainScreen(),
