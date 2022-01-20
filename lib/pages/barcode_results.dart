@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:untitled/pages/home.dart';
-import 'product_details.dart';
 
 class BarcodeResults extends StatefulWidget {
   const BarcodeResults({Key? key}) : super(key: key);
@@ -43,7 +41,7 @@ class _BarcodeResultsState extends State<BarcodeResults> {
     return FutureBuilder(
       future: _findBarcode(barcodeRes, database),
       builder: (context, snapshot) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }

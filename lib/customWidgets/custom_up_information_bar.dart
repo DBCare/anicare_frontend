@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/product_details.dart';
 
 class CustomUpInformationBar extends StatelessWidget implements PreferredSize {
   BuildContext pageContext;

@@ -3,14 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/pages/favorites.dart';
 import 'package:untitled/pages/login.dart';
-
-import 'main_menu.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -71,7 +68,7 @@ class _UserProfileState extends State<UserProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        width: 300,
+                        width: 280,
                         child: TextField(
                           controller: allergyController,
                           decoration: const InputDecoration(

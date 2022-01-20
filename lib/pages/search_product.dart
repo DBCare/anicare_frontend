@@ -1,4 +1,3 @@
-import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/customWidgets/custom_drawer.dart';
@@ -9,7 +8,6 @@ import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/models/filter.dart';
-import 'product_details.dart';
 
 class SearchProduct extends StatefulWidget {
   final filter;
@@ -58,7 +56,7 @@ class _SearchProductState extends State<SearchProduct> {
                     if (snapshot.hasData) {
                       List<Map<String, dynamic>> items =
                           filter.applyFilter(snapshot.data!);
-                      if (items.length == 0) {
+                      if (items.isEmpty) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8),

@@ -1,7 +1,4 @@
 import 'dart:collection';
-import 'dart:convert';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/product.dart';
 

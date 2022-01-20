@@ -1,8 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/models/brand.dart';
-
 import 'main_data_interface.dart';
 
 class Product implements MainData {
@@ -49,6 +47,7 @@ class Product implements MainData {
     ingredients = ingr;
   }
 
+  @override
   Map<String, dynamic> toJson() => {
         'barcode': barcode,
         'name': name,

@@ -9,13 +9,13 @@ class MainMenuCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       minWidth: 0,
       onPressed: () { },
       child: Padding(
         padding: const EdgeInsets.only(left:10.0),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Color(0xff4754F0),
               borderRadius: BorderRadius.all(Radius.circular(8))
           ),
@@ -37,7 +37,7 @@ class MainMenuCards extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20,top: 10, right: 30),
-                child: Text(text,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white)),
+                child: Text(text,style: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white)),
               )
             ],
           ),

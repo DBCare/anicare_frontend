@@ -34,8 +34,8 @@ class _SearchBarState extends State<SearchBar> {
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer();
                   },
-                  icon: Icon(Icons.filter_list),
-                  color: Color(0xff29303E)),
+                  icon: const Icon(Icons.filter_list),
+                  color: const Color(0xff29303E)),
           filled: true,
           fillColor: Colors.white,
           focusColor: Colors.white,

@@ -1,4 +1,3 @@
-import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/filter.dart';
-import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/search_product.dart';
 
 class MainMenu extends StatefulWidget {
@@ -71,12 +69,12 @@ class _MainMenuState extends State<MainMenu> {
         MediaQuery.of(context).padding.bottom;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffE5E5E5),
+        backgroundColor: const Color(0xffE5E5E5),
         appBar: AppBar(
-          backgroundColor: Color(0xff4754F0),
+          backgroundColor: const Color(0xff4754F0),
           elevation: 0,
-          leading: Icon(Icons.menu_rounded, size: 24),
-          actions: [Icon(Icons.notifications_rounded)],
+          leading: const Icon(Icons.menu_rounded, size: 24),
+          actions: const [Icon(Icons.notifications_rounded)],
         ),
         body: Column(
           children: [
@@ -307,7 +305,7 @@ class _MainMenuState extends State<MainMenu> {
             ),
             Expanded(
               child: Material(
-                color: Color(0xffE5E5E5),
+                color: const Color(0xffE5E5E5),
                 shape: const CircleBorder(),
                 child: InkWell(
                     onTap: () {
@@ -319,7 +317,7 @@ class _MainMenuState extends State<MainMenu> {
             ),
           ],
         ),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
       ),
     );
   }

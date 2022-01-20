@@ -4,7 +4,6 @@ import 'package:untitled/functions/auth.dart';
 import 'package:untitled/pages/ingredien_analysis.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/main_screen.dart';
-import 'package:untitled/pages/recognize_text.dart';
 import 'package:untitled/pages/user_profile.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -17,9 +16,9 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   final screens = [
-    MainMenu(),
-    IngredientAnalysis(),
-    Auth.getCurrUser() != null ? UserProfile() : MainScreen()
+    const MainMenu(),
+    const IngredientAnalysis(),
+    Auth.getCurrUser() != null ? const UserProfile() : const MainScreen()
   ];
   int _selectedIndex = 0;
   _onTap() {
@@ -34,7 +33,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return BottomNavigationBar(
       iconSize: 30,
       selectedFontSize: 0,
-      selectedItemColor: Color(0xff4754F0),
+      selectedItemColor: const Color(0xff4754F0),
       currentIndex: _selectedIndex,
       onTap: (index) {
         // this has changed

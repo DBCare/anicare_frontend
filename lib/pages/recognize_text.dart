@@ -1,14 +1,7 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:untitled/pages/crop_image.dart';
-import 'package:untitled/pages/main_menu.dart';
-import 'package:untitled/pages/scan_result.dart';
-
 import '../main.dart';
 
 class RecognizeTextScreen extends StatefulWidget {
