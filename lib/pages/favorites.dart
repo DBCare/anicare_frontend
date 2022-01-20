@@ -34,6 +34,7 @@ class _FavoritesState extends State<Favorites> {
       appBar: CustomUpInformationBar(
         pageContext: context,
         title: 'Favorites',
+        color: Color(0xffF9F9F9),
       ),
       body: Column(children: [
         ProductListing(

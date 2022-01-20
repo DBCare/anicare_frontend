@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/request.dart';
@@ -54,14 +55,10 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Align(alignment: Alignment.center, child: Text("New Product Form")),
-        backgroundColor: Color(0xdd4754F0),
-        elevation: 0,
-        leading: Icon(Icons.menu_rounded, size: 24),
-        actions: [Icon(Icons.notifications_rounded)],
-      ),
+      appBar: CustomUpInformationBar(
+          pageContext: context,
+          title: 'Request Product Form',
+          color: Color(0xffF9F9F9)),
       body: Container(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),

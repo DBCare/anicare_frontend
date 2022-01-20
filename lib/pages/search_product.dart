@@ -38,6 +38,7 @@ class _SearchProductState extends State<SearchProduct> {
         appBar: CustomUpInformationBar(
           pageContext: context,
           title: 'Search Suggestions',
+          color: Color(0xffF9F9F9),
         ),
         body: Column(
           children: [

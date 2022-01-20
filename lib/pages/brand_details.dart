@@ -1,5 +1,6 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/product.dart';
@@ -90,24 +91,10 @@ class _BrandDetailsState extends State<BrandDetails> {
               return SafeArea(
                 child: Scaffold(
                     backgroundColor: Colors.white,
-                    appBar: PreferredSize(
-                      preferredSize: Size(size.width, height * 0.1),
-                      child: Center(
-                        child: AppBar(
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: Icon(Icons.arrow_back_ios,
-                                color: Color(0xFF29303E)),
-                          ),
-                          backgroundColor: const Color(0xFFFFFFFF),
-                          title: Center(
-                              child: Text(brand.name,
-                                  style: const TextStyle(
-                                      color: Color(0xFF29303E)))),
-                          elevation: 0,
-                        ),
-                      ),
-                    ),
+                    appBar: CustomUpInformationBar(
+                        pageContext: context,
+                        title: brand.name,
+                        color: Color(0xffF9F9F9)),
                     body: SizedBox(
                       width: double.infinity,
                       child: Column(
