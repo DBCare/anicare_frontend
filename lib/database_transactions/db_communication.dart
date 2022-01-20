@@ -1,15 +1,13 @@
 import 'dart:collection';
-import 'dart:convert';
+
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:analyzer_plugin/utilities/pair.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/brand.dart';
 import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
-import 'package:flutter/material.dart';
 import 'package:untitled/models/request.dart';
 import 'package:untitled/models/user.dart';
 
@@ -40,8 +38,9 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
         item['brand_id'] = value['brand_id'];
         item['description'] = value['description'].substring(0, 20);
         item['pic-url'] = value['pic-url'];
-        if (item['name'].toString().toLowerCase().contains(begin.toLowerCase()))
+        if (item['name'].toString().toLowerCase().contains(begin.toLowerCase())) {
           itemMapList.add(item);
+        }
       });
     }
   });
@@ -57,7 +56,7 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
       itemMapList[i]['cruelty_free'] = arr['cruelty_free'] == '1';
     });
   }
-  ;
+
   return itemMapList;
 }
 

@@ -25,7 +25,7 @@ class MainMenuBadges extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               return MaterialButton(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 minWidth: 0,
                 onPressed: () {
                   Navigator.push(
@@ -43,9 +43,9 @@ class MainMenuBadges extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    Image(image: new AssetImage(filePath)),
+                    Image(image: AssetImage(filePath)),
                     Text(text,
-                        style: TextStyle(fontSize: 13, color: Colors.black))
+                        style: const TextStyle(fontSize: 13, color: Colors.black))
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
@@ -53,13 +53,13 @@ class MainMenuBadges extends StatelessWidget {
             }
           }
           return MaterialButton(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             minWidth: 0,
             onPressed: () {},
             child: Column(
               children: [
-                Image(image: new AssetImage(filePath)),
-                Text(text, style: TextStyle(fontSize: 13, color: Colors.black))
+                Image(image: AssetImage(filePath)),
+                Text(text, style: const TextStyle(fontSize: 13, color: Colors.black))
               ],
               mainAxisAlignment: MainAxisAlignment.center,
             ),

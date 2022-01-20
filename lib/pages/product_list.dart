@@ -22,17 +22,15 @@ class _ProductListState extends State<ProductList> {
                     Row(children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: IconButton(icon: Icon(Icons.keyboard_arrow_left,size: 40,), onPressed: () { Navigator.of(context).pop(); },),
+                        child: IconButton(icon: const Icon(Icons.keyboard_arrow_left,size: 40,), onPressed: () { Navigator.of(context).pop(); },),
                       ),
-                      Container(
-                        child: Row(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(85,5,5,5),
-                              child: Text('Brands',style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal,fontSize: 15)),
-                            )
-                          ],
-                        ),
+                      Row(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(85,5,5,5),
+                            child: Text('Brands',style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal,fontSize: 15)),
+                          )
+                        ],
                       ),
                     ],),
                     Row(
@@ -47,35 +45,33 @@ class _ProductListState extends State<ProductList> {
                             TextField(
                               decoration: InputDecoration(
                                   hintText: "Vegan eyeshadow palette",
-                                  hintStyle: TextStyle(fontSize: 14,color: Color(0xffBAB9D0)),
-                                  prefixIcon: Icon(Icons.search,color: Color(0xff4754F0)),
+                                  hintStyle: const TextStyle(fontSize: 14,color: Color(0xffBAB9D0)),
+                                  prefixIcon: const Icon(Icons.search,color: Color(0xff4754F0)),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
                                       borderSide: BorderSide.none
                                   ),
                                   contentPadding: EdgeInsets.zero,
                                   filled: true,
-                                  fillColor: Color(0xffFCFCFF)
+                                  fillColor: const Color(0xffFCFCFF)
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('All Brands A-Z',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 25),),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(150.0,1.0,4.0,5.0),
-                              child: IconButton(icon: Icon(Icons.arrow_forward,),onPressed: () { Navigator.of(context).pop(); }),
-                            ),
-                          ],
-                        )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('All Brands A-Z',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 25),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(150.0,1.0,4.0,5.0),
+                          child: IconButton(icon: const Icon(Icons.arrow_forward,),onPressed: () { Navigator.of(context).pop(); }),
+                        ),
+                      ],
                     ),
                     Column(
                       children: [
@@ -98,7 +94,7 @@ class _ProductListState extends State<ProductList> {
                                       color: Colors.white,
                                       width: 150,
                                       height: 30,
-                                      child: Center(
+                                      child: const Center(
                                         child: Text('100% Pure',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 15),
                                         ),
                                       )
@@ -124,7 +120,7 @@ class _ProductListState extends State<ProductList> {
                                       color: Colors.white,
                                       width: 150,
                                       height: 30,
-                                      child: Center(
+                                      child: const Center(
                                         child: Text('14e Cosmetics',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 15),
                                         ),
                                       )
@@ -156,7 +152,7 @@ class _ProductListState extends State<ProductList> {
                                         color: Colors.white,
                                         width: 150,
                                         height: 30,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('3INA',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 15),
                                           ),
                                         )
@@ -181,7 +177,7 @@ class _ProductListState extends State<ProductList> {
                                         color: Colors.white,
                                         width: 150,
                                         height: 30,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Acure',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 15),
                                           ),
                                         )
@@ -215,7 +211,7 @@ class _ProductListState extends State<ProductList> {
                                         color: Colors.white,
                                         width: 150,
                                         height: 30,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Adorn Cosmetics',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 14),
                                           ),
                                         )
@@ -240,7 +236,7 @@ class _ProductListState extends State<ProductList> {
                                         color: Colors.white,
                                         width: 150,
                                         height: 30,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('AG Hair',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 15),
                                           ),
                                         )

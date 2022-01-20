@@ -1,24 +1,15 @@
-import 'dart:convert';
-import 'dart:ffi';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled/customWidgets/custom_up_information_bar.dart';
-import 'package:untitled/database_transactions/custom_exception.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
-import 'package:untitled/functions/auth.dart';
-import 'package:untitled/models/product.dart';
-import 'package:untitled/models/brand.dart';
-import 'package:untitled/models/company.dart';
 import 'package:untitled/models/product.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/models/user.dart';
-import 'package:untitled/pages/home.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:untitled/pages/main_menu.dart';
 

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/brand_details.dart';
-import 'package:untitled/pages/favorites.dart';
-import 'package:untitled/pages/home.dart';
 import 'package:untitled/pages/barcode_results.dart';
 import 'package:untitled/pages/ingredien_analysis.dart';
 import 'package:untitled/pages/login.dart';
@@ -13,7 +11,6 @@ import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/main_screen.dart';
 import 'package:untitled/pages/register.dart';
 import 'package:untitled/pages/request_product.dart';
-import 'package:untitled/pages/search_product.dart';
 import 'package:untitled/pages/product_details.dart';
 import 'package:untitled/pages/terms_conditions.dart';
 
@@ -43,9 +40,9 @@ Future<void> main() async {
         '/barcode': (context) => const BarcodeResults(),
         '/product': (context) => const ProductDetails(),
         '/terms': (context) => const TermsConditions(),
-        '/product_details': (context) => ProductDetails(),
-        '/brand_details': (context) => BrandDetails(),
-        '/request': (context) => RequestProduct(),
-        '/analysis': (context) => IngredientAnalysis()
+        '/product_details': (context) => const ProductDetails(),
+        '/brand_details': (context) => const BrandDetails(),
+        '/request': (context) => const RequestProduct(),
+        '/analysis': (context) => const IngredientAnalysis()
       }));
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/product_details.dart';
 
 class CustomUpInformationBar extends StatelessWidget implements PreferredSize {
   BuildContext pageContext;
@@ -30,7 +29,7 @@ class CustomUpInformationBar extends StatelessWidget implements PreferredSize {
           backgroundColor: const Color(0xffF9F9F9),
           title: Center(
               child: Text(title,
-                  style: TextStyle(color: Color(0xFF29303E), fontSize: 14))),
+                  style: const TextStyle(color: Color(0xFF29303E), fontSize: 14))),
           elevation: 0,
         ),
       ),

@@ -87,7 +87,7 @@ class _ListProductState extends State<ListProduct> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(50, 1.0, 4.0, 5.0),
                         child: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_forward,
                           ),
                           onPressed: () {

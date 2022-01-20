@@ -58,6 +58,7 @@ class Brand implements MainData {
     picURL = infoMap['pic-url'];
   }
 
+  @override
   Map<String, dynamic> toJson() => {
         'company_id': company.id,
         'id': id,

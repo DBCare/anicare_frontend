@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:untitled/pages/scan_result.dart';
 
 class CropScreen extends StatefulWidget {
@@ -37,9 +36,9 @@ class _CropScreenState extends State<CropScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("test"),
+        title: const Text("test"),
       ),
-      body: Center(),
+      body: const Center(),
     );
   }
 
@@ -71,7 +70,7 @@ class _CropScreenState extends State<CropScreen> {
             activeControlsWidgetColor: Colors.blueAccent.shade700,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(
+        iosUiSettings: const IOSUiSettings(
           title: 'Cropper',
         ));
     if (croppedFile != null) {

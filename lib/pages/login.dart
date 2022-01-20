@@ -219,7 +219,7 @@ class _LoginState extends State<Login> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => MainMenu()),
+                      builder: (BuildContext context) => const MainMenu()),
                   ModalRoute.withName('/'),
                 );
               }
@@ -302,7 +302,7 @@ class _LoginState extends State<Login> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => MainMenu()),
+                    builder: (BuildContext context) => const MainMenu()),
                 ModalRoute.withName('/'),
               );
             }

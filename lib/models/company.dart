@@ -15,6 +15,7 @@ class Company implements MainData {
     countryCode = infoMap['country_code'];
   }
 
+  @override
   Map<String, dynamic> toJson() => {
         'company': {'id': id, 'name': name, 'country_code': countryCode}
       };

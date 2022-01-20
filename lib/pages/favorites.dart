@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
 import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/customWidgets/product_listing.dart';
-import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/main_data_interface.dart';
 
 class Favorites extends StatefulWidget {
