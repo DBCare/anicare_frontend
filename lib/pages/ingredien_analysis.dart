@@ -20,7 +20,9 @@ class _IngredientAnalysisState extends State<IngredientAnalysis> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomUpInformationBar(
-          pageContext: context, title: "Analyze Ingredients"),
+          pageContext: context,
+          title: "Analyze Ingredients",
+          color: const Color(0xffF9F9F9)),
       body: Center(
         child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

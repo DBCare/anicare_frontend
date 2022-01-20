@@ -33,7 +33,7 @@ class CustomUpInformationBar extends StatelessWidget implements PreferredSize {
           ),
           backgroundColor: color,
           title: Text(title,
-              style: TextStyle(color: Color(0xFF29303E), fontSize: 18)),
+              style: const TextStyle(color: Color(0xFF29303E), fontSize: 15)),
           elevation: 0,
         ),
       ),
