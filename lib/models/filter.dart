@@ -55,6 +55,16 @@ class Filter {
     return false;
   }
 
+  void activateCategory(String categoryName) {
+    for (int i = 0; i < categoryFilter.length; ++i) {
+      if (categoryFilter[i].first == categoryName) {
+        categoryFilter[i] = Pair(categoryFilter[i].first, true);
+      } else {
+        categoryFilter[i] = Pair(categoryFilter[i].first, false);
+      }
+    }
+  }
+
   List<Map<String, dynamic>> applyFilter(List<Map<String, dynamic>> items) {
     List<Map<String, dynamic>> returnVal = [];
 

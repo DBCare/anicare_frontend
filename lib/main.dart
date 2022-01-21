@@ -6,6 +6,7 @@ import 'package:untitled/models/user.dart';
 import 'package:untitled/pages/brand_details.dart';
 import 'package:untitled/pages/barcode_results.dart';
 import 'package:untitled/pages/ingredien_analysis.dart';
+import 'package:untitled/pages/list_product.dart';
 import 'package:untitled/pages/login.dart';
 import 'package:untitled/pages/main_menu.dart';
 import 'package:untitled/pages/main_screen.dart';
@@ -40,9 +41,10 @@ Future<void> main() async {
         '/barcode': (context) => const BarcodeResults(),
         '/product': (context) => const ProductDetails(),
         '/terms': (context) => const TermsConditions(),
-        '/product_details': (context) => const ProductDetails(),
+        '/product_details': (context) => ProductDetails(),
         '/brand_details': (context) => const BrandDetails(),
         '/request': (context) => const RequestProduct(),
-        '/analysis': (context) => const IngredientAnalysis()
+        '/analysis': (context) => const IngredientAnalysis(),
+        '/category_list': (context) => const ListProduct(),
       }));
 }

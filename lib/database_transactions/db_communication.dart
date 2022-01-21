@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/database_transactions/custom_exception.dart';
@@ -38,7 +37,11 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
         item['brand_id'] = value['brand_id'];
         item['description'] = value['description'].substring(0, 20);
         item['pic-url'] = value['pic-url'];
-        if (item['name'].toString().toLowerCase().contains(begin.toLowerCase())) {
+        item['category'] = value['category'];
+        if (item['name']
+            .toString()
+            .toLowerCase()
+            .contains(begin.toLowerCase())) {
           itemMapList.add(item);
         }
       });
@@ -49,7 +52,6 @@ Future<List<Map<String, dynamic>>> searchSuggestion(
       LinkedHashMap arr = value.value;
       itemMapList[i]['brand_name'] = arr['name'];
       itemMapList[i]['vegan'] = arr['vegan'] == '1';
-      itemMapList[i]['category'] = arr['category'];
       itemMapList[i]['cer_peta'] = arr['cer_peta'] == '1';
       itemMapList[i]['cer_lb'] = arr['cer_lb'] == '1';
       itemMapList[i]['cer_ccf'] = arr['cer_ccf'] == '1';

@@ -12,6 +12,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/functions/auth.dart';
 import 'package:untitled/models/filter.dart';
+import 'package:untitled/pages/list_product.dart';
 import 'package:untitled/pages/search_product.dart';
 
 class MainMenu extends StatefulWidget {
@@ -269,7 +270,13 @@ class _MainMenuState extends State<MainMenu> {
                           color: Color(0xff29303E),
                           fontWeight: FontWeight.bold)),
                   TextButton(
-                      onPressed: null,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ListProduct(),
+                            ));
+                      },
                       child: Row(
                         children: const [
                           Text("Browse all",

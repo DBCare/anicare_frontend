@@ -8,6 +8,9 @@ import 'package:untitled/functions/auth.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:untitled/pages/favorites.dart';
 import 'package:untitled/pages/login.dart';
+import 'package:untitled/pages/main_screen.dart';
+
+import 'main_menu.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -361,11 +364,9 @@ class _UserProfileState extends State<UserProfile> {
                         child: TextButton.icon(
                           onPressed: () {
                             Auth.signOut();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Login(),
-                                ));
+                            Auth.userProfile = null;
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/main', (Route<dynamic> route) => false);
                           },
                           label: const Align(
                               alignment: Alignment.centerLeft,
