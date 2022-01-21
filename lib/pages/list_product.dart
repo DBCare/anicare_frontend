@@ -41,44 +41,6 @@ class _ListProductState extends State<ListProduct> {
                             },
                           ),
                         ),
-                        Row(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(85, 5, 5, 5),
-                              child: Text('Product List',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 15)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 8),
-                          child: SizedBox(
-                            width: 370,
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Vegan eyeshadow palette",
-                                  hintStyle: const TextStyle(
-                                      fontSize: 14, color: Color(0xffBAB9D0)),
-                                  prefixIcon: const Icon(Icons.search,
-                                      color: Colors.black87),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      borderSide: BorderSide.none),
-                                  contentPadding: EdgeInsets.zero,
-                                  filled: true,
-                                  fillColor: const Color(0xffFCFCFF)),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                     Row(
@@ -87,7 +49,7 @@ class _ListProductState extends State<ListProduct> {
                           padding:
                               EdgeInsets.only(top: 15.0, bottom: 15, left: 28),
                           child: Text(
-                            'Product Categories',
+                            'Categories',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,

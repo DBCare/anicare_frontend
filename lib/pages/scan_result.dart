@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/customWidgets/custom_bottom_navigation_bar.dart';
-
 
 class scanResult extends StatefulWidget {
   final ingredientL;
@@ -48,20 +48,10 @@ class _scanResultState extends State<scanResult> {
                   appBar: PreferredSize(
                     preferredSize: Size(size.width, height * 0.1),
                     child: Center(
-                      child: AppBar(
-                        leading: const Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Icon(Icons.arrow_back_ios,
-                              color: Color(0xFF29303E)),
-                        ),
-                        backgroundColor: const Color(0xFFFFFFFF),
-                        title: const Center(
-                            child: Text("Scan Result",
-                                style: TextStyle(
-                                    color: Color(0xFF29303E), fontSize: 14))),
-                        elevation: 0,
-                      ),
-                    ),
+                        child: CustomUpInformationBar(
+                            pageContext: context,
+                            title: '',
+                            color: const Color(0xffF9F9F9))),
                   ),
                   body: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
@@ -69,68 +59,42 @@ class _scanResultState extends State<scanResult> {
                       width: size.width,
                       decoration: const BoxDecoration(color: Colors.white),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25.0, vertical: 10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  child: Icon(Icons.favorite,
-                                      color: const Color(0xFFC2C2FE)
-                                          .withOpacity(1)),
-                                  height: 24,
-                                  width: 26,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 25.0, vertical: 7),
-                                        child: Row(
-                                          children: <Widget>[
-                                            for (int i = 0;
-                                                i < ingredientList.length;
-                                                i++)
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 4.0),
-                                                  child: Container(
-                                                    child: Center(
-                                                      child: Text(
-                                                          ingredientList[i]
-                                                              .toString()
-                                                              .toCapitalized(),
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Color(
-                                                                0xFFE64A45),
-                                                            fontSize: 12,
-                                                          )),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              21),
-                                                      color: const Color(
-                                                              0xFFE64A45)
-                                                          .withOpacity(0.2),
-                                                    ),
-                                                    width: 105,
-                                                    height: 38,
-                                                  ))
-                                          ],
-                                        )),
+                                  children: <Widget>[
+                                    for (int i = 0;
+                                        i < ingredientList.length;
+                                        i++)
+                                      Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 4.0),
+                                          child: Container(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 3.0),
+                                              child: Text(
+                                                  ingredientList[i]
+                                                      .toString()
+                                                      .toCapitalized(),
+                                                  style: const TextStyle(
+                                                    color: Color(0xFFE64A45),
+                                                    fontSize: 12,
+                                                  )),
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(21),
+                                              color: const Color(0xFFE64A45)
+                                                  .withOpacity(0.2),
+                                            ),
+                                            width: 105,
+                                            height: 38,
+                                          ))
                                   ],
                                 )),
                           ),
@@ -160,27 +124,17 @@ class _scanResultState extends State<scanResult> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: const [
-                                      Text("Ingredients:",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xFF4754F0),
-                                              fontSize: 14)),
-                                    ],
-                                  ),
+                                children: const [
+                                  Text("Ingredients:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF4754F0),
+                                          fontSize: 14)),
                                 ],
                               )),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25.0, vertical: 15),
-                            child: Text(ingredient,
-                                style: const TextStyle(
-                                    color: Color(0xffBAB9D0), fontSize: 13)),
-                          ),
+                          Text(ingredient,
+                              style: const TextStyle(
+                                  color: Color(0xffBAB9D0), fontSize: 13)),
                           SizedBox(
                             child: ElevatedButton(
                                 onPressed: () {

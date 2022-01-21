@@ -22,7 +22,7 @@ class _IngredientAnalysisState extends State<IngredientAnalysis> {
       appBar: CustomUpInformationBar(
         pageContext: context,
         title: "Analyze Ingredients",
-        color: Color(0xffF9F9F9),
+        color: const Color(0xffF9F9F9),
       ),
       body: Center(
         child: SingleChildScrollView(

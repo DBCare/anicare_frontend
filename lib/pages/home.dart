@@ -6,8 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:untitled/database_transactions/db_communication.dart';
 
-void main() => runApp(const MaterialApp(home: Home()));
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 

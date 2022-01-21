@@ -283,7 +283,7 @@ Future<UserProfile?> getUser(String uid) async {
           .then((value) => favBrands.add(value));
     }
   }
-
+  debugPrint(map.toString());
   return UserProfile.fromMap(map, uid, favBrands, favProducts);
 }
 
