@@ -279,7 +279,7 @@ class _MainMenuState extends State<MainMenu> {
                       },
                       child: Row(
                         children: const [
-                          Text("Browse all",
+                          Text("Display",
                               style: TextStyle(
                                   fontSize: 14,
                                   color: Color(0xff4754F0),

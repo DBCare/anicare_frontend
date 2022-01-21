@@ -45,56 +45,63 @@ class _scanResultState extends State<scanResult> {
             return SafeArea(
               child: Scaffold(
                   backgroundColor: const Color(0xFFF9F9F9),
-                  appBar: PreferredSize(
-                    preferredSize: Size(size.width, height * 0.1),
-                    child: Center(
-                        child: CustomUpInformationBar(
-                            pageContext: context,
-                            title: '',
-                            color: const Color(0xffF9F9F9))),
+                  appBar: CustomUpInformationBar(
+                    color: Color(0xffF9F9F9),
+                    pageContext: context,
+                    title: '',
                   ),
                   body: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Container(
                       width: size.width,
-                      decoration: const BoxDecoration(color: Colors.white),
+                      decoration: const BoxDecoration(color: Color(0xffF9F9F9)),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                  children: <Widget>[
-                                    for (int i = 0;
-                                        i < ingredientList.length;
-                                        i++)
-                                      Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 4.0),
-                                          child: Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 3.0),
-                                              child: Text(
-                                                  ingredientList[i]
-                                                      .toString()
-                                                      .toCapitalized(),
-                                                  style: const TextStyle(
-                                                    color: Color(0xFFE64A45),
-                                                    fontSize: 12,
-                                                  )),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(21),
-                                              color: const Color(0xFFE64A45)
-                                                  .withOpacity(0.2),
-                                            ),
-                                            width: 105,
-                                            height: 38,
-                                          ))
+                                  children: [
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 25.0, vertical: 7),
+                                        child: Row(
+                                          children: <Widget>[
+                                            for (int i = 0;
+                                                i < ingredientList.length;
+                                                i++)
+                                              Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 4.0),
+                                                  child: Container(
+                                                    child: Center(
+                                                      child: Text(
+                                                          ingredientList[i]
+                                                              .toString()
+                                                              .toCapitalized(),
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Color(
+                                                                0xFFE64A45),
+                                                            fontSize: 12,
+                                                          )),
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              21),
+                                                      color: const Color(
+                                                              0xFFE64A45)
+                                                          .withOpacity(0.2),
+                                                    ),
+                                                    width: 105,
+                                                    height: 38,
+                                                  ))
+                                          ],
+                                        )),
                                   ],
                                 )),
                           ),
@@ -124,17 +131,27 @@ class _scanResultState extends State<scanResult> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: const [
-                                  Text("Ingredients:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF4754F0),
-                                          fontSize: 14)),
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: const [
+                                      Text("Ingredients:",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF4754F0),
+                                              fontSize: 14)),
+                                    ],
+                                  ),
                                 ],
                               )),
-                          Text(ingredient,
-                              style: const TextStyle(
-                                  color: Color(0xffBAB9D0), fontSize: 13)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 25.0, vertical: 15),
+                            child: Text(ingredient,
+                                style: const TextStyle(
+                                    color: Color(0xffBAB9D0), fontSize: 13)),
+                          ),
                           SizedBox(
                             child: ElevatedButton(
                                 onPressed: () {

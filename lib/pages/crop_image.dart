@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:image_cropper/image_cropper.dart';
+import 'package:untitled/customWidgets/custom_up_information_bar.dart';
 import 'package:untitled/pages/scan_result.dart';
 
 class CropScreen extends StatefulWidget {
@@ -35,9 +36,8 @@ class _CropScreenState extends State<CropScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("test"),
-      ),
+      appBar: CustomUpInformationBar(
+          color: Color(0xffF9F9F9), pageContext: context, title: 'Crop Image'),
       body: const Center(),
     );
   }

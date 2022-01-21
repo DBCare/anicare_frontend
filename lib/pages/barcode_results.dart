@@ -25,7 +25,7 @@ class _BarcodeResultsState extends State<BarcodeResults> {
     });
     Navigator.pushNamed(context, '/product_details', arguments: id);
 
-    return "error";
+    return '';
   }
 
   @override

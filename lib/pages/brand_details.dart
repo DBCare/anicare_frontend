@@ -390,7 +390,7 @@ class _BrandDetailsState extends State<BrandDetails> {
               );
             }
           }
-          return const Text('error');
+          return const Text('');
         });
   }
 }
