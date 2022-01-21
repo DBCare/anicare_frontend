@@ -9,11 +9,7 @@ class Request {
       this.name, this.brandName, this.category, this.description, this.status);
 
   bool validateRequest() {
-    return (category != '' &&
-        brandName != '' &&
-        name != '' &&
-        description != '' &&
-        status != '');
+    return (category != '' && brandName != '' && name != '' && status != '');
   }
 
   Map<String, dynamic> toJson() => {
